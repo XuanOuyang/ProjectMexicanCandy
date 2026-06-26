@@ -750,7 +750,6 @@ GameObject:
   - component: {fileID: 953523604}
   - component: {fileID: 953523608}
   - component: {fileID: 953523609}
-  - component: {fileID: 953523610}
   m_Layer: 0
   m_Name: White Box Player
   m_TagString: Untagged
@@ -896,18 +895,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &953523610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953523603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f874448925a889479d33cbd4b437888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &993302092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +1927,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 773191591}
   - {fileID: 330585546}
-  - {fileID: 426761186}
   - {fileID: 1826671442}
+  - {fileID: 426761186}
+  - {fileID: 773191591}
