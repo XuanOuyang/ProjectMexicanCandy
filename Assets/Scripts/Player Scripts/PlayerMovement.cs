@@ -5,15 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {   
-    [Header("Movement")]
-    public float verticalInput;
-    public float horizontalInput;
+    
+    private float verticalInput;
+    private float horizontalInput;
     public float moveSpeed = 5f;
     private Rigidbody rb;
-
-    [Header("Shooting")]
-    public GameObject projectilePrefab; // Drop your bullet prefab here in the inspector
-    public Transform firePoint;          // Where the bullet spawns (optional, can use player position)
 
     void Start()
     {
@@ -33,11 +29,7 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed) verticalInput = -1f;
             if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) verticalInput = 1f;
 
-            // 2. Read Shooting Input (Spacebar)
-            if (Keyboard.current.spaceKey.wasReleasedThisFrame)
-            {
-                Shoot();
-            }
+            // 3. While spaceKey is held show trajectory Trajectory = true
         }
     }
 
@@ -53,14 +45,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.forward = moveDirection;
         }
-    }
-
-    void Shoot()
-    {
-        // Determine where to spawn the projectile (use firePoint if assigned, otherwise player position)
-        Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position + transform.forward;
-        
-        // Spawn the projectile matching the player's current position and rotation
-        Instantiate(projectilePrefab, spawnPosition, transform.rotation);
     }
 }
