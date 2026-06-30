@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) verticalInput = 1f;
 
             // 2. Read Shooting Input (Spacebar)
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current.spaceKey.wasReleasedThisFrame)
             {
                 Shoot();
             }
