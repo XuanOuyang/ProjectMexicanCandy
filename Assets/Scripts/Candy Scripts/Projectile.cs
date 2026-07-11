@@ -1,43 +1,67 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))] // Force Unity to add a Rigidbody to this GameObject
 public class Projectile : MonoBehaviour
 {
-    // maybe add an arc to the object so it drops?
-    public float speed = 20f;
-    public float lifetime = 5f; // Destroys the bullet after 3 seconds so your game doesn't lag
+    public float lifetime = 10f; // Safeguard destruction timer
 
     [Header("Combat Settings")]
     public int damage = 1;  
+    
     void Start()
     {
         // Destroy the bullet automatically after 'lifetime' seconds
         Destroy(gameObject, lifetime);
+        
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            // Ensure gravity is checked so it drops into a natural arc
+            rb.useGravity = true; 
+        }
     }          
 
     void Update()
     {
-        // Move the bullet forward dynamically every frame
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // Let the Rigidbody handle linear movement naturally.
+        
+        // Dynamic Polish: Rotate the projectile to face its travel heading
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null && rb.linearVelocity != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(rb.linearVelocity);
+        }
     }
 
-    // Optional: Destroy the bullet if it hits a wall
+    // Handles trigger zone overlapping (if your projectile or target is a trigger)
     private void OnTriggerEnter(Collider collision)
     {
-        Pinyata pinyata = collision.GetComponent<Pinyata>();
+        HandleImpact(collision.gameObject);
+    }
+
+    // Handles hard physical impacts
+    private void OnCollisionEnter(Collision collision)
+    {
+        HandleImpact(collision.gameObject);
+    }
+
+    private void HandleImpact(GameObject hitObject)
+    {
+        // Try getting the Pinyata component
+        Pinyata pinyata = hitObject.GetComponent<Pinyata>();
 
         if (pinyata != null)
         {
-            // 3. Deal damage directly to that specific enemy!
-            pinyata.TakeDamage(damage);
-            
-            // Destroy the bullet after it deals damage
+            pinyata.TakeDamage(damage); 
             Destroy(gameObject);
-            return; // Exit the function early so it doesn't look for walls
+            return; 
         }
-        if (collision.gameObject.CompareTag("Wall"))
+        
+        // Destructive logic on walls/floors
+        if (hitObject.CompareTag("Wall") || hitObject.CompareTag("Floor"))
         {
-                Destroy(gameObject);
-                Debug.Log("Hit " + collision.gameObject.name);
+            Destroy(gameObject);
+            Debug.Log("Hit environment object: " + hitObject.name);
         }
     }
 }
