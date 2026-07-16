@@ -1904,7 +1904,6 @@ GameObject:
   - component: {fileID: 953523609}
   - component: {fileID: 953523608}
   - component: {fileID: 953523610}
-  - component: {fileID: 953523611}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player 1
@@ -1958,7 +1957,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c6fae07539b339c4cb6bd0d04bc02faf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2004,7 +2003,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1262160559}
-  m_Father: {fileID: 773191591}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &953523608
 MonoBehaviour:
