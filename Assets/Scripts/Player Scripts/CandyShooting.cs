@@ -10,6 +10,9 @@ public class CandyShooting : MonoBehaviour
     public float arcForce = 0.5f;
     public float minLaunchForce = 5f;
     public float maxLaunchForce = 20f;
+    private Animator animator;
+ 
+
     [Tooltip("How many seconds it takes to reach maximum launch force")]
     public float chargeTime = 1.5f;
 
@@ -20,12 +23,6 @@ public class CandyShooting : MonoBehaviour
 
     [Header("Line Display")] public int LinePoints = 30; // Number of points tracked along the arc
     public float TimeBetweenPoints = 0.05f; // Time interval between points
-    void Start()
-    {
-        // Setup the isolated background physics environment
-        CreatePredictionScene();
-        animator = GetComponent<Animator>();
-    }
 
     void Update()
     {
