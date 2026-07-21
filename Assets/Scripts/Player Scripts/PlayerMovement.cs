@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
             verticalInput = 0f;
             if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed) verticalInput = -1f;
             if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) verticalInput = 1f;
-
-            // 3. While spaceKey is held show trajectory Trajectory = true
         }
     }
 

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class CandyShooting : MonoBehaviour
 {
@@ -25,26 +24,13 @@ public class CandyShooting : MonoBehaviour
  
     [Header("Line Display")]
     public int LinePoints = 30;           // Number of points tracked along the arc
-    public float TimeBetweenPoints = 0.05f; // Simulation step accuracy (lower = smoother line)
-
-    // Physics Simulation Scene Handles
-    private Scene predictionScene;
-    private PhysicsScene physicsScene;
+    public float TimeBetweenPoints = 0.05f; // Time interval between points
 
     void Start()
     {
-        // Setup the isolated background physics environment
-        CreatePredictionScene();
         animator = GetComponent<Animator>();
     }
-
-    void CreatePredictionScene()
-    {
-        CreateSceneParameters parameters = new CreateSceneParameters(LocalPhysicsMode.Physics3D);
-        predictionScene = SceneManager.CreateScene("TrajectoryPrediction", parameters);
-        physicsScene = predictionScene.GetPhysicsScene();
-    }
- 
+    
     void Update()
     {
         // Safe check: Use firePoint position if assigned, otherwise forward of player
@@ -104,51 +90,24 @@ public class CandyShooting : MonoBehaviour
  
     void DrawProjection(Vector3 startPosition, Vector3 launchDirection)
     {
-        if (LineRenderer == null || projectilePrefab == null) return;
+        if (LineRenderer == null) return;
  
         LineRenderer.enabled = true;
         LineRenderer.useWorldSpace = true;
         LineRenderer.positionCount = LinePoints;
  
-        // 1. Instantiate the invisible "ghost" projectile
-        GameObject ghostObj = Instantiate(projectilePrefab, startPosition, transform.rotation);
-        
-        // Hide its renderers immediately so it's invisible to players
-        Renderer[] renderers = ghostObj.GetComponentsInChildren<Renderer>();
-        foreach (var r in renderers) r.enabled = false;
+        Vector3 startingVelocity = launchDirection * currentLaunchForce;
+        Vector3 gravity = Physics.gravity;
 
-        // Move it into our isolated prediction world
-        SceneManager.MoveGameObjectToScene(ghostObj, predictionScene);
-
-        Rigidbody ghostRb = ghostObj.GetComponent<Rigidbody>();
-        if (ghostRb != null)
+        for (int i = 0; i < LinePoints; i++)
         {
-            ghostRb.isKinematic = false;
-            ghostRb.WakeUp();
-            ghostRb.linearVelocity = launchDirection * currentLaunchForce;
-        }
-
-        // Set the starting point
-        LineRenderer.SetPosition(0, startPosition);
- 
-        // 2. Clock physics forward step-by-step and capture coordinates
-        for (int i = 1; i < LinePoints; i++)
-        {
-            physicsScene.Simulate(TimeBetweenPoints);
+            // Calculate time elapsed at this specific point index
+            float time = i * TimeBetweenPoints;
             
-            if (ghostObj != null)
-            {
-                LineRenderer.SetPosition(i, ghostObj.transform.position);
-            }
-            else
-            {
-                // If the ghost collided and was destroyed prematurely inside the simulation scene, 
-                // lock remaining trail points to the last known position.
-                LineRenderer.SetPosition(i, LineRenderer.GetPosition(i - 1));
-            }
+            // Mathematical formula for projectile motion: displacement = (v0 * t) + (0.5 * g * t^2)
+            Vector3 pointPosition = startPosition + (startingVelocity * time) + (0.5f * gravity * time * time);
+            
+            LineRenderer.SetPosition(i, pointPosition);
         }
- 
-        // 3. Destroy the ghost object to keep the prediction scene empty
-        Destroy(ghostObj);
     }
 }
