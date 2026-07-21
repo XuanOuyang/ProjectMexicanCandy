@@ -1904,6 +1904,7 @@ GameObject:
   - component: {fileID: 953523609}
   - component: {fileID: 953523608}
   - component: {fileID: 953523610}
+  - component: {fileID: 953523611}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player 1
@@ -2003,7 +2004,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1262160559}
-  m_Father: {fileID: 773191591}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &953523608
 MonoBehaviour:
@@ -2555,7 +2556,7 @@ MonoBehaviour:
     PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 2e0d3cf2ff9b2e441b452ab635fc10fc, type: 2}
+      - {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
