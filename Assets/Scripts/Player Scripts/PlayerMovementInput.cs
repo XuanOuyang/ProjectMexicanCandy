@@ -7,14 +7,14 @@ public class PlayerMovementInput : MonoBehaviour
 {   
     public float moveSpeed = 5f;
     private Rigidbody rb;
-    private Vector2 moveInput; // Store the input from the callback
+    private Vector2 moveInput;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-
-    // This method will be called by the PlayerInput component
+    
+    //For "playerInput"
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();

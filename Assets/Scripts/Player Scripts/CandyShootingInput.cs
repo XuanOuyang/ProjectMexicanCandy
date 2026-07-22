@@ -92,19 +92,38 @@ public class CandyShootingInput : MonoBehaviour
     void DrawProjection(Vector3 startPosition, Vector3 launchDirection)
     {
         if (LineRenderer == null) return;
- 
+
         LineRenderer.enabled = true;
         LineRenderer.useWorldSpace = true;
         LineRenderer.positionCount = LinePoints;
- 
+
         Vector3 startingVelocity = launchDirection * currentLaunchForce;
         Vector3 gravity = Physics.gravity;
 
+        Vector3 previousPoint = startPosition;
+
         for (int i = 0; i < LinePoints; i++)
         {
+            // Calculate time elapsed at this specific point index
             float time = i * TimeBetweenPoints;
+
+            // Mathematical formula for projectile motion: displacement = (v0 * t) + (0.5 * g * t^2)
             Vector3 pointPosition = startPosition + (startingVelocity * time) + (0.5f * gravity * time * time);
+
+            if (Physics.Linecast(previousPoint, pointPosition, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Wall") ||
+                    hit.collider.CompareTag("Floor") ||
+                    hit.collider.CompareTag("Enemy"))
+                {
+                    LineRenderer.positionCount = i + 1;
+                    LineRenderer.SetPosition(i, hit.point);
+                    break;
+                }
+            }
+
             LineRenderer.SetPosition(i, pointPosition);
+            previousPoint = pointPosition;
         }
     }
 }
