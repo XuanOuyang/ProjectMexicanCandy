@@ -28,6 +28,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("Collision")]
     public Collider playerCollider;
 
+    [Header("Combat")]
+    public MonoBehaviour attackScript; // drag your attack script here
+
     void Start()
     {
         currentHearts = maxHearts;
@@ -85,6 +88,9 @@ public class PlayerHealth : MonoBehaviour
         if (movementScript != null)
             movementScript.enabled = false;
 
+        if (attackScript != null)
+            attackScript.enabled = false;
+
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;
@@ -93,16 +99,10 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (playerCollider != null)
-        {
             playerCollider.enabled = false;
-        }
 
         if (playerRenderer != null)
-        {
             playerRenderer.material.color = downedColor;
-        }
-
-        Debug.Log(gameObject.name + " is downed.");
     }
 
     public void Revive()
@@ -117,26 +117,23 @@ public class PlayerHealth : MonoBehaviour
         if (movementScript != null)
             movementScript.enabled = true;
 
+        if (attackScript != null)
+            attackScript.enabled = true;
+
         if (rb != null)
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         if (playerCollider != null)
-        {
             playerCollider.enabled = true;
-        }
 
         if (playerRenderer != null)
-        {
             playerRenderer.material.color = originalColor;
-        }
     }
 
     void Die()
     {
         isDead = true;
         isDowned = false;
-
-        Debug.Log(gameObject.name + " died.");
         gameObject.SetActive(false);
     }
 }
