@@ -1,83 +1,102 @@
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform[] waypoints;
+    public Transform player1;
+    public Transform player2;
 
-    public float speed = 3f;
+    public float attackRange = 1.5f;
+    public int damage = 1;
+    public float attackCooldown = 1f;
+    public float targetUpdateRate = 0.2f;
 
-    private int currentWaypointIndex = 0;
-
-    private Rigidbody rb;
-
-    public Transform player;
-
-    public float detectionRange = 5f;
+    private NavMeshAgent agent;
+    private float lastAttackTime;
+    private float nextTargetUpdateTime;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        if (PlayerInRange())
+        if (Time.time >= nextTargetUpdateTime)
         {
-            ChasePlayer();
-        }
-        else
-        {
-            Patrol();
-        }
-    }
+            nextTargetUpdateTime = Time.time + targetUpdateRate;
 
-    void Patrol()
-    {
-        if (waypoints.Length == 0) return;
-        Transform targetWaypoint = waypoints[currentWaypointIndex];
-        Vector3 direction = (targetWaypoint.position - transform.position).normalized;
-
-        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
-        {
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-        }
-    }
-
-    bool PlayerInRange()
-    {
-        return Vector3.Distance(transform.position, player.position) <= detectionRange;
-    }
-
-    void ChasePlayer()
-    {
-        Vector3 direction = (player.position - transform.position).normalized;
-        rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-    }
-    void OnDrawGizmos()
-    {
-        if (waypoints != null && waypoints.Length > 0)
-        {
-            Gizmos.color = Color.red;
-            foreach (Transform waypoint in waypoints)
+            Transform target = GetClosestValidPlayer();
+            if (target != null)
             {
-                if (waypoint != null)
-                {
-                    Gizmos.DrawSphere(waypoint.position, 0.3f);
-                }
+                agent.SetDestination(target.position);
             }
-            Gizmos.color = Color.green;
-            for (int i = 0; i < waypoints.Length; i++)
+            else
             {
-                if (waypoints[i] != null && waypoints[(i + 1) % waypoints.Length] !=null)
-                {
-                    Gizmos.DrawLine(waypoints[i].position, waypoints[(i + 1) % waypoints.Length].position);
-                }
+                agent.ResetPath();
             }
         }
-        // Draw detection range
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Transform attackTarget = GetClosestValidPlayer();
+        if (attackTarget != null)
+        {
+            float distance = Vector3.Distance(transform.position, attackTarget.position);
+            if (distance <= attackRange)
+            {
+                TryAttack(attackTarget);
+            }
+        }
+    }
+
+    Transform GetClosestValidPlayer()
+    {
+        Transform closest = null;
+        float closestDistance = Mathf.Infinity;
+
+        if (IsValidTarget(player1))
+        {
+            float d1 = Vector3.Distance(transform.position, player1.position);
+            if (d1 < closestDistance)
+            {
+                closestDistance = d1;
+                closest = player1;
+            }
+        }
+
+        if (IsValidTarget(player2))
+        {
+            float d2 = Vector3.Distance(transform.position, player2.position);
+            if (d2 < closestDistance)
+            {
+                closestDistance = d2;
+                closest = player2;
+            }
+        }
+
+        return closest;
+    }
+
+    bool IsValidTarget(Transform player)
+    {
+        if (player == null) return false;
+
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        if (health == null) return false;
+
+        return !health.isDead && !health.isDowned;
+    }
+
+    void TryAttack(Transform target)
+    {
+        if (Time.time - lastAttackTime < attackCooldown)
+            return;
+
+        lastAttackTime = Time.time;
+
+        PlayerHealth health = target.GetComponent<PlayerHealth>();
+        if (health != null)
+        {
+            health.TakeDamage(damage);
+        }
     }
 }
