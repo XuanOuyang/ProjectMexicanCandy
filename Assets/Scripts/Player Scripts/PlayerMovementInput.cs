@@ -8,10 +8,12 @@ public class PlayerMovementInput : MonoBehaviour
     public float moveSpeed = 5f;
     private Rigidbody rb;
     private Vector2 moveInput;
+    private Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
     
     //For "playerInput"
