@@ -80,36 +80,39 @@ public class ComboTracker : MonoBehaviour
 
     // ── Combo effect implementations ─────────────────────────────────────────
 
-    private void TriggerCandyRupture()
+private void TriggerCandyRupture()
+{
+    Debug.Log($"[Combo] CANDY RUPTURE on {gameObject.name}!");
+
+    // Clear so the combo can't chain-fire on the very next hit
+    _recentHits.Clear();
+
+    // Burst damage to the enemy that triggered the combo
+    Pinyata self = GetComponent<Pinyata>();
+    if (self != null)
+        self.TakeDamage(_settings.ruptBurstDamage);
+
+    // AOE splash to all nearby enemies
+    Collider[] nearby = Physics.OverlapSphere(transform.position, _settings.ruptAoeRadius);
+    foreach (Collider col in nearby)
     {
-        Debug.Log($"[Combo] CANDY RUPTURE on {gameObject.name}!");
+        if (col.gameObject == gameObject) continue;
 
-        // Clear so the combo can't chain-fire on the very next hit
-        _recentHits.Clear();
-
-        // Burst damage to the enemy that triggered the combo
-        Pinyata self = GetComponent<Pinyata>();
-        if (self != null)
-            self.TakeDamage(_settings.ruptBurstDamage);
-
-        // AOE splash to all nearby enemies
-        Collider[] nearby = Physics.OverlapSphere(transform.position, _settings.ruptAoeRadius);
-        foreach (Collider col in nearby)
+        Pinyata nearbyPinyata = col.GetComponent<Pinyata>();
+        if (nearbyPinyata != null)
         {
-            if (col.gameObject == gameObject) continue;
-
-            Pinyata nearbyPinyata = col.GetComponent<Pinyata>();
-            if (nearbyPinyata != null)
-            {
-                nearbyPinyata.TakeDamage(_settings.ruptAoeDamage);
-                Debug.Log($"[Combo] AOE hit {col.gameObject.name} for {_settings.ruptAoeDamage}.");
-            }
+            nearbyPinyata.TakeDamage(_settings.ruptAoeDamage);
+            Debug.Log($"[Combo] AOE hit {col.gameObject.name} for {_settings.ruptAoeDamage}.");
         }
-
-        // Optional VFX
-        if (_settings.ruptureVFXPrefab != null)
-            Instantiate(_settings.ruptureVFXPrefab, transform.position, Quaternion.identity);
     }
+
+    // Optional VFX — Instantiated and automatically destroyed after ruptureVfxLifetime seconds
+    if (_settings.ruptureVFXPrefab != null)
+    {
+        GameObject vfxInstance = Instantiate(_settings.ruptureVFXPrefab, transform.position, Quaternion.identity);
+        Destroy(vfxInstance, _settings.ruptureVfxLifetime);
+    }
+}
 
     // Scene-view gizmo so you can see the AOE radius while playtesting
     private void OnDrawGizmosSelected()
