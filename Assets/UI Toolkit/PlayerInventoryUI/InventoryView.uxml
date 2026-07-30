@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/PlayerInventoryUI/inventory.uss?fileID=7433441132597879392&amp;guid=e4c7e80f6cae6c3438fa5f2782251bf4&amp;type=3#inventory"/>
+    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1; background-image: none; -unity-background-image-tint-color: rgb(182, 0, 0); background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="Player1" class="p1" style="flex-grow: 0; flex-direction: row; justify-content: flex-start; align-items: stretch; align-self: auto; align-content: auto;">
+            <ui:VisualElement name="ARing1" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/PlayerInventoryUI/VAring2.svg?fileID=7388822144124034973&amp;guid=651e90c9a2fe27e438387a1bb2122fae&amp;type=3#VAring2&quot;); background-color: rgb(255, 255, 255); justify-content: flex-start; align-items: flex-start; -unity-background-scale-mode: scale-to-fit;"/>
+            <ui:Button text="Button"/>
+            <ui:Button text="Button"/>
+            <ui:Button text="Button"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="Player2" class="p2" style="flex-grow: 0; flex-direction: row; justify-content: flex-end;">
+            <ui:Button text="Button" enabled="true"/>
+            <ui:Button text="Button"/>
+            <ui:Button text="Button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
