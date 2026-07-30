@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -160,6 +158,8 @@ public class CandyShootingInput : MonoBehaviour
         {
             if (lineRenderer != null)
                 lineRenderer.enabled = false;
+            if (lineRenderer != null)
+                lineRenderer.enabled = false;
         }
     }
 
@@ -188,6 +188,7 @@ public class CandyShootingInput : MonoBehaviour
         else if (context.canceled)
         {
             isHoldingShoot = false;
+
 
             if (isCharging)
             {
@@ -303,11 +304,16 @@ public class CandyShootingInput : MonoBehaviour
         lineRenderer.enabled       = true;
         lineRenderer.useWorldSpace = true;
         lineRenderer.positionCount = linePoints;
+        lineRenderer.enabled = true;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.positionCount = linePoints;
 
         Vector3 startingVelocity = launchDirection * currentLaunchForce;
-        Vector3 gravity          = Physics.gravity;
-        Vector3 previousPoint    = startPosition;
+        Vector3 gravity = Physics.gravity;
 
+        Vector3 previousPoint = startPosition;
+
+        for (int i = 0; i < linePoints; i++)
         for (int i = 0; i < linePoints; i++)
         {
             float   t             = i * timeBetweenPoints;
@@ -324,12 +330,20 @@ public class CandyShootingInput : MonoBehaviour
                 {
                     lineRenderer.positionCount = i + 1;
                     lineRenderer.SetPosition(i, hit.point);
+                    lineRenderer.positionCount = i + 1;
+                    lineRenderer.SetPosition(i, hit.point);
                     break;
                 }
             }
 
             lineRenderer.SetPosition(i, pointPosition);
+            lineRenderer.SetPosition(i, pointPosition);
             previousPoint = pointPosition;
         }
+    }
+
+    void OnDisable()
+    {
+        CancelShooting();
     }
 }
