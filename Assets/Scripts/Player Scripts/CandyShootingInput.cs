@@ -314,7 +314,6 @@ public class CandyShootingInput : MonoBehaviour
         Vector3 previousPoint = startPosition;
 
         for (int i = 0; i < linePoints; i++)
-        for (int i = 0; i < linePoints; i++)
         {
             float   t             = i * timeBetweenPoints;
             // s = v₀t + ½gt²
@@ -342,8 +341,9 @@ public class CandyShootingInput : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    /*void OnDisable()
     {
         CancelShooting();
     }
+    */
 }
