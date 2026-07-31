@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 2503317573330902378}
   - component: {fileID: 8513328394420228332}
   - component: {fileID: 8883685971058588060}
-  - component: {fileID: 8372739590791475542}
   - component: {fileID: 2524498050529333758}
+  - component: {fileID: 8372739590791475542}
+  - component: {fileID: -3303404030067668471}
+  - component: {fileID: 147679220037563414}
   m_Layer: 0
   m_Name: white box pinyata
   m_TagString: Enemy
@@ -143,23 +145,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8372739590791475542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7975591007826943524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a65b79ac58512746b44196787ee13c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  maxHealth: 10
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
-  flashDuration: 0.15
-  startWithGravity: 0
-  gravityDelayTimer: 5
 --- !u!95 &2524498050529333758
 Animator:
   serializedVersion: 7
@@ -182,6 +167,63 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8372739590791475542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975591007826943524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a65b79ac58512746b44196787ee13c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxHealth: 10
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
+  startWithGravity: 0
+  gravityDelayTimer: 5
+--- !u!114 &-3303404030067668471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975591007826943524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392cee82293e1c94dae5eec29749626c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  attackRange: 1.5
+  damage: 1
+  attackCooldown: 1
+  targetUpdateRate: 0.2
+--- !u!195 &147679220037563414
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975591007826943524}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8804431850035535116
 GameObject:
   m_ObjectHideFlags: 0
