@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1008146424986037545, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: m_Name
-      value: Textureles Shelf Variant
+      value: WoodenShelf
       objectReference: {fileID: 0}
     - target: {fileID: 2429677495812583799, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -59,23 +59,23 @@ PrefabInstance:
     - target: {fileID: 2621872845742357646, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ae5609f5b14906e4992dae5b161adff0, type: 2}
+      objectReference: {fileID: 2100000, guid: cf5b05cb6320e9f4d8daf549b6eab181, type: 2}
     - target: {fileID: 4754791175739291089, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ae5609f5b14906e4992dae5b161adff0, type: 2}
+      objectReference: {fileID: 2100000, guid: cf5b05cb6320e9f4d8daf549b6eab181, type: 2}
     - target: {fileID: 4786181759166288933, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ae5609f5b14906e4992dae5b161adff0, type: 2}
+      objectReference: {fileID: 2100000, guid: cf5b05cb6320e9f4d8daf549b6eab181, type: 2}
     - target: {fileID: 6056031984929941780, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ae5609f5b14906e4992dae5b161adff0, type: 2}
+      objectReference: {fileID: 2100000, guid: cf5b05cb6320e9f4d8daf549b6eab181, type: 2}
     - target: {fileID: 7839509784766736941, guid: fe1248e001ae90c4b9f4b18850fe9447, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ae5609f5b14906e4992dae5b161adff0, type: 2}
+      objectReference: {fileID: 2100000, guid: cf5b05cb6320e9f4d8daf549b6eab181, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
