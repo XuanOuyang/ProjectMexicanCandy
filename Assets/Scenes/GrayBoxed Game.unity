@@ -42161,6 +42161,7 @@ GameObject:
   - component: {fileID: 1102798856}
   - component: {fileID: 1102798855}
   - component: {fileID: 1102798864}
+  - component: {fileID: 1102798865}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player 1
@@ -42435,6 +42436,32 @@ CapsuleCollider:
   m_Height: 1.351951
   m_Direction: 1
   m_Center: {x: 0, y: 0.2065451, z: 0}
+--- !u!114 &1102798865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102798854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHearts: 5
+  currentHearts: 5
+  isDowned: 0
+  isDead: 0
+  downedTime: 10
+  hearts: []
+  fullHeartSprite: {fileID: 0}
+  emptyHeartSprite: {fileID: 0}
+  playerRenderer: {fileID: 0}
+  downedColor: {r: 1, g: 0, b: 0, a: 1}
+  movementScript: {fileID: 0}
+  rb: {fileID: 0}
+  playerCollider: {fileID: 0}
+  attackScript: {fileID: 0}
 --- !u!1001 &1103919109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44057,7 +44084,7 @@ Transform:
   m_GameObject: {fileID: 1155810264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.52586, y: 1.22, z: 12.87208}
+  m_LocalPosition: {x: 4.52586, y: 10.91, z: 12.87208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50176,6 +50203,7 @@ GameObject:
   - component: {fileID: 1312748213}
   - component: {fileID: 1312748212}
   - component: {fileID: 1312748220}
+  - component: {fileID: 1312748221}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player 2
@@ -50428,6 +50456,32 @@ CapsuleCollider:
   m_Height: 1.2782184
   m_Direction: 1
   m_Center: {x: 0, y: 0.31897214, z: 0}
+--- !u!114 &1312748221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312748211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHearts: 5
+  currentHearts: 5
+  isDowned: 0
+  isDead: 0
+  downedTime: 10
+  hearts: []
+  fullHeartSprite: {fileID: 0}
+  emptyHeartSprite: {fileID: 0}
+  playerRenderer: {fileID: 0}
+  downedColor: {r: 1, g: 0, b: 0, a: 1}
+  movementScript: {fileID: 0}
+  rb: {fileID: 0}
+  playerCollider: {fileID: 0}
+  attackScript: {fileID: 0}
 --- !u!1001 &1313173419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51389,7 +51443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &1328906158
 LineRenderer:
   serializedVersion: 3
@@ -52813,6 +52867,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3626656710975290303, guid: f34066ba7058db14499165d0cdced2e3, type: 3}
   m_PrefabInstance: {fileID: 464908417}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1373717826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373717828}
+  - component: {fileID: 1373717827}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1373717827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373717826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4116769, y: 3.940453, z: 14.666294}
+  m_Center: {x: -0.03922057, y: -0.6697738, z: 0.37669563}
+--- !u!4 &1373717828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373717826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6, y: 1.62386, z: 3.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1377843229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -54295,7 +54402,7 @@ GameObject:
   - component: {fileID: 1419707256}
   - component: {fileID: 1419707257}
   m_Layer: 0
-  m_Name: image
+  m_Name: Player 1 Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54311,7 +54418,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0.315, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.20710057, z: 2.3333333}
+  m_LocalScale: {x: 0.74, y: 0.4378698, z: 4.933333}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1102798863}
@@ -54365,7 +54472,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 184c3a56abfd4d741a7874012686085b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad5b4087079c61245953f8ce077e82e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -58343,8 +58450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PinataSpawner
   pinataPrefab: {fileID: 7975591007826943524, guid: 08de7dee0352a0a4cb9b4e931eadafb6, type: 3}
-  minSpawnDelay: 5
-  maxSpawnDelay: 10
+  minSpawnDelay: 1
+  maxSpawnDelay: 1
   spawnCheckRadius: 1
   raycastHeight: 10
   raycastDistance: 20
@@ -79425,7 +79532,7 @@ GameObject:
   - component: {fileID: 2122656988}
   - component: {fileID: 2122656989}
   m_Layer: 0
-  m_Name: image (1)
+  m_Name: Player 2 Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81126,3 +81233,4 @@ SceneRoots:
   - {fileID: 1987861997}
   - {fileID: 1155810265}
   - {fileID: 1328906159}
+  - {fileID: 1373717828}
