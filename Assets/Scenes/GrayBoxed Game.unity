@@ -42278,7 +42278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   candyTypes:
   - candyName: Candy
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 6333229432217315993, guid: cf939cf271cc55e4fa1ba42f642cbda4, type: 3}
     arcForce: 0.5
     minLaunchForce: 5
     maxLaunchForce: 20
@@ -42286,7 +42286,7 @@ MonoBehaviour:
     maxAmmo: 5
     currentAmmo: 0
   - candyName: Candy
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 4540407025719182988, guid: 6ee0695b374253648bdc5fb05d1ac7c0, type: 3}
     arcForce: 0.5
     minLaunchForce: 5
     maxLaunchForce: 20
@@ -50271,7 +50271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   candyTypes:
   - candyName: Candy
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 6333229432217315993, guid: cf939cf271cc55e4fa1ba42f642cbda4, type: 3}
     arcForce: 0.5
     minLaunchForce: 5
     maxLaunchForce: 20
@@ -50279,7 +50279,7 @@ MonoBehaviour:
     maxAmmo: 5
     currentAmmo: 0
   - candyName: Candy
-    projectilePrefab: {fileID: 0}
+    projectilePrefab: {fileID: 4540407025719182988, guid: 6ee0695b374253648bdc5fb05d1ac7c0, type: 3}
     arcForce: 0.5
     minLaunchForce: 5
     maxLaunchForce: 20
