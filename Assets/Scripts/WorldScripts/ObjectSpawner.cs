@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class PinataSpawner : MonoBehaviour
+public class ObjectSpawner : MonoBehaviour
 {
-    [Header("Prefab")] [SerializeField] private GameObject pinataPrefab;
+    [Header("Prefab")] [SerializeField] private GameObject prefab;
 
     [Header("Spawn Timing")] [SerializeField]
     private float minSpawnDelay = 5f;
@@ -13,9 +13,14 @@ public class PinataSpawner : MonoBehaviour
     [Header("Spawn Validation")] [SerializeField]
     private float spawnCheckRadius = 1f;
 
-    [SerializeField] private float raycastHeight = 10f;
-    [SerializeField] private float raycastDistance = 20f;
     [SerializeField] private int maxSpawnAttempts = 20;
+
+    [Header("Raycast")] [SerializeField] private float raycastHeight = 10f;
+    [SerializeField] private float raycastDistance = 20f;
+
+    [Header("Air Spawn")] [SerializeField] private bool spawnInAir = false;
+    [SerializeField] private float airSpawnHeight = 10f;
+
     private BoxCollider spawnArea;
 
     private void Awake()
@@ -34,11 +39,11 @@ public class PinataSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-            TrySpawnPinata();
+            TrySpawnObject();
         }
     }
 
-    private void TrySpawnPinata()
+    private void TrySpawnObject()
     {
         for (int i = 0; i < maxSpawnAttempts; i++)
         {
@@ -52,10 +57,24 @@ public class PinataSpawner : MonoBehaviour
                     QueryTriggerInteraction.Ignore))
             {
                 Vector3 spawnPosition = hit.point;
+
                 if (IsSpawnLocationValid(spawnPosition))
                 {
-                    Vector3 airSpawn = spawnPosition + Vector3.up * raycastHeight;
-                    Instantiate(pinataPrefab, airSpawn, Quaternion.identity);
+                    GameObject obj = Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+                    Collider col = obj.GetComponent<Collider>();
+
+                    if (col != null && !spawnInAir)
+                    {
+                        float offset = hit.point.y - col.bounds.min.y;
+                        obj.transform.position += Vector3.up * offset;
+                    }
+
+                    if (spawnInAir)
+                    {
+                        obj.transform.position += Vector3.up * airSpawnHeight;
+                    }
+
                     return;
                 }
             }
@@ -80,6 +99,7 @@ public class PinataSpawner : MonoBehaviour
             if (col.CompareTag("Wall")) return false;
             if (col.CompareTag("Player")) return false;
             if (col.CompareTag("Enemy")) return false;
+            if (col.CompareTag("Candy")) return false;
         }
 
         return true;
