@@ -27,7 +27,7 @@ public class CandyBoxPickup : MonoBehaviour
     public GameObject collectEffectPrefab;
     [Tooltip("Optional VFX/SFX prefab spawn lifetime")]
     [Min(0.1f)]
-    public float lifeTime = 2f;
+    public float EffectlifeTime = 2f;
 
     // ── Trigger ───────────────────────────────────────────────────────────────
     private void OnTriggerEnter(Collider other)
@@ -44,7 +44,7 @@ public class CandyBoxPickup : MonoBehaviour
         if (collectEffectPrefab != null)
         {
             GameObject effect = Instantiate(collectEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(effect, lifeTime); // Passes the instance ('effect') instead of the prefab blueprint
+            Destroy(effect, EffectlifeTime); // Passes the instance ('effect') instead of the prefab blueprint
         }
         // Remove the pickup from the scene
         Destroy(gameObject);
