@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cee82293e1c94dae5eec29749626c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  player1: {fileID: 8693151705613397996, guid: 14cb2bc13ce286946b328ad6da5bc46b, type: 3}
+  player2: {fileID: 1766737684427784720, guid: 18ad0264a1447b4499fc4b55b8e14bc9, type: 3}
   attackRange: 1.5
   damage: 1
   attackCooldown: 1

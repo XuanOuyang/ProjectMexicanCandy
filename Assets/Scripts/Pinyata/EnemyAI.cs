@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        player1 = GameObject.FindWithTag("Player 1")?.transform;
+        player2 = GameObject.FindWithTag("Player 2")?.transform;
     }
 
     void Update()
