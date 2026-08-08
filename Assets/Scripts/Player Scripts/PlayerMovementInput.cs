@@ -15,7 +15,7 @@ public class PlayerMovementInput : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        spriteRenderer =  GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     //For "playerInput"
@@ -27,7 +27,6 @@ public class PlayerMovementInput : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
-
         rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, 0f, moveDirection.z * moveSpeed);
         bool isMoving = moveDirection != Vector3.zero;
         animator.SetBool("IsMoving", isMoving);
@@ -43,6 +42,12 @@ public class PlayerMovementInput : MonoBehaviour
         if (moveDirection.x != 0f)
         {
             spriteRenderer.flipX = moveDirection.x > 0f;
+        }
+
+        // Face the movement direction
+        if (moveDirection != Vector3.zero)
+        {
+            transform.forward = moveDirection;
         }
     }
 }
