@@ -42387,10 +42387,9 @@ GameObject:
   - component: {fileID: 1102798855}
   - component: {fileID: 1102798864}
   - component: {fileID: 1102798865}
-  - component: {fileID: 1102798866}
   m_Layer: 0
-  m_Name: Player 2
-  m_TagString: Player 1
+  m_Name: Player 1
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42685,37 +42684,6 @@ MonoBehaviour:
   - {fileID: 1940241686}
   - {fileID: 1505266249}
   - {fileID: 1982754934}
-  fullHeartSprite: {fileID: 21300000, guid: 3ed1804cd1877ef4099fc90840238aa5, type: 3}
-  emptyHeartSprite: {fileID: 21300000, guid: 2b99df4bf1272924bb2921a7b93d9b68, type: 3}
-  playerRenderer: {fileID: 1102798861}
-  downedColor: {r: 1, g: 0, b: 0, a: 1}
-  movementScript: {fileID: 1102798858}
-  rb: {fileID: 1102798859}
-  playerCollider: {fileID: 1102798864}
-  attackScript: {fileID: 1102798857}
---- !u!114 &1102798866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102798854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHearts: 5
-  currentHearts: 5
-  isDowned: 0
-  isDead: 0
-  downedTime: 10
-  hearts:
-  - {fileID: 2001477992}
-  - {fileID: 1294787457}
-  - {fileID: 261359021}
-  - {fileID: 767923417}
-  - {fileID: 18315695}
   fullHeartSprite: {fileID: 21300000, guid: 3ed1804cd1877ef4099fc90840238aa5, type: 3}
   emptyHeartSprite: {fileID: 21300000, guid: 2b99df4bf1272924bb2921a7b93d9b68, type: 3}
   playerRenderer: {fileID: 1102798861}
@@ -44330,8 +44298,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1155810265}
+  - component: {fileID: 1155810266}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Navmesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44346,12 +44315,44 @@ Transform:
   m_GameObject: {fileID: 1155810264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.52586, y: 1.22, z: 12.87208}
+  m_LocalPosition: {x: 3.2, y: -3.14, z: 13.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155810266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155810264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 4d82cda53b54d5144a095364904dca2c, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!4 &1155865633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -50543,7 +50544,7 @@ GameObject:
   - component: {fileID: 1312748221}
   m_Layer: 0
   m_Name: Player 2
-  m_TagString: Player 2
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50806,19 +50807,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHearts: 5
-  currentHearts: 0
+  currentHearts: 5
   isDowned: 0
   isDead: 0
   downedTime: 10
-  hearts: []
-  fullHeartSprite: {fileID: 0}
-  emptyHeartSprite: {fileID: 0}
-  playerRenderer: {fileID: 0}
+  hearts:
+  - {fileID: 2001477992}
+  - {fileID: 1294787457}
+  - {fileID: 261359021}
+  - {fileID: 767923417}
+  - {fileID: 18315695}
+  fullHeartSprite: {fileID: 21300000, guid: 3ed1804cd1877ef4099fc90840238aa5, type: 3}
+  emptyHeartSprite: {fileID: 21300000, guid: 2b99df4bf1272924bb2921a7b93d9b68, type: 3}
+  playerRenderer: {fileID: 1312748217}
   downedColor: {r: 1, g: 0, b: 0, a: 1}
-  movementScript: {fileID: 0}
-  rb: {fileID: 0}
-  playerCollider: {fileID: 0}
-  attackScript: {fileID: 0}
+  movementScript: {fileID: 1312748214}
+  rb: {fileID: 1312748215}
+  playerCollider: {fileID: 1312748220}
+  attackScript: {fileID: 1312748213}
 --- !u!1001 &1313173419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57553,6 +57559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1481183800}
+  - component: {fileID: 1481183801}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -57583,6 +57590,26 @@ Transform:
   - {fileID: 1052514903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1481183801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481183799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &1483174985 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -82061,6 +82088,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1155810265}
   - {fileID: 2094519727}
   - {fileID: 1413868191}
   - {fileID: 410087041}
@@ -82078,5 +82106,4 @@ SceneRoots:
   - {fileID: 972233025}
   - {fileID: 325268396}
   - {fileID: 1987861997}
-  - {fileID: 1155810265}
   - {fileID: 1328906159}

@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8883685971058588060}
   - component: {fileID: 2524498050529333758}
   - component: {fileID: 8372739590791475542}
-  - component: {fileID: -3303404030067668471}
-  - component: {fileID: 147679220037563414}
+  - component: {fileID: 3245768396527399653}
+  - component: {fileID: 3165612064106581523}
   m_Layer: 0
   m_Name: white box pinyata
   m_TagString: Enemy
@@ -184,7 +184,7 @@ MonoBehaviour:
   flashDuration: 0.15
   startWithGravity: 0
   gravityDelayTimer: 5
---- !u!114 &-3303404030067668471
+--- !u!114 &3245768396527399653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,7 +202,7 @@ MonoBehaviour:
   damage: 1
   attackCooldown: 1
   targetUpdateRate: 0.2
---- !u!195 &147679220037563414
+--- !u!195 &3165612064106581523
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
