@@ -17644,7 +17644,7 @@ GameObject:
   - component: {fileID: 452791092}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27691,7 +27691,7 @@ GameObject:
   - component: {fileID: 746799412}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34688,7 +34688,7 @@ GameObject:
   - component: {fileID: 933746340}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49927,7 +49927,7 @@ GameObject:
   - component: {fileID: 1297365668}
   m_Layer: 0
   m_Name: Short Shelves
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52730,7 +52730,7 @@ GameObject:
   - component: {fileID: 1349065946}
   m_Layer: 0
   m_Name: Indoor Shelves
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59112,7 +59112,7 @@ MonoBehaviour:
   raycastHeight: 10
   raycastDistance: 20
   spawnInAir: 1
-  airSpawnHeight: 12.19
+  airSpawnHeight: 12
   airHoldTime: 3
 --- !u!4 &1539301690 stripped
 Transform:
@@ -70348,7 +70348,7 @@ GameObject:
   - component: {fileID: 1833056359}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73637,7 +73637,7 @@ GameObject:
   - component: {fileID: 1939438612}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
