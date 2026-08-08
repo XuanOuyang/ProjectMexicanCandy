@@ -5,7 +5,7 @@ public class StartMenuController : MonoBehaviour
 {
     public void OnStartClick()
     {
-        SceneManager.LoadScene("WhiteBoxed Game");
+        SceneManager.LoadScene("GrayBoxed Game");
     }
 
     public void OnQuitClick()
