@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -64,6 +65,13 @@ public class ObjectSpawner : MonoBehaviour
                 {
                     GameObject obj = Instantiate(prefab, spawnPosition, Quaternion.identity);
 
+                    // Disable NavMeshAgent right away so air spawning/gravity delays work
+                    NavMeshAgent agent = obj.GetComponent<NavMeshAgent>();
+                    if (agent != null)
+                    {
+                        agent.enabled = false;
+                    }
+
                     Collider col = obj.GetComponent<Collider>();
 
                     if (col != null && !spawnInAir)
@@ -76,7 +84,6 @@ public class ObjectSpawner : MonoBehaviour
                     {
                         obj.transform.position += Vector3.up * airSpawnHeight;
                         
-                        // Handle air hold logic if time > 0
                         if (airHoldTime > 0f)
                         {
                             StartCoroutine(HoldInAirRoutine(obj, airHoldTime));
@@ -100,19 +107,17 @@ public class ObjectSpawner : MonoBehaviour
         bool originalUseGravity = false;
         bool originalIsKinematic = false;
 
-        // Freeze movement while floating
         if (rb != null)
         {
             originalUseGravity = rb.useGravity;
             originalIsKinematic = rb.isKinematic;
 
             rb.useGravity = false;
-            rb.isKinematic = true; // Prevents velocity buildup or collisions pushing it down
+            rb.isKinematic = true;
         }
 
         yield return new WaitForSeconds(holdTime);
 
-        // Restore physics after airHoldTime
         if (obj != null && rb != null)
         {
             rb.isKinematic = originalIsKinematic;

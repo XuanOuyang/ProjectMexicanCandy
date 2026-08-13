@@ -18,12 +18,19 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player1 = GameObject.FindWithTag("Player 1")?.transform;
-        player2 = GameObject.FindWithTag("Player 2")?.transform;
+        
+        GameObject p1Obj = GameObject.FindWithTag("Player 1");
+        if (p1Obj != null) player1 = p1Obj.transform;
+
+        GameObject p2Obj = GameObject.FindWithTag("Player 2");
+        if (p2Obj != null) player2 = p2Obj.transform;
     }
 
     void Update()
     {
+        // Don't run AI destination calls if agent isn't active or on the NavMesh yet
+        if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
+
         if (Time.time >= nextTargetUpdateTime)
         {
             nextTargetUpdateTime = Time.time + targetUpdateRate;
