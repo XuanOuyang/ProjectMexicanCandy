@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -64,6 +65,8 @@ public class CandyShootingInput : MonoBehaviour
     private bool  isCharging         = false;
     private bool  isHoldingShoot     = false;
     private Animator animator;
+    
+    public event Action<int> OnCandySelected;
 
     // ── Direct input action references (bypasses PlayerInput Behavior mode) ───
     private InputAction _cc1Action, _cc2Action, _cc3Action;
@@ -131,6 +134,7 @@ public class CandyShootingInput : MonoBehaviour
             candy.currentAmmo = candy.maxAmmo;
 
         currentLaunchForce = CurrentCandy.minLaunchForce;
+        OnCandySelected?.Invoke(selectedCandyIndex);
     }
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -256,6 +260,7 @@ public class CandyShootingInput : MonoBehaviour
 
         selectedCandyIndex = index;
         currentLaunchForce = CurrentCandy.minLaunchForce;
+        OnCandySelected?.Invoke(selectedCandyIndex);
 
         Debug.Log($"[CandyShooter] Switched to slot {index + 1}: " +
                   $"{CurrentCandy.candyName} " +
