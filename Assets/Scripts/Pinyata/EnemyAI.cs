@@ -24,8 +24,6 @@ public class EnemyAI : MonoBehaviour
 
         GameObject p2Obj = GameObject.FindWithTag("Player 2");
         if (p2Obj != null) player2 = p2Obj.transform;
-        player1 = GameObject.Find("Player 1").transform;
-        player2 = GameObject.Find("Player 2").transform;
     }
 
     void Update()
