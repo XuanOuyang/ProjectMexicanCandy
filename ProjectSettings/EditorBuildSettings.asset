@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/WhiteBoxed Game.unity
     guid: e93367ef32bbbe54d96b58d3f09cda54
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Recovery/0 (1).unity
     guid: c402e7b4d967bf542a044c74699d8680
   - enabled: 1
