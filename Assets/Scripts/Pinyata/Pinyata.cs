@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Pinyata : MonoBehaviour
 {
@@ -35,11 +36,9 @@ public class Pinyata : MonoBehaviour
     {
         currentHealth = maxHealth;
         
-        // Find SpriteRenderer (handles child or root)
         enemyRenderer = GetComponentInChildren<SpriteRenderer>();
         if (enemyRenderer != null) originalColor = enemyRenderer.color;
 
-        // Auto-assign visualModel if missing
         if (visualModel == null && enemyRenderer != null)
         {
             visualModel = enemyRenderer.transform;
@@ -51,14 +50,13 @@ public class Pinyata : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
+        
         if (rb != null)
         {
             rb.useGravity = startWithGravity;
-            if (!startWithGravity)
-            {
-                StartCoroutine(GravityTimerRoutine());
-            }
         }
+
+        StartCoroutine(GravityTimerRoutine());
         
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
@@ -73,35 +71,48 @@ public class Pinyata : MonoBehaviour
     {
         if (visualModel == null) return;
 
-        // Check if movement is required to skip
         float speed = (transform.position - lastPosition).magnitude / Time.deltaTime;
         lastPosition = transform.position;
 
         if (animateOnlyWhenMoving && speed < 0.1f)
         {
-            // Reset to default local position/rotation when stationary
             visualModel.localPosition = Vector3.Lerp(visualModel.localPosition, initialVisualLocalPos, Time.deltaTime * 5f);
             visualModel.localRotation = Quaternion.Lerp(visualModel.localRotation, Quaternion.identity, Time.deltaTime * 5f);
             return;
         }
 
-        // Calculate bounce (Absolute sine wave keeps Y exclusively bouncing upward)
         float bounceY = Mathf.Abs(Mathf.Sin(Time.time * bounceFrequency)) * bounceHeight;
         visualModel.localPosition = initialVisualLocalPos + new Vector3(0, bounceY, 0);
 
-        // Calculate side-to-side tilt (Standard sine wave rocks left & right)
         float tiltZ = Mathf.Sin(Time.time * bounceFrequency) * tiltAngle;
         visualModel.localRotation = Quaternion.Euler(0, 0, tiltZ);
     }
 
     private IEnumerator GravityTimerRoutine()
     {
-        yield return new WaitForSeconds(gravityDelayTimer);
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null) agent.enabled = false;
 
+        if (!startWithGravity)
+        {
+            yield return new WaitForSeconds(gravityDelayTimer);
+        }
+
+        // Disable physics dynamics so physics doesn't conflict with the agent
         if (rb != null)
         {
-            rb.useGravity = true;
-            rb.constraints &= ~RigidbodyConstraints.FreezePositionY; 
+            rb.useGravity = false;
+            rb.isKinematic = true; 
+        }
+
+        // Snap down onto the NavMesh and enable the agent
+        if (agent != null)
+        {
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 15f, NavMesh.AllAreas))
+            {
+                transform.position = hit.position;
+                agent.enabled = true;
+            }
         }
     }
 

@@ -63,6 +63,7 @@ public class CandyShootingInput : MonoBehaviour
     private float currentLaunchForce = 0f;
     private bool  isCharging         = false;
     private bool  isHoldingShoot     = false;
+    private Animator animator;
 
     // ── Direct input action references (bypasses PlayerInput Behavior mode) ───
     private InputAction _cc1Action, _cc2Action, _cc3Action;
@@ -87,6 +88,7 @@ public class CandyShootingInput : MonoBehaviour
     // ══════════════════════════════════════════════════════════════════════════
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         PlayerInput pi = GetComponent<PlayerInput>();
         if (pi == null)
         {
@@ -182,6 +184,7 @@ public class CandyShootingInput : MonoBehaviour
             isCharging         = true;
             isHoldingShoot     = true;
             currentLaunchForce = CurrentCandy.minLaunchForce;
+            animator.SetTrigger("ThrowStarted");
         }
 
         // ── Button released ───────────────────────────────────────────────────
@@ -200,7 +203,7 @@ public class CandyShootingInput : MonoBehaviour
 
                 Vector3 launchDirection = (transform.forward + transform.up * CurrentCandy.arcForce)
                                           .normalized;
-
+                animator.SetTrigger("ThrowReleased");
                 FireCandy(startPos, launchDirection * currentLaunchForce);
             }
         }
