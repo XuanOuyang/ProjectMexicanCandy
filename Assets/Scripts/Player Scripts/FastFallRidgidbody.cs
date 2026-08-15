@@ -15,8 +15,8 @@ public class FastFallRigidbody : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Check if player is falling downwards
-        if (rb.velocity.y < 0)
+        // Check if player is falling downwards using linearVelocity
+        if (rb.linearVelocity.y < 0)
         {
             // Apply extra gravity force continuously on falling frames
             Vector3 extraGravity = Vector3.up * Physics.gravity.y * (fallMultiplier - 1);
