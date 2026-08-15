@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 506882670968020016}
   - component: {fileID: 5913738962721897519}
   - component: {fileID: 6431393146148427978}
+  - component: {fileID: 1446940234292135596}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player 1
@@ -34,8 +35,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 3.77, y: 0.841, z: 13.07699}
-  m_LocalScale: {x: 1, y: 1.69, z: 0.15}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2010549306256853287}
   - {fileID: 9016469416177189275}
@@ -169,18 +170,18 @@ MonoBehaviour:
   candyTypes:
   - candyName: Candy
     projectilePrefab: {fileID: 6333229432217315993, guid: cf939cf271cc55e4fa1ba42f642cbda4, type: 3}
-    arcForce: 0.7
-    minLaunchForce: 7
-    maxLaunchForce: 20
-    chargeTime: 6
+    arcForce: 1
+    minLaunchForce: 3
+    maxLaunchForce: 16
+    chargeTime: 3
     maxAmmo: 10
     currentAmmo: 0
   - candyName: Candy
     projectilePrefab: {fileID: 4540407025719182988, guid: 6ee0695b374253648bdc5fb05d1ac7c0, type: 3}
     arcForce: 0.04
     minLaunchForce: 10
-    maxLaunchForce: 30
-    chargeTime: 0.5
+    maxLaunchForce: 40
+    chargeTime: 3
     maxAmmo: 5
     currentAmmo: 0
   - candyName: Candy
@@ -188,7 +189,7 @@ MonoBehaviour:
     arcForce: 0
     minLaunchForce: 20
     maxLaunchForce: 50
-    chargeTime: 5
+    chargeTime: 3
     maxAmmo: 1
     currentAmmo: 0
   firePoint: {fileID: 2010549306256853287}
@@ -322,6 +323,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1446940234292135596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144200886945120143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f596bea3fb34af438a5f6e2613cc1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FastFallRigidbody
+  fallMultiplier: 2.5
 --- !u!1 &4439491453191896005
 GameObject:
   m_ObjectHideFlags: 0
