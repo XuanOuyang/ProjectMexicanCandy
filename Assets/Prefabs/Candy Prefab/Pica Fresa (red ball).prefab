@@ -194,5 +194,5 @@ MonoBehaviour:
   lifetime: 10
   damage: 1
   tickDamage: 1
-  tickInterval: 0.5
+  tickInterval: 1
   totalTicks: 4

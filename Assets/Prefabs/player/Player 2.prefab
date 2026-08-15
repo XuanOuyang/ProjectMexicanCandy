@@ -169,31 +169,31 @@ MonoBehaviour:
   candyTypes:
   - candyName: Candy
     projectilePrefab: {fileID: 6333229432217315993, guid: cf939cf271cc55e4fa1ba42f642cbda4, type: 3}
-    arcForce: 0.5
-    minLaunchForce: 5
+    arcForce: 0.7
+    minLaunchForce: 7
     maxLaunchForce: 20
-    chargeTime: 1.5
-    maxAmmo: 5
+    chargeTime: 6
+    maxAmmo: 10
     currentAmmo: 0
   - candyName: Candy
     projectilePrefab: {fileID: 4540407025719182988, guid: 6ee0695b374253648bdc5fb05d1ac7c0, type: 3}
-    arcForce: 0.5
-    minLaunchForce: 5
-    maxLaunchForce: 20
-    chargeTime: 1.5
+    arcForce: 0.04
+    minLaunchForce: 10
+    maxLaunchForce: 30
+    chargeTime: 0.5
     maxAmmo: 5
     currentAmmo: 0
   - candyName: Candy
     projectilePrefab: {fileID: 736368949108161727, guid: fb957a997260f1540aadd8b6b68f56c0, type: 3}
-    arcForce: 0.5
-    minLaunchForce: 5
-    maxLaunchForce: 20
-    chargeTime: 1.5
-    maxAmmo: 5
+    arcForce: 0
+    minLaunchForce: 20
+    maxLaunchForce: 50
+    chargeTime: 5
+    maxAmmo: 1
     currentAmmo: 0
   firePoint: {fileID: 2010549306256853287}
   lineRenderer: {fileID: 6795164576791867217}
-  linePoints: 30
+  linePoints: 50
   timeBetweenPoints: 0.05
 --- !u!114 &506882670968020016
 MonoBehaviour:

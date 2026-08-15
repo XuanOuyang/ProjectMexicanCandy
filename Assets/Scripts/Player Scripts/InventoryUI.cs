@@ -19,7 +19,6 @@ public class InventoryUI : MonoBehaviour
 
     [Header("Single Selected Ammo Display")] 
     [SerializeField] private TextMeshProUGUI ammoText;
-    [SerializeField] private Vector2 textOffset = new Vector2(0f, -40f); // Offset relative to card holder center
 
     [Header("Selected Appearance")] 
     [SerializeField] private float selectedScale = 1.15f;
@@ -81,18 +80,6 @@ public class InventoryUI : MonoBehaviour
                 if (isSelected)
                 {
                     cardHolders[i].SetAsLastSibling();
-
-                    if (ammoText != null)
-                    {
-                        ammoText.transform.SetParent(cardHolders[i], false);
-                        ammoText.transform.SetAsLastSibling();
-
-                        RectTransform textRect = ammoText.rectTransform;
-                        
-                        // Offset slightly inwards/upwards so it doesn't clip the screen edge
-                        textRect.anchoredPosition = new Vector2(30f, 20f); // Adjust numbers to taste!
-                        textRect.localPosition = new Vector3(30f, 20f, 0f);
-                    }
                 }
             }
 
