@@ -1,24 +1,28 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("Candy Shooting")] [SerializeField]
-    private CandyShootingInput candyShooting;
+    [Header("Candy Shooting")] 
+    [SerializeField] private CandyShootingInput candyShooting;
 
-    [Header("Card Holders")] [SerializeField]
-    private RectTransform[] cardHolders = new RectTransform[3];
+    [Header("Card Holders")] 
+    [SerializeField] private RectTransform[] cardHolders = new RectTransform[3];
 
-    [Header("Card Holder Images")] [SerializeField]
-    private Image[] cardHolderImages = new Image[3];
+    [Header("Card Holder Images")] 
+    [SerializeField] private Image[] cardHolderImages = new Image[3];
 
-    [Header("Card Images")] [SerializeField]
-    private Image[] cardImages = new Image[3];
+    [Header("Card Images")] 
+    [SerializeField] private Image[] cardImages = new Image[3];
 
-    [Header("Selected Appearance")] [SerializeField]
-    private float selectedScale = 1.15f;
+    [Header("Single Selected Ammo Display")] 
+    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private Vector2 textOffset = new Vector2(0f, -40f); // Offset relative to card holder center
 
+    [Header("Selected Appearance")] 
+    [SerializeField] private float selectedScale = 1.15f;
     [SerializeField] private Color selectedColor = Color.white;
     [SerializeField] private Color unselectedColor = new Color(0.4f, 0.4f, 0.4f, 1f);
 
@@ -27,12 +31,15 @@ public class InventoryUI : MonoBehaviour
         if (candyShooting != null)
         {
             candyShooting.OnCandySelected += UpdateSelection;
+            candyShooting.OnAmmoChanged += HandleAmmoChanged;
         }
     }
 
     private void Start()
     {
-        UpdateSelection(candyShooting != null ? candyShooting.SelectedIndex : 0);
+        int initialIndex = candyShooting != null ? candyShooting.SelectedIndex : 0;
+        UpdateSelection(initialIndex);
+        RefreshAmmoDisplay();
     }
 
     private void OnDisable()
@@ -40,6 +47,23 @@ public class InventoryUI : MonoBehaviour
         if (candyShooting != null)
         {
             candyShooting.OnCandySelected -= UpdateSelection;
+            candyShooting.OnAmmoChanged -= HandleAmmoChanged;
+        }
+    }
+
+    private void HandleAmmoChanged(int slotIndex, int newAmmoCount)
+    {
+        if (candyShooting != null && slotIndex == candyShooting.SelectedIndex)
+        {
+            RefreshAmmoDisplay();
+        }
+    }
+
+    public void RefreshAmmoDisplay()
+    {
+        if (ammoText != null && candyShooting != null)
+        {
+            ammoText.text = candyShooting.CurrentAmmo.ToString();
         }
     }
 
@@ -49,12 +73,26 @@ public class InventoryUI : MonoBehaviour
         {
             bool isSelected = i == selectedIndex;
             Color color = isSelected ? selectedColor : unselectedColor;
+
             if (cardHolders[i] != null)
             {
                 cardHolders[i].localScale = Vector3.one * (isSelected ? selectedScale : 1f);
+
                 if (isSelected)
                 {
                     cardHolders[i].SetAsLastSibling();
+
+                    if (ammoText != null)
+                    {
+                        ammoText.transform.SetParent(cardHolders[i], false);
+                        ammoText.transform.SetAsLastSibling();
+
+                        RectTransform textRect = ammoText.rectTransform;
+                        
+                        // Offset slightly inwards/upwards so it doesn't clip the screen edge
+                        textRect.anchoredPosition = new Vector2(30f, 20f); // Adjust numbers to taste!
+                        textRect.localPosition = new Vector3(30f, 20f, 0f);
+                    }
                 }
             }
 
@@ -68,5 +106,7 @@ public class InventoryUI : MonoBehaviour
                 cardImages[i].color = color;
             }
         }
+
+        RefreshAmmoDisplay();
     }
 }

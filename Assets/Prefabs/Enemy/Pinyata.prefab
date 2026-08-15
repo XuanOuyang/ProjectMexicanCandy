@@ -206,7 +206,7 @@ MonoBehaviour:
   visualModel: {fileID: 4083480066333611208}
   bounceFrequency: 12
   bounceHeight: 0.25
-  tiltAngle: 15
+  tiltAngle: 239.5
   animateOnlyWhenMoving: 1
 --- !u!114 &2285189020642222811
 MonoBehaviour:
@@ -232,9 +232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cee82293e1c94dae5eec29749626c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player1: {fileID: 43778827145033875, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
-  player2: {fileID: 1766737684427784720, guid: 18ad0264a1447b4499fc4b55b8e14bc9, type: 3}
-  attackRange: 1.5
+  playerTags:
+  - Player 1
+  - Player 2
+  attackRange: 2.2
   damage: 1
   attackCooldown: 1
   targetUpdateRate: 0.2
@@ -286,7 +287,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &5050021595525697532
 GameObject:
   m_ObjectHideFlags: 0
