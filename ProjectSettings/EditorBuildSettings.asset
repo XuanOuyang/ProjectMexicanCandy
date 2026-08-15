@@ -18,6 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/GrayBoxed Game.unity
     guid: 1657f1914c8f68a41beada5a54504621
   - enabled: 1
+  - enabled: 1
+    path: Assets/Scenes/UI SCENE/UI.unity
+    guid: b34af51eb38926d48926b9210ba78cee
+  - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 01e4e65e2741bd344ae0e41671342e78
   - enabled: 1
