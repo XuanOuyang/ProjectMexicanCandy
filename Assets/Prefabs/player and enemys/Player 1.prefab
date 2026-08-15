@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5262681523452562314}
   - component: {fileID: 6651906195090482430}
-  - component: {fileID: 7131074830178785161}
   m_Layer: 0
   m_Name: Player 1 Image
   m_TagString: Untagged
@@ -82,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 184c3a56abfd4d741a7874012686085b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad5b4087079c61245953f8ce077e82e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,18 +91,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7131074830178785161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87210632964731165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd1a43ed141c0b40abc64b50e8f0332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Billboard
 --- !u!1 &1515763893747912353
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +107,7 @@ GameObject:
   - component: {fileID: 3625016088738982969}
   - component: {fileID: 8433620168883786887}
   - component: {fileID: 526351310118056014}
-  - component: {fileID: -8814599227809227390}
+  - component: {fileID: 1594296417231999442}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player 1
@@ -153,7 +140,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515763893747912353}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -395,7 +382,7 @@ CapsuleCollider:
   m_Height: 1.351951
   m_Direction: 1
   m_Center: {x: 0, y: 0.2065451, z: 0}
---- !u!114 &-8814599227809227390
+--- !u!114 &1594296417231999442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,9 +391,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515763893747912353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd1a43ed141c0b40abc64b50e8f0332, type: 3}
+  m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Billboard
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHearts: 5
+  currentHearts: 0
+  isDowned: 0
+  isDead: 0
+  downedTime: 1
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fullHeartSprite: {fileID: 21300000, guid: 3ed1804cd1877ef4099fc90840238aa5, type: 3}
+  emptyHeartSprite: {fileID: 21300000, guid: 2b99df4bf1272924bb2921a7b93d9b68, type: 3}
+  playerRenderer: {fileID: 2479139137249999106}
+  downedColor: {r: 1, g: 0, b: 0, a: 1}
+  movementScript: {fileID: 7319163067486454865}
+  rb: {fileID: 5929112531379757124}
+  playerCollider: {fileID: 526351310118056014}
+  attackScript: {fileID: 7319163067486454865}
 --- !u!1 &2407117118463401563
 GameObject:
   m_ObjectHideFlags: 0
