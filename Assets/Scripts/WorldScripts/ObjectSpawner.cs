@@ -8,21 +8,21 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject prefab;
 
     [Header("Spawn Timing")] 
-    [SerializeField] private float minSpawnDelay = 5f;
-    [SerializeField] private float maxSpawnDelay = 10f;
+    [SerializeField] protected float minSpawnDelay = 5f;
+    [SerializeField] protected float maxSpawnDelay = 10f;
 
     [Header("Spawn Validation")] 
     [SerializeField] private float spawnCheckRadius = 1f;
-    [SerializeField] private int maxSpawnAttempts = 20;
+    [SerializeField] protected int maxSpawnAttempts = 20;
 
     [Header("Raycast")] 
-    [SerializeField] private float raycastHeight = 10f;
-    [SerializeField] private float raycastDistance = 20f;
+    [SerializeField] protected float raycastHeight = 10f;
+    [SerializeField] protected float raycastDistance = 20f;
 
     [Header("Air Spawn")] 
-    [SerializeField] private bool spawnInAir = false;
-    [SerializeField] private float airSpawnHeight = 10f;
-    [SerializeField] private float airHoldTime = 3f;
+    [SerializeField] protected bool spawnInAir = false;
+    [SerializeField] protected float airSpawnHeight = 10f;
+    [SerializeField] protected float airHoldTime = 3f;
 
     private BoxCollider spawnArea;
 
@@ -46,7 +46,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    private void TrySpawnObject()
+    protected virtual void TrySpawnObject()
     {
         for (int i = 0; i < maxSpawnAttempts; i++)
         {
@@ -98,7 +98,7 @@ public class ObjectSpawner : MonoBehaviour
         Debug.LogWarning("No valid spawn location.");
     }
 
-    private IEnumerator HoldInAirRoutine(GameObject obj, float holdTime)
+    protected IEnumerator HoldInAirRoutine(GameObject obj, float holdTime)
     {
         if (obj == null) yield break;
 
@@ -125,7 +125,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomPosition()
+    protected Vector3 GetRandomPosition()
     {
         Bounds bounds = spawnArea.bounds;
         float x = Random.Range(bounds.min.x, bounds.max.x);
@@ -133,7 +133,7 @@ public class ObjectSpawner : MonoBehaviour
         return new Vector3(x, bounds.max.y, z);
     }
 
-    private bool IsSpawnLocationValid(Vector3 position)
+   protected bool IsSpawnLocationValid(Vector3 position)
     {
         Collider[] colliders = Physics.OverlapSphere(position, spawnCheckRadius);
         foreach (Collider col in colliders)

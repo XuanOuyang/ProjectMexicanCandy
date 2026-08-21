@@ -262,7 +262,7 @@ MonoBehaviour:
   - candyName: Candy
     projectilePrefab: {fileID: 6333229432217315993, guid: cf939cf271cc55e4fa1ba42f642cbda4, type: 3}
     arcForce: 1
-    minLaunchForce: 3
+    minLaunchForce: 6
     maxLaunchForce: 16
     chargeTime: 3
     maxAmmo: 10
@@ -378,6 +378,7 @@ MonoBehaviour:
   isDowned: 0
   isDead: 0
   downedTime: 1
+  invincibilityDuration: 2
   hearts:
   - {fileID: 0}
   - {fileID: 0}
