@@ -31,6 +31,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("Combat")]
     public MonoBehaviour attackScript; // drag your attack script here
 
+    [Header("Audio")]
+    public AudioSource hitSound;
+
     void Start()
     {
         currentHearts = maxHearts;
@@ -63,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHearts < 0)
             currentHearts = 0;
 
+        hitSound.Play();
         UpdateHeartsUI();
 
         if (currentHearts <= 0)
