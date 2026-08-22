@@ -3,33 +3,26 @@ using UnityEngine.InputSystem;
 
 public class ReadyUpManager : MonoBehaviour
 {
+    [SerializeField] private CharacterSelectManager characterSelectManager;
     private int playersReady = 0;
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        playerInput.SwitchCurrentActionMap("CharacterSelect");
         playersReady++;
+        LocalPlayer localPlayer = playerInput.GetComponent<LocalPlayer>();
         if (playersReady == 1)
         {
             Debug.Log("Player 1 Ready!");
-            playerInput.GetComponent<LocalPlayer>()
-                .InitializePlayer(1);
+            localPlayer.InitializePlayer(1);
+            characterSelectManager.InitializeCharacterSelection(localPlayer, 0);
         }
         else if (playersReady == 2)
         {
             Debug.Log("Player 2 Ready!");
-            playerInput.GetComponent<LocalPlayer>()
-                .InitializePlayer(2);
+            localPlayer.InitializePlayer(2);
+            characterSelectManager.InitializeCharacterSelection(localPlayer, 1);
             Debug.Log("Both players ready!");
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
