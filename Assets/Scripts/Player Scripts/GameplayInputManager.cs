@@ -23,15 +23,9 @@ public class GameplayInputManager : MonoBehaviour
             Debug.LogError($"Player {player.playerNumber} has no PlayerInput!");
             return;
         }
-
-        InputDevice[] devices = playerInput.devices.ToArray();
-        playerInput.actions = Instantiate(multiplayerInput);
-        playerInput.user.UnpairDevices();
-        foreach (InputDevice device in devices)
-        {
-            InputUser.PerformPairingWithDevice(device, playerInput.user);
-        }
-
+        Debug.Log($"Setting up P{player.playerNumber} " + $"with {player.controlScheme}");
+        playerInput.actions = multiplayerInput;
+        playerInput.SwitchCurrentControlScheme(player.controlScheme, player.inputDevice);
         playerInput.SwitchCurrentActionMap("Gameplay");
         Debug.Log($"P{player.playerNumber} is now using Gameplay input");
     }

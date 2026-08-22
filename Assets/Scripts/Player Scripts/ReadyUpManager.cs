@@ -10,7 +10,13 @@ public class ReadyUpManager : MonoBehaviour
     {
         playersReady++;
         LocalPlayer localPlayer = playerInput.GetComponent<LocalPlayer>();
+        localPlayer.controlScheme = playerInput.currentControlScheme;
+        if (playerInput.devices.Count > 0)
+        {
+            localPlayer.inputDevice = playerInput.devices[0];
+        }
         playerInput.SwitchCurrentActionMap("CharacterSelect");
+        Debug.Log($"Player {playersReady} joined using " + $"{localPlayer.controlScheme}");
         if (playersReady == 1)
         {
             Debug.Log("Player 1 Ready!");

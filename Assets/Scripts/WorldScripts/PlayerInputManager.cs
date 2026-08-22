@@ -61,6 +61,12 @@ public class PlayerInputManager : MonoBehaviour
 
         targetPlayer.enabled = true; 
         targetPlayer.SwitchCurrentControlScheme(schemeName, device);
+        LocalPlayer localPlayer = targetPlayer.GetComponent<LocalPlayer>();
+        if (localPlayer != null)
+        {
+            localPlayer.controlScheme = schemeName;
+            localPlayer.inputDevice = device;
+        }
 
         Debug.Log($"Player {joinedPlayers + 1} joined using {schemeName}!");
         

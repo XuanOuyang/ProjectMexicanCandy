@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelectManager : MonoBehaviour
@@ -7,7 +6,6 @@ public class CharacterSelectManager : MonoBehaviour
     private LocalPlayer player1;
     private LocalPlayer player2;
     [SerializeField] private CharacterSelectUI characterSelectUI;
-    [SerializeField] private InputActionAsset multiplayerInputActions;
 
     public void InitializeCharacterSelection(LocalPlayer player, int startingCharacter)
     {

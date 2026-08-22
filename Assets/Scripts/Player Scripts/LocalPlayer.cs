@@ -6,6 +6,8 @@ public class LocalPlayer : MonoBehaviour
     public int playerNumber;
     public int selectedCharacter;
     public bool isCharacterLocked;
+    public string controlScheme;
+    public InputDevice inputDevice;
     private CharacterSelectManager characterSelectManager;
 
     public void InitializePlayer(int number)
