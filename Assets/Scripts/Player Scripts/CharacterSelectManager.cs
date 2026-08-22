@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelectManager : MonoBehaviour
 {
     private LocalPlayer player1;
     private LocalPlayer player2;
     [SerializeField] private CharacterSelectUI characterSelectUI;
+    [SerializeField] private InputActionAsset multiplayerInputActions;
 
     public void InitializeCharacterSelection(LocalPlayer player, int startingCharacter)
     {
@@ -106,5 +109,18 @@ public class CharacterSelectManager : MonoBehaviour
         Debug.Log("Both players selected characters");
         Debug.Log($"Player 1: {player1.selectedCharacter}");
         Debug.Log($"Player 2: {player2.selectedCharacter}");
+        SwitchToGameplayInput(player1, "WASD");
+        SwitchToGameplayInput(player1, "Arrows");
+        SceneManager.LoadScene("GrayBoxed Game");
+    }
+
+    private void SwitchToGameplayInput(LocalPlayer player, string controlScheme)
+    {
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        InputDevice[] devices = playerInput.devices.ToArray();
+        playerInput.actions = Instantiate(multiplayerInputActions);
+        playerInput.user.AssociateActionsWithUser(playerInput.actions);
+        playerInput.SwitchCurrentActionMap("Gameplay");
+        Debug.Log($"Player {player.playerNumber} switched to MultiplayerInput");
     }
 }

@@ -12,6 +12,7 @@ public class LocalPlayer : MonoBehaviour
     {
         playerNumber = number;
         characterSelectManager = FindAnyObjectByType<CharacterSelectManager>();
+        DontDestroyOnLoad(gameObject);
         Debug.Log($"Player {playerNumber} initialized");
     }
 

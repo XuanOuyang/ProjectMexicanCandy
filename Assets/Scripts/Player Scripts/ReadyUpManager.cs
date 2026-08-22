@@ -8,9 +8,9 @@ public class ReadyUpManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        playerInput.SwitchCurrentActionMap("CharacterSelect");
         playersReady++;
         LocalPlayer localPlayer = playerInput.GetComponent<LocalPlayer>();
+        playerInput.SwitchCurrentActionMap("CharacterSelect");
         if (playersReady == 1)
         {
             Debug.Log("Player 1 Ready!");
