@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
         HandleImpact(collision.gameObject);
     }
 
-    private void HandleImpact(GameObject hitObject)
+    protected virtual void HandleImpact(GameObject hitObject)
     {
         // Try getting the Pinyata component
         Pinyata pinyata = hitObject.GetComponent<Pinyata>();
@@ -65,3 +65,4 @@ public class Projectile : MonoBehaviour
         }
     }
 }
+

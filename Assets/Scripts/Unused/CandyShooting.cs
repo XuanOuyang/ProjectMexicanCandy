@@ -24,6 +24,11 @@ public class CandyShooting : MonoBehaviour
     [Header("Line Display")] public int LinePoints = 30; // Number of points tracked along the arc
     public float TimeBetweenPoints = 0.05f; // Time interval between points
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+    
     void Update()
     {
         // Safe check: Use firePoint position if assigned, otherwise forward of player
