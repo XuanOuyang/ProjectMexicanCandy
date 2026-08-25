@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 4300982701683550337}
   - component: {fileID: 5031173795543553669}
   m_Layer: 0
-  m_Name: Piruli (Sharp Lolipop)
+  m_Name: Piruli (sharp lolipop)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,9 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7cc43b9189b60438cd2e209d0cf174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PiercingProjectile
-  lifetime: 10
+  lifetime: 20
   damage: 1
-  maxPierceCount: 3
+  maxPierceCount: 6
 --- !u!136 &5031173795543553669
 CapsuleCollider:
   m_ObjectHideFlags: 0
