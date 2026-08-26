@@ -21,7 +21,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoText;
 
     [Header("Selected Appearance")] 
-    [SerializeField] private float selectedScale = 1.15f;
+    [SerializeField] private float selectedScale = 0.75f;
     [SerializeField] private Color selectedColor = Color.white;
     [SerializeField] private Color unselectedColor = new Color(0.4f, 0.4f, 0.4f, 1f);
 
@@ -75,7 +75,7 @@ public class InventoryUI : MonoBehaviour
 
             if (cardHolders[i] != null)
             {
-                cardHolders[i].localScale = Vector3.one * (isSelected ? selectedScale : 1f);
+                cardHolders[i].localScale = Vector3.one * (isSelected ? selectedScale : 0.7f);
 
                 if (isSelected)
                 {
