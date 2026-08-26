@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 655927908288301942}
   - component: {fileID: 5201358522132409052}
+  - component: {fileID: 9139907130665031103}
   - component: {fileID: 5652386380075199604}
   - component: {fileID: 3653003224881806932}
   - component: {fileID: 6530571414212663285}
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.43, y: 1.07, z: 7.653}
-  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.10000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +52,27 @@ MonoBehaviour:
   ammoAmount: 5
   collectEffectPrefab: {fileID: 5622800232270703362, guid: 4d029e3aaf094c349a0b51a3447c9216, type: 3}
   EffectlifeTime: 2
+--- !u!65 &9139907130665031103
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606006938354501450}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.46, y: 12.55, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &5652386380075199604
 SphereCollider:
   m_ObjectHideFlags: 0
