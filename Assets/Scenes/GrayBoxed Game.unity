@@ -82764,6 +82764,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2401743730960597999, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: isDead
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401743730960597999, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: downedTime
       value: 1
       objectReference: {fileID: 0}
