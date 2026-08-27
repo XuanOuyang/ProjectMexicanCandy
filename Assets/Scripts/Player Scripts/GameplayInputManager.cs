@@ -24,8 +24,7 @@ public class GameplayInputManager : MonoBehaviour
             return;
         }
         Debug.Log($"Setting up P{player.playerNumber} " + $"with {player.controlScheme}");
-        playerInput.actions = multiplayerInput;
-        playerInput.SwitchCurrentControlScheme(player.controlScheme, player.inputDevice);
+        //playerInput.SwitchCurrentControlScheme(player.controlScheme, player.inputDevice);
         playerInput.SwitchCurrentActionMap("Gameplay");
         Debug.Log($"P{player.playerNumber} is now using Gameplay input");
     }
