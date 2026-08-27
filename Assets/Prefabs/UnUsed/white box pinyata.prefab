@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8883685971058588060}
   - component: {fileID: 2524498050529333758}
   - component: {fileID: 8372739590791475542}
-  - component: {fileID: -3303404030067668471}
-  - component: {fileID: 147679220037563414}
+  - component: {fileID: 3245768396527399653}
+  - component: {fileID: 3165612064106581523}
   m_Layer: 0
   m_Name: white box pinyata
   m_TagString: Enemy
@@ -184,12 +184,7 @@ MonoBehaviour:
   flashDuration: 0.15
   startWithGravity: 0
   gravityDelayTimer: 5
-  visualModel: {fileID: 0}
-  bounceFrequency: 12
-  bounceHeight: 0.25
-  tiltAngle: 15
-  animateOnlyWhenMoving: 0
---- !u!114 &-3303404030067668471
+--- !u!114 &3245768396527399653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,13 +196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392cee82293e1c94dae5eec29749626c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player1: {fileID: 8693151705613397996, guid: 14cb2bc13ce286946b328ad6da5bc46b, type: 3}
-  player2: {fileID: 1766737684427784720, guid: 18ad0264a1447b4499fc4b55b8e14bc9, type: 3}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   attackRange: 1.5
   damage: 1
   attackCooldown: 1
   targetUpdateRate: 0.2
---- !u!195 &147679220037563414
+--- !u!195 &3165612064106581523
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

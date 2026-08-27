@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player1;
-    public Transform player2;
+    [Header("Targeting Settings")]
+    public string[] playerTags = new string[] { "Player 1", "Player 2" };
 
+    [Header("Attack Settings")]
     public float attackRange = 1.5f;
     public int damage = 1;
     public float attackCooldown = 1f;
@@ -18,12 +20,6 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
-        GameObject p1Obj = GameObject.FindWithTag("Player 1");
-        if (p1Obj != null) player1 = p1Obj.transform;
-
-        GameObject p2Obj = GameObject.FindWithTag("Player 2");
-        if (p2Obj != null) player2 = p2Obj.transform;
     }
 
     void Update()
@@ -31,14 +27,15 @@ public class EnemyAI : MonoBehaviour
         // Don't run AI destination calls if agent isn't active or on the NavMesh yet
         if (agent == null || !agent.enabled || !agent.isOnNavMesh) return;
 
+        Transform currentTarget = GetClosestValidPlayer();
+
         if (Time.time >= nextTargetUpdateTime)
         {
             nextTargetUpdateTime = Time.time + targetUpdateRate;
 
-            Transform target = GetClosestValidPlayer();
-            if (target != null)
+            if (currentTarget != null)
             {
-                agent.SetDestination(target.position);
+                agent.SetDestination(currentTarget.position);
             }
             else
             {
@@ -46,13 +43,12 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        Transform attackTarget = GetClosestValidPlayer();
-        if (attackTarget != null)
+        if (currentTarget != null)
         {
-            float distance = Vector3.Distance(transform.position, attackTarget.position);
+            float distance = Vector3.Distance(transform.position, currentTarget.position);
             if (distance <= attackRange)
             {
-                TryAttack(attackTarget);
+                TryAttack(currentTarget);
             }
         }
     }
@@ -62,23 +58,23 @@ public class EnemyAI : MonoBehaviour
         Transform closest = null;
         float closestDistance = Mathf.Infinity;
 
-        if (IsValidTarget(player1))
+        foreach (string tag in playerTags)
         {
-            float d1 = Vector3.Distance(transform.position, player1.position);
-            if (d1 < closestDistance)
-            {
-                closestDistance = d1;
-                closest = player1;
-            }
-        }
+            GameObject[] players = GameObject.FindGameObjectsWithTag(tag);
 
-        if (IsValidTarget(player2))
-        {
-            float d2 = Vector3.Distance(transform.position, player2.position);
-            if (d2 < closestDistance)
+            foreach (GameObject playerObj in players)
             {
-                closestDistance = d2;
-                closest = player2;
+                Transform playerTransform = playerObj.transform;
+
+                if (IsValidTarget(playerTransform))
+                {
+                    float distance = Vector3.Distance(transform.position, playerTransform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closest = playerTransform;
+                    }
+                }
             }
         }
 
