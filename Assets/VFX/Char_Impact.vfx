@@ -2698,7 +2698,8 @@ MonoBehaviour:
     - outputSlot: {fileID: 8926484042661614626}
       inputSlot: {fileID: 8926484042661614613}
     position: {x: 511.2, y: 350.40002}
-    expandedSlots: []
+    expandedSlots:
+    - {fileID: 8926484042661614626}
     expanded: 1
     supecollapsed: 0
 --- !u!114 &8926484042661614626

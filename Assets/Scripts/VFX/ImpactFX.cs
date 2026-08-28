@@ -35,5 +35,6 @@ public class ImpactFX : MonoBehaviour
 
         // Data is copied from eventAttribute, so this object can be used again
         vfx.SendEvent("OnImpact", eventAttribute);
+        Debug.Log("IMPACT");
     }
 }
