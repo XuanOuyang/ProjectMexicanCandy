@@ -1,75 +1,83 @@
+using System.Net;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    [Header("Assign your two players here")]
-    public PlayerInput player1;
-    public PlayerInput player2;
+    [Header("Gameplay Characters")] [SerializeField]
+    private PlayerMovementInput player1Movement;
 
-    private int joinedPlayers = 0;
+    [SerializeField] private CandyShootingInput player1Shooting;
 
-    // Track which schemes have been claimed so they can't be picked twice
-    private bool wasdClaimed = false;
-    private bool arrowsClaimed = false;
-    private bool gamepadClaimed = false;
+    [SerializeField] private PlayerMovementInput player2Movement;
+    [SerializeField] private CandyShootingInput player2Shooting;
 
-    void Start()
+    private void Start()
     {
-        // Turn off the PlayerInput components so they can't move until they "join"
-        if (player1 != null) player1.enabled = false;
-        if (player2 != null) player2.enabled = false;
-    }
-
-    void Update()
-    {
-        // Stop checking if both players have already joined
-        if (joinedPlayers >= 2) return;
-
-        // 1. Check if someone pressed SPACEBAR to claim WASD
-        if (!wasdClaimed && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        LocalPlayer[] players = FindObjectsByType<LocalPlayer>();
+        foreach (LocalPlayer player in players)
         {
-            AssignControlSchemeToNextPlayer("WASD", Keyboard.current);
-            wasdClaimed = true;
-        }
-        
-        // 2. Check if someone pressed ENTER to claim ARROWS
-        else if (!arrowsClaimed && Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            AssignControlSchemeToNextPlayer("Arrows", Keyboard.current);
-            arrowsClaimed = true;
-        }
-        
-        // 3. Check if someone pressed the 'A' / 'South' button to claim GAMEPAD
-        else if (!gamepadClaimed && Gamepad.current != null)
-        {
-            foreach (var gamepad in Gamepad.all)
-            {
-                if (gamepad.buttonSouth.wasPressedThisFrame)
-                {
-                    AssignControlSchemeToNextPlayer("Gamepad", gamepad);
-                    gamepadClaimed = true;
-                    break; // Break out of the loop so we only assign one gamepad per frame
-                }
-            }
+            SetupPlayer(player);
         }
     }
 
-    void AssignControlSchemeToNextPlayer(string schemeName, InputDevice device)
+    private void SetupPlayer(LocalPlayer player)
     {
-        PlayerInput targetPlayer = (joinedPlayers == 0) ? player1 : player2;
-
-        targetPlayer.enabled = true; 
-        targetPlayer.SwitchCurrentControlScheme(schemeName, device);
-        LocalPlayer localPlayer = targetPlayer.GetComponent<LocalPlayer>();
-        if (localPlayer != null)
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        if (playerInput == null)
         {
-            localPlayer.controlScheme = schemeName;
-            localPlayer.inputDevice = device;
+            Debug.LogError($"P{player.playerNumber} has no PlayerInput");
+            return;
         }
 
-        Debug.Log($"Player {joinedPlayers + 1} joined using {schemeName}!");
-        
-        joinedPlayers++;
+        Debug.Log($"Setting up P{player.playerNumber} " + $"with existing scheme {playerInput.currentControlScheme}");
+        playerInput.SwitchCurrentActionMap("Gameplay");
+        InputAction moveAction = playerInput.actions.FindAction("Move");
+        InputAction shootAction = playerInput.actions.FindAction("Shoot");
+        if (moveAction == null)
+        {
+            Debug.LogError($"P{player.playerNumber} has no MoveAction");
+            return;
+        }
+
+        if (shootAction == null)
+        {
+            Debug.LogError($"P{player.playerNumber} has no ShootAction");
+            return;
+        }
+
+        if (player.playerNumber == 1)
+        {
+            SetupGameplayInput(playerInput, moveAction, shootAction, player1Movement, player1Shooting);
+        }
+        else if (player.playerNumber == 2)
+        {
+            SetupGameplayInput(playerInput, moveAction, shootAction, player2Movement, player2Shooting);
+        }
+
+        Debug.Log($"P{player.playerNumber} is now using Gameplay Input");
+    }
+
+    private void SetupGameplayInput(PlayerInput playerInput, InputAction moveAction, InputAction shootAction,
+        PlayerMovementInput movement, CandyShootingInput shooting)
+    {
+        if (movement == null)
+        {
+            Debug.LogError("PlayerMovementInput reference is missing");
+            return;
+        }
+
+        if (shooting == null)
+        {
+            Debug.LogError("PlayerMovementInput reference is missing");
+            return;
+        }
+
+        moveAction.performed += movement.OnMove;
+        moveAction.canceled += movement.OnMove;
+        shootAction.started += shooting.OnShoot;
+        shootAction.canceled += shooting.OnShoot;
+        shooting.InitializeInput(playerInput);
     }
 }
