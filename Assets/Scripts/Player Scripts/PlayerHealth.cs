@@ -38,6 +38,9 @@ public class PlayerHealth : MonoBehaviour
     public float height = 2f;
     public float backDistance = 5f;
 
+    [Header("VFX")]
+    public ImpactFX impact;
+
     void Start()
     {
         currentHearts = maxHearts;
@@ -71,6 +74,7 @@ public class PlayerHealth : MonoBehaviour
             currentHearts = 0;
 
         hitSound.Play();
+        impact.PlayVFX();
         UpdateHeartsUI();
         HitByPinata();
 
