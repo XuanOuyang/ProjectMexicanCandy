@@ -18,10 +18,6 @@ public class PlayerHealth : MonoBehaviour
     private float invincibilityTimer;
     private bool isInvincible = false;
 
-    public float invincibilityDuration = 2f;
-    private float invincibilityTimer;
-    private bool isInvincible = false;
-
     public Image[] hearts;
     public Sprite fullHeartSprite;
     public Sprite emptyHeartSprite;

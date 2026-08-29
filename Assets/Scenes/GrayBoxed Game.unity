@@ -65560,10 +65560,6 @@ MonoBehaviour:
   isDowned: 0
   isDead: 1
   downedTime: 10
-<<<<<<< HEAD
-  downedTimer: 0
-=======
->>>>>>> Master
   invincibilityDuration: 2
   hearts:
   - {fileID: 827778770}
