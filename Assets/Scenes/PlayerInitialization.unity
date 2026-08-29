@@ -880,7 +880,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectManager
   characterSelectUI: {fileID: 1459296828}
-  multiplayerInputActions: {fileID: -944628639613478452, guid: fee6f5de08af47b478651e50d50cd528, type: 3}
 --- !u!4 &1328211148
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,7 +1251,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1272,9 +1271,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: e3e112b7-98a2-44dd-afb3-83ebe3b11d08
@@ -1282,7 +1281,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -6577054151978602245, guid: fee6f5de08af47b478651e50d50cd528, type: 3}
   m_PlayerPrefab: {fileID: 6997186906531646871, guid: 380eb333253bd1f42b9cfe846bd8c6f7, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0

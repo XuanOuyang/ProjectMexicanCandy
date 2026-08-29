@@ -10,12 +10,16 @@ public class ReadyUpManager : MonoBehaviour
     {
         playersReady++;
         LocalPlayer localPlayer = playerInput.GetComponent<LocalPlayer>();
+        if (localPlayer == null)
+        {
+            Debug.LogError("ReadyUpManager: Joined PlayerInput has no LocalPlayer Component");
+            return;
+        }
         localPlayer.controlScheme = playerInput.currentControlScheme;
         if (playerInput.devices.Count > 0)
         {
             localPlayer.inputDevice = playerInput.devices[0];
         }
-        //playerInput.SwitchCurrentActionMap("CharacterSelect");
         Debug.Log($"Player {playersReady} joined using " + $"{localPlayer.controlScheme}");
         if (playersReady == 1)
         {
