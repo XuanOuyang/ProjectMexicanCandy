@@ -21,9 +21,14 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoText;
 
     [Header("Selected Appearance")] 
-    [SerializeField] private float selectedScale = 1.15f;
+    [SerializeField] private float selectedScale = 0.75f;
     [SerializeField] private Color selectedColor = Color.white;
     [SerializeField] private Color unselectedColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+
+
+    [Header("Card Titles")]
+    [SerializeField] private string[] cardTextArray = new string[3];
+    [SerializeField] private TextMeshProUGUI activeText;
 
     private void OnEnable()
     {
@@ -39,6 +44,7 @@ public class InventoryUI : MonoBehaviour
         int initialIndex = candyShooting != null ? candyShooting.SelectedIndex : 0;
         UpdateSelection(initialIndex);
         RefreshAmmoDisplay();
+        UpdateCardDisplay(initialIndex);
     }
 
     private void OnDisable()
@@ -55,6 +61,7 @@ public class InventoryUI : MonoBehaviour
         if (candyShooting != null && slotIndex == candyShooting.SelectedIndex)
         {
             RefreshAmmoDisplay();
+            UpdateCardDisplay(slotIndex);
         }
     }
 
@@ -75,7 +82,7 @@ public class InventoryUI : MonoBehaviour
 
             if (cardHolders[i] != null)
             {
-                cardHolders[i].localScale = Vector3.one * (isSelected ? selectedScale : 1f);
+                cardHolders[i].localScale = Vector3.one * (isSelected ? selectedScale : 0.7f);
 
                 if (isSelected)
                 {
@@ -95,5 +102,14 @@ public class InventoryUI : MonoBehaviour
         }
 
         RefreshAmmoDisplay();
+        UpdateCardDisplay(selectedIndex);
+    }
+
+    private void UpdateCardDisplay(int selectedCardIndex)
+    {
+        if(activeText != null)
+        {
+            activeText.text = cardTextArray[selectedCardIndex];
+        }
     }
 }

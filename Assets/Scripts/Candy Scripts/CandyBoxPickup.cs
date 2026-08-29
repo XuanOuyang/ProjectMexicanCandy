@@ -29,9 +29,19 @@ public class CandyBoxPickup : MonoBehaviour
     [Min(0.1f)]
     public float EffectlifeTime = 2f;
 
+    [Header("Sound Effect")]
+    public AudioSource collectAudio;
+
     // ── Trigger ───────────────────────────────────────────────────────────────
     private void OnTriggerEnter(Collider other)
     {
+
+        GameObject audioObject = GameObject.Find("sparkle");
+        if (audioObject != null)
+        {
+            collectAudio = audioObject.GetComponent<AudioSource>();
+        }
+
         // Only care about objects that have a CandyShootingInput
         CandyShootingInput shooter = other.GetComponent<CandyShootingInput>();
         if (shooter == null) return;
@@ -46,6 +56,8 @@ public class CandyBoxPickup : MonoBehaviour
             GameObject effect = Instantiate(collectEffectPrefab, transform.position, Quaternion.identity);
             Destroy(effect, EffectlifeTime); // Passes the instance ('effect') instead of the prefab blueprint
         }
+        collectAudio.Play();
+
         // Remove the pickup from the scene
         Destroy(gameObject);
     }

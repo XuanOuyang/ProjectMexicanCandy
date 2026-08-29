@@ -49,6 +49,16 @@ public class PlayerHealth : MonoBehaviour
     [Tooltip("How smooth the circle looks. 40 is a great balance.")]
     public int circleSegments = 40;
 
+    [Header("Audio")]
+    public AudioSource hitSound;
+
+    [Header("Backwards Hit")]
+    public float height = 2f;
+    public float backDistance = 5f;
+
+    [Header("VFX")]
+    public ImpactFX impact;
+
     void Start()
     {
         currentHearts = maxHearts;
@@ -106,7 +116,10 @@ public class PlayerHealth : MonoBehaviour
         currentHearts -= amount;
         if (currentHearts < 0) currentHearts = 0;
 
+        hitSound.Play();
+        impact.PlayVFX();
         UpdateHeartsUI();
+        HitByPinata();
 
         if (currentHearts <= 0)
         {
@@ -213,4 +226,40 @@ public class PlayerHealth : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+    void HitByPinata()
+    {
+            Vector2 targetPos = (Vector2)transform.position + Vector2.left * backDistance;
+            SendBackwards(targetPos, height);
+    }
+
+    /// Launches the character toward a target position in an arc.
+
+    public void SendBackwards(Vector2 targetPos, float arcHeight)
+    {
+        // Calculate displacement
+        Vector2 displacement = targetPos - (Vector2)transform.position;
+
+        // Split into horizontal and vertical distances
+        float displacementY = displacement.y;
+        Vector2 displacementXZ = new Vector2(displacement.x, 0);
+
+        // Calculate initial vertical velocity
+        float velocityY = Mathf.Sqrt(2 * arcHeight);
+
+        // Time to go from peak to target
+        float timeDown = Mathf.Sqrt(2 * Mathf.Max(0, arcHeight - displacementY));
+
+        float totalTime = velocityY + timeDown;
+
+        // Calculate horizontal velocity
+        Vector2 velocityXZ = displacementXZ / totalTime;
+
+        // Combine velocities
+        Vector2 launchVelocity = velocityXZ + Vector2.up * velocityY;
+
+        // Apply velocity
+        rb.linearVelocity = launchVelocity;
+    }
+
 }
