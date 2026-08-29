@@ -25490,8 +25490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   prefab: {fileID: 0}
-  minSpawnDelay: 1
-  maxSpawnDelay: 1
+  minSpawnDelay: 5
+  maxSpawnDelay: 10
   spawnCheckRadius: 1
   maxSpawnAttempts: 20
   raycastHeight: 4
@@ -57804,6 +57804,7 @@ MonoBehaviour:
   ruptAoeRadius: 10
   ruptAoeDamage: 2
   ruptureVFXPrefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  ruptureSFX: {fileID: 8300000, guid: 27a1bbe1aef577d46991ee7bfc6c913b, type: 3}
   ruptureVfxLifetime: 100
 --- !u!4 &1436950414
 Transform:
@@ -59066,8 +59067,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 13.817128, y: 7.68, z: 1}
-  m_Center: {x: -4.9784465, y: 0, z: 2.3991033e-16}
+  m_Size: {x: 13.817128, y: 7.68, z: 1.1306275}
+  m_Center: {x: -4.9784465, y: 0, z: 0.002467092}
 --- !u!33 &1456579018
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59317,6 +59318,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
+--- !u!114 &1461976555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1353865632666690928, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+  m_PrefabInstance: {fileID: 2351218235480733223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9888e79505ad6d498cbc8fcae3202ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactFX
 --- !u!1001 &1462026842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67423,6 +67435,8 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   height: 2
   backDistance: 5
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
   impact: {fileID: 0}
 --- !u!136 &1709111005
 CapsuleCollider:
@@ -86579,7 +86593,7 @@ PrefabInstance:
       objectReference: {fileID: 18226179}
     - target: {fileID: 1379961623023526999, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: moveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2010549306256853287, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_LocalScale.y
@@ -86640,7 +86654,7 @@ PrefabInstance:
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: impact
       value: 
-      objectReference: {fileID: 1397035910}
+      objectReference: {fileID: 1461976555}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: isDead
       value: 0
@@ -86672,6 +86686,10 @@ PrefabInstance:
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: currentHearts
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: flashDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: circleRenderer
@@ -86720,6 +86738,10 @@ PrefabInstance:
     - target: {fileID: 6795164576791867217, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7981168555927824480, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_UseGravity
@@ -86965,6 +86987,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: flashDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: circleRenderer
       value: 
       objectReference: {fileID: 420019782}
@@ -87038,6 +87064,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
@@ -87162,7 +87192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7319163067486454865, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: moveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8693151705613397996, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_LocalPosition.x

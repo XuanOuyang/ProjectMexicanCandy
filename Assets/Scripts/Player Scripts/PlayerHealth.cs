@@ -56,6 +56,10 @@ public class PlayerHealth : MonoBehaviour
     public float height = 2f;
     public float backDistance = 5f;
 
+    [Header("Visual Feedback")]
+    public Color flashColor = Color.red;
+    public float flashDuration = 0.15f;
+
     [Header("VFX")]
     public ImpactFX impact;
 
@@ -136,6 +140,7 @@ public class PlayerHealth : MonoBehaviour
         isInvincible = true;
         invincibilityTimer = invincibilityDuration;
     }
+    
 
     void UpdateHeartsUI()
     {
