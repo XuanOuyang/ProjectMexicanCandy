@@ -12,6 +12,10 @@ public class PlayerHealth : MonoBehaviour
     public float downedTime = 10f;
     private float downedTimer;
 
+    public float invincibilityDuration = 2f;
+    private float invincibilityTimer;
+    private bool isInvincible = false;
+
     public Image[] hearts;
     public Sprite fullHeartSprite;
     public Sprite emptyHeartSprite;
@@ -54,6 +58,15 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        if (isInvincible)
+        {
+            invincibilityTimer -= Time.deltaTime;
+            if (invincibilityTimer <= 0f)
+            {
+                isInvincible = false;
+            }
+        }
+
         if (isDowned && !isDead)
         {
             downedTimer -= Time.deltaTime;
@@ -66,7 +79,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (isDead || isDowned)
+        if (isDead || isDowned || isInvincible)
             return;
 
         currentHearts -= amount;
@@ -82,6 +95,15 @@ public class PlayerHealth : MonoBehaviour
         {
             Downed();
         }
+        else
+        {
+            TriggerInvincibility();
+        }
+    }
+    void TriggerInvincibility()
+    {
+        isInvincible = true;
+        invincibilityTimer = invincibilityDuration;
     }
 
     void UpdateHeartsUI()
