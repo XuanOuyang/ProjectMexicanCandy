@@ -18,6 +18,9 @@ GameObject:
   - component: {fileID: 5913738962721897519}
   - component: {fileID: 6431393146148427978}
   - component: {fileID: 1446940234292135596}
+  - component: {fileID: 1095061806021584935}
+  - component: {fileID: 7244985494975572371}
+  - component: {fileID: 1353865632666690928}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player 1
@@ -154,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1280224912be31448abea6a5576859bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 5
+  moveSpeed: 3
 --- !u!114 &2284267280199575555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +290,7 @@ MonoBehaviour:
   isDowned: 0
   isDead: 0
   downedTime: 1
+  downedTimer: 0
   invincibilityDuration: 2
   hearts:
   - {fileID: 0}
@@ -302,6 +306,15 @@ MonoBehaviour:
   rb: {fileID: 7981168555927824480}
   playerCollider: {fileID: 876030694996881200}
   attackScript: {fileID: 1379961623023526999}
+  statusText: {fileID: 0}
+  isBeingRevived: 0
+  circleRenderer: {fileID: 0}
+  reviveRadius: 3
+  circleSegments: 40
+  hitSound: {fileID: 0}
+  height: 2
+  backDistance: 5
+  impact: {fileID: 0}
 --- !u!95 &6431393146148427978
 Animator:
   serializedVersion: 7
@@ -337,6 +350,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FastFallRigidbody
   fallMultiplier: 2.5
+--- !u!114 &1095061806021584935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144200886945120143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea82b9a429a9e96428624660798c44dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRevive
+  reviveDuration: 5
+  hasUsedRevive: 0
+  showRadiusGizmo: 1
+  visualRadius: 5
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.4}
+--- !u!135 &7244985494975572371
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144200886945120143}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1353865632666690928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144200886945120143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9888e79505ad6d498cbc8fcae3202ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactFX
+  vfx: {fileID: 0}
+  player: {fileID: 7981168555927824480}
 --- !u!1 &4439491453191896005
 GameObject:
   m_ObjectHideFlags: 0

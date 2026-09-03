@@ -33,6 +33,9 @@ public class CandyComboSettings : MonoBehaviour
 
     [Tooltip("Optional VFX prefab spawned at the combo's origin point")]
     public GameObject ruptureVFXPrefab;
+    [Header("Audio")]
+    [Tooltip("Sound played when Candy Rupture triggers")]
+    public AudioClip ruptureSFX;
 
     [Tooltip("How many seconds before the spawned Rupture VFX GameObject is destroyed.")]
     [Min(0f)]
