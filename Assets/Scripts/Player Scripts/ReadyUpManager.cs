@@ -7,6 +7,7 @@ public class ReadyUpManager : MonoBehaviour
 {
     [SerializeField] private CharacterSelectManager characterSelectManager;
     [SerializeField] private UnityEngine.InputSystem.PlayerInputManager playerInputManager;
+    [SerializeField] private GameObject pressToJoinText;
 
     private int playersReady = 0;
 
@@ -121,6 +122,7 @@ public class ReadyUpManager : MonoBehaviour
         {
             localPlayer.InitializePlayer(2);
             characterSelectManager.InitializeCharacterSelection(localPlayer, 1);
+            pressToJoinText.SetActive(false);
             Debug.Log("Both players ready!");
         }
     }
