@@ -533,6 +533,7 @@ MonoBehaviour:
   lifetime: 20
   damage: 1
   maxPierceCount: 6
+  nameOfSoundFX: stab
 --- !u!136 &5031173795543553669
 CapsuleCollider:
   m_ObjectHideFlags: 0

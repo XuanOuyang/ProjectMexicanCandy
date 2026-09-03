@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class Pinyata : MonoBehaviour
 {
@@ -29,8 +30,9 @@ public class Pinyata : MonoBehaviour
     public float tiltAngle = 15f;         // Max tilt rotation (side to side)
     public bool animateOnlyWhenMoving = false;
 
-    [Header("Audio")]
-    public AudioSource hitSound;
+    [Header("VFX")]
+    public GameObject piruliVFX;
+    public GameObject damageVFX;
 
     private Vector3 initialVisualLocalPos;
     private Vector3 lastPosition;
@@ -64,12 +66,6 @@ public class Pinyata : MonoBehaviour
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
 
-
-        GameObject audioObject = GameObject.Find("PinataHit");
-        if (audioObject != null)
-        {
-            hitSound = audioObject.GetComponent<AudioSource>();
-        }
     }
 
     void Update()
@@ -132,12 +128,35 @@ public class Pinyata : MonoBehaviour
         {
             TakeDamage(1);
         }
+
+        PiercingProjectile projectile = other.GetComponent<PiercingProjectile>();
+
+        if (projectile != null)
+        {
+            ParticleSystem piruliFX = Instantiate(piruliVFX.GetComponent<ParticleSystem>(), transform.position, transform.rotation);
+            piruliFX.Play();
+            Debug.Log("vfx played");
+            //Audio
+            GameObject audioObject = GameObject.Find("stab");
+            AudioSource collectAudio = audioObject.GetComponent<AudioSource>();
+
+            collectAudio.Play();
+        }
+        else
+        {
+            ParticleSystem projectileFX = Instantiate(damageVFX.GetComponent<ParticleSystem>(), transform.position, transform.rotation);
+            projectileFX.Play();
+
+            GameObject audioObject = GameObject.Find("PinataHit");
+            AudioSource hitSound = audioObject.GetComponent<AudioSource>();
+
+            hitSound.Play();
+        }
     }
 
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        hitSound.Play();
         if (!isFlashing && enemyRenderer != null) StartCoroutine(FlashRedRoutine());
         if (currentHealth <= 0) Die();
     }
