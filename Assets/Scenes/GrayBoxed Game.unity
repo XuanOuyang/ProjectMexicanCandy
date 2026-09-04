@@ -20335,17 +20335,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee769c23e1c641f43a403d62a8d9e49d, type: 3}
---- !u!114 &495409121 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
-  m_PrefabInstance: {fileID: 2784990939760976398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!4 &495409126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8693151705613397996, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
@@ -53231,17 +53220,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
---- !u!114 &1312748212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-  m_PrefabInstance: {fileID: 2351218235480733223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!114 &1312748213 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2284267280199575555, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
@@ -57069,8 +57047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4e72b13d8c70249b9b0f141ba34305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player1: {fileID: 495409121}
-  player2: {fileID: 1312748212}
+  player1Movement: {fileID: 2784990939760976399}
+  player1Shooting: {fileID: 495409133}
+  player2Movement: {fileID: 2351218235480733224}
+  player2Shooting: {fileID: 1312748213}
 --- !u!114 &1407360029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86575,6 +86555,30 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: b32abd19-92d8-47d9-a52f-56e7376c7d81
+      objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 338c1328-4109-4cdc-b182-28c9ca904cfb
+      objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: 'CharacterSelect/Navigate[/DualSenseGamepadHID/leftStick/up,/DualSenseGamepadHID/leftStick/down,/DualSenseGamepadHID/leftStick/left,/DualSenseGamepadHID/leftStick/right,/DualSenseGamepadHID/dpad,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: 'CharacterSelect/Submit[/DualSenseGamepadHID/buttonSouth,/Keyboard/space,/Keyboard/enter]'
+      objectReference: {fileID: 0}
     - target: {fileID: 876030694996881200, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_Height
       value: 4
@@ -86808,6 +86812,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1941352603}
   m_SourcePrefab: {fileID: 100100000, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+--- !u!114 &2351218235480733224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1379961623023526999, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+  m_PrefabInstance: {fileID: 2351218235480733223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1280224912be31448abea6a5576859bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &2703155307426941783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87050,6 +87065,30 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: b32abd19-92d8-47d9-a52f-56e7376c7d81
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 338c1328-4109-4cdc-b182-28c9ca904cfb
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: 'CharacterSelect/Navigate[/DualSenseGamepadHID/leftStick/up,/DualSenseGamepadHID/leftStick/down,/DualSenseGamepadHID/leftStick/left,/DualSenseGamepadHID/leftStick/right,/DualSenseGamepadHID/dpad,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625016088738982969, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: 'CharacterSelect/Submit[/DualSenseGamepadHID/buttonSouth,/Keyboard/space,/Keyboard/enter]'
+      objectReference: {fileID: 0}
     - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -87231,6 +87270,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 182417756}
   m_SourcePrefab: {fileID: 100100000, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+--- !u!114 &2784990939760976399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7319163067486454865, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+  m_PrefabInstance: {fileID: 2784990939760976398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1280224912be31448abea6a5576859bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &3082089636567708117
 PrefabInstance:
   m_ObjectHideFlags: 0

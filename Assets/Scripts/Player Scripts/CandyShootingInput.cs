@@ -36,21 +36,19 @@ public class CandyShootingInput : MonoBehaviour
     [Header("Candy Types  (index 0 = slot 1, index 1 = slot 2, index 2 = slot 3)")]
     public CandyType[] candyTypes = new CandyType[3];
 
-    [Header("Fire Point")]
-    public Transform firePoint;
+    [Header("Fire Point")] public Transform firePoint;
 
-    [Header("Trajectory Preview")]
-    public LineRenderer lineRenderer;
-    public int   linePoints        = 30;
+    [Header("Trajectory Preview")] public LineRenderer lineRenderer;
+    public int linePoints = 30;
     public float timeBetweenPoints = 0.05f;
 
     // ── Private State ─────────────────────────────────────────────────────────
-    private int   selectedCandyIndex = 0;
+    private int selectedCandyIndex = 0;
     private float currentLaunchForce = 0f;
-    private bool  isCharging         = false;
-    private bool  isHoldingShoot     = false;
+    private bool isCharging = false;
+    private bool isHoldingShoot = false;
     private Animator animator;
-    
+
     // EVENTS
     public event Action<int> OnCandySelected;
     public event Action<int, int> OnAmmoChanged; // Passes: (slotIndex, newAmmoCount)
@@ -63,11 +61,12 @@ public class CandyShootingInput : MonoBehaviour
     private CandyType CurrentCandy => candyTypes[selectedCandyIndex];
 
     // ── Public Read-only Info ──────────────────────────────────────────────────
-    public int    SelectedIndex    => selectedCandyIndex;
-    public int    CurrentAmmo      => CurrentCandy.currentAmmo;
-    public int    CurrentMaxAmmo   => CurrentCandy.maxAmmo;
+    public int SelectedIndex => selectedCandyIndex;
+    public int CurrentAmmo => CurrentCandy.currentAmmo;
+    public int CurrentMaxAmmo => CurrentCandy.maxAmmo;
     public string CurrentCandyName => CurrentCandy.candyName;
-    public float  ChargePercent    =>
+
+    public float ChargePercent =>
         CurrentCandy.maxLaunchForce > CurrentCandy.minLaunchForce
             ? (currentLaunchForce - CurrentCandy.minLaunchForce) /
               (CurrentCandy.maxLaunchForce - CurrentCandy.minLaunchForce)
@@ -77,9 +76,13 @@ public class CandyShootingInput : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         PlayerInput pi = GetComponent<PlayerInput>();
-        if (pi == null)
+    }
+
+    public void InitializeInput(PlayerInput playerInput)
+    {
+        if (playerInput == null)
         {
-            Debug.LogError("[CandyShooter] No PlayerInput component found on this GameObject!");
+            Debug.LogError("[CandyShooter] InitializeInput received null PlayerInput");
             return;
         }
 
@@ -107,7 +110,6 @@ public class CandyShootingInput : MonoBehaviour
         if (_cc1Action != null) _cc1Action.performed -= _onCC1;
         if (_cc2Action != null) _cc2Action.performed -= _onCC2;
         if (_cc3Action != null) _cc3Action.performed -= _onCC3;
-        if (_rotateCandyAction != null) _rotateCandyAction.performed -= _onRotateCandy;
     }
 
     private void Start()
@@ -124,8 +126,8 @@ public class CandyShootingInput : MonoBehaviour
     private void Update()
     {
         Vector3 startPos = firePoint != null
-                               ? firePoint.position
-                               : transform.position + transform.forward;
+            ? firePoint.position
+            : transform.position + transform.forward;
 
         Vector3 launchDirection = (transform.forward + transform.up * CurrentCandy.arcForce).normalized;
 
@@ -133,7 +135,8 @@ public class CandyShootingInput : MonoBehaviour
         {
             if (CurrentCandy.chargeTime > 0f)
             {
-                float ratePerSecond = (CurrentCandy.maxLaunchForce - CurrentCandy.minLaunchForce) / CurrentCandy.chargeTime;
+                float ratePerSecond = (CurrentCandy.maxLaunchForce - CurrentCandy.minLaunchForce) /
+                                      CurrentCandy.chargeTime;
                 currentLaunchForce += ratePerSecond * Time.deltaTime;
             }
 
@@ -156,8 +159,8 @@ public class CandyShootingInput : MonoBehaviour
                 return;
             }
 
-            isCharging         = true;
-            isHoldingShoot     = true;
+            isCharging = true;
+            isHoldingShoot = true;
             currentLaunchForce = CurrentCandy.minLaunchForce;
             if (animator != null) animator.SetTrigger("ThrowStarted");
         }
@@ -170,8 +173,8 @@ public class CandyShootingInput : MonoBehaviour
                 isCharging = false;
 
                 Vector3 startPos = firePoint != null
-                                       ? firePoint.position
-                                       : transform.position + transform.forward;
+                    ? firePoint.position
+                    : transform.position + transform.forward;
 
                 Vector3 launchDirection = (transform.forward + transform.up * CurrentCandy.arcForce).normalized;
                 if (animator != null) animator.SetTrigger("ThrowReleased");
@@ -189,11 +192,13 @@ public class CandyShootingInput : MonoBehaviour
                 candyTypes[i].currentAmmo = Mathf.Min(candyTypes[i].currentAmmo + amount, candyTypes[i].maxAmmo);
                 OnAmmoChanged?.Invoke(i, candyTypes[i].currentAmmo);
             }
+
             Debug.Log($"[CandyShooter] Restored {amount} ammo to all candies.");
         }
         else if (candyIndex >= 0 && candyIndex < candyTypes.Length)
         {
-            candyTypes[candyIndex].currentAmmo = Mathf.Min(candyTypes[candyIndex].currentAmmo + amount, candyTypes[candyIndex].maxAmmo);
+            candyTypes[candyIndex].currentAmmo = Mathf.Min(candyTypes[candyIndex].currentAmmo + amount,
+                candyTypes[candyIndex].maxAmmo);
             OnAmmoChanged?.Invoke(candyIndex, candyTypes[candyIndex].currentAmmo);
             Debug.Log($"[CandyShooter] Restored {amount} {candyTypes[candyIndex].candyName} ammo.");
         }
@@ -213,7 +218,7 @@ public class CandyShootingInput : MonoBehaviour
     {
         if (index < 0 || index >= candyTypes.Length) return;
 
-        isCharging     = false;
+        isCharging = false;
         isHoldingShoot = false;
         if (lineRenderer != null) lineRenderer.enabled = false;
 
@@ -248,7 +253,7 @@ public class CandyShootingInput : MonoBehaviour
     {
         if (lineRenderer == null) return;
 
-        lineRenderer.enabled       = true;
+        lineRenderer.enabled = true;
         lineRenderer.useWorldSpace = true;
         lineRenderer.positionCount = linePoints;
 
@@ -263,7 +268,7 @@ public class CandyShootingInput : MonoBehaviour
 
             if (Physics.Linecast(previousPoint, pointPosition, out RaycastHit hit))
             {
-                if (hit.collider.CompareTag("Wall")  ||
+                if (hit.collider.CompareTag("Wall") ||
                     hit.collider.CompareTag("Floor") ||
                     hit.collider.CompareTag("Enemy"))
                 {

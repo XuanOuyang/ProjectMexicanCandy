@@ -1,21 +1,50 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LocalPlayer : MonoBehaviour
 {
     public int playerNumber;
+    public int selectedCharacter;
+    public bool isCharacterLocked;
+    public string controlScheme;
+    public InputDevice inputDevice;
+    private CharacterSelectManager characterSelectManager;
 
     public void InitializePlayer(int number)
     {
         playerNumber = number;
+        characterSelectManager = FindAnyObjectByType<CharacterSelectManager>();
+        DontDestroyOnLoad(gameObject);
+        Debug.Log($"Player {playerNumber} initialized");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnNavigate(InputAction.CallbackContext context)
     {
+        if (!context.performed || isCharacterLocked)
+        {
+            return;
+        }
+
+        Debug.Log($"P{playerNumber} received Navigate!");
+
+        float horizontal = context.ReadValue<Vector2>().x;
+        if (horizontal > 0)
+        {
+            characterSelectManager.SelectCharacter(this, 1);
+        }
+        else if (horizontal < 0)
+        {
+            characterSelectManager.SelectCharacter(this, 0);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnSubmit(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+        {
+            return;
+        }
+
+        characterSelectManager.ConfirmSelection(this);
     }
 }
