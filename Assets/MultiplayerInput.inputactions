@@ -218,6 +218,17 @@
                 },
                 {
                     "name": "",
+                    "id": "f611d2d1-6c91-4c25-9fe2-234cf587df9b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fb5827ad-5359-4ebe-a66a-3eddf9736c7b",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",

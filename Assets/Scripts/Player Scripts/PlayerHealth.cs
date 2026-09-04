@@ -119,7 +119,6 @@ public class PlayerHealth : MonoBehaviour
 
         currentHearts -= amount;
         if (currentHearts < 0) currentHearts = 0;
-
         hitSound.Play();
         impact.PlayVFX();
         UpdateHeartsUI();

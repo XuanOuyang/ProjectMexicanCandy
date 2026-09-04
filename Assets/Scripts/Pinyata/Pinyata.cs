@@ -16,7 +16,7 @@ public class Pinyata : MonoBehaviour
     private Color originalColor;
     private bool isFlashing = false;
 
-    [Header("Gravity Timer Settings")]
+    [Header("Gravity Timer Settings")] 
     public bool startWithGravity = false; 
     public float gravityDelayTimer = 5f;
     private Rigidbody rb;

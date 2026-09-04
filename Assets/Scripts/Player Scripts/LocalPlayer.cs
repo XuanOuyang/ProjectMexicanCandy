@@ -18,6 +18,7 @@ public class LocalPlayer : MonoBehaviour
         Debug.Log($"Player {playerNumber} initialized");
     }
 
+/*
     public void OnNavigate(InputAction.CallbackContext context)
     {
         if (!context.performed || isCharacterLocked)
@@ -37,7 +38,7 @@ public class LocalPlayer : MonoBehaviour
             characterSelectManager.SelectCharacter(this, 0);
         }
     }
-
+*/
     public void OnSubmit(InputAction.CallbackContext context)
     {
         if (!context.performed)
