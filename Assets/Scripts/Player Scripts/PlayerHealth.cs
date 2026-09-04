@@ -231,6 +231,7 @@ public float backDistance = 5f;
         if (!isDowned || isDead) return;
 
         isDowned = false;
+
         hasBeenRevived = true;
         currentHearts = maxHearts;
         UpdateHeartsUI();

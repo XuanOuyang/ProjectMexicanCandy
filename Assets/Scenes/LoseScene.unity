@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 348426109}
   - component: {fileID: 348426108}
   - component: {fileID: 348426107}
+  - component: {fileID: 348426112}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348426106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 833477a58d4146c4e8eef8e4601cb7a2, type: 3}
   m_Name: 
@@ -313,6 +314,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &348426112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348426106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67cbe58f04b1f544988a485fb4cddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AltMenuController
 --- !u!1 &1101309522
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1101309523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -396,9 +409,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 348426107}
+      - m_Target: {fileID: 11500000, guid: d67cbe58f04b1f544988a485fb4cddf9, type: 3}
         m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
-        m_MethodName: OnStartClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

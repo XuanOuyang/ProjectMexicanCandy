@@ -9291,7 +9291,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9060043808532496609, guid: ee104dcee0db6ec42af42898cbdd6549, type: 3}
   m_PrefabInstance: {fileID: 203544035}
   m_PrefabAsset: {fileID: 0}
-  collectAudio: {fileID: 0}
 --- !u!1001 &211131806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19423,7 +19422,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
   m_PrefabInstance: {fileID: 572503963}
   m_PrefabAsset: {fileID: 0}
-  collectAudio: {fileID: 0}
 --- !u!4 &416706531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -20609,7 +20607,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7001315229630049242, guid: d2b41bb4a15f13240b2c039b33489f85, type: 3}
   m_PrefabInstance: {fileID: 353622510}
   m_PrefabAsset: {fileID: 0}
-  collectAudio: {fileID: 0}
 --- !u!4 &434242142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -26000,7 +25997,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538751945}
-  m_LocalRotation: {x: -0.0000001872535, y: -0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 1, z: 0.0000001872535, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29379,7 +29376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627019565}
   - component: {fileID: 627019567}
-  - component: {fileID: 627019566}
+  - component: {fileID: 627019568}
   m_Layer: 11
   m_Name: Candy Box Spawner
   m_TagString: Untagged
@@ -29402,28 +29399,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 325268396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &627019566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627019564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed28bd0561cb8841b2bb275392e953a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
-  prefab: {fileID: 3058093061185856121, guid: e63fe29376601c14c8b7a7f433cd5892, type: 3}
-  minSpawnDelay: 5
-  maxSpawnDelay: 10
-  spawnCheckRadius: 1
-  maxSpawnAttempts: 20
-  raycastHeight: 10
-  raycastDistance: 20
-  spawnInAir: 0
-  airSpawnHeight: 10
-  airHoldTime: 3
 --- !u!65 &627019567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62395,7 +62370,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 18226177}
-  m_Father: {fileID: 1312748219}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1305994214
 PrefabInstance:
@@ -63068,17 +63043,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
---- !u!114 &1312748212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 506882670968020016, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-  m_PrefabInstance: {fileID: 2351218235480733223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393858927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!114 &1312748213 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2284267280199575555, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
@@ -63106,6 +63070,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+--- !u!135 &1312748222 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+  m_PrefabInstance: {fileID: 2351218235480733223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1312748223 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 7981168555927824480, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
@@ -63125,11 +63094,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ImpactFX
   vfx: {fileID: 1843222413}
   player: {fileID: 1312748223}
---- !u!135 &1312748222 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-  m_PrefabInstance: {fileID: 2351218235480733223}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1313173419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66919,7 +66883,7 @@ Transform:
   m_LocalScale: {x: 1.5384616, y: 1.5384616, z: 1.5384616}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1312748219}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1388705086
 LineRenderer:
@@ -68420,6 +68384,7 @@ MonoBehaviour:
   ruptAoeRadius: 10
   ruptAoeDamage: 2
   ruptureVFXPrefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  ruptureSFX: {fileID: 0}
   ruptureVfxLifetime: 2
 --- !u!4 &1436950414
 Transform:
@@ -70130,7 +70095,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1353865632666690928, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
   m_PrefabInstance: {fileID: 2351218235480733223}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 393858927}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9888e79505ad6d498cbc8fcae3202ac, type: 3}
@@ -72099,7 +72064,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 538751946}
-  m_Father: {fileID: 1312748219}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -72715,7 +72680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
   prefab: {fileID: 1292850643981351394, guid: e3a1b1f0e5171ba40a640a2ac6448d87, type: 3}
   minSpawnDelay: 3
-  maxSpawnDelay: 10
+  maxSpawnDelay: 7
   spawnCheckRadius: 1
   maxSpawnAttempts: 20
   raycastHeight: 10
@@ -94869,7 +94834,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
   m_PrefabInstance: {fileID: 1786101855}
   m_PrefabAsset: {fileID: 0}
-  collectAudio: {fileID: 0}
 --- !u!1001 &2014037562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101491,10 +101455,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      propertyPath: impact
-      value: 
-      objectReference: {fileID: 1312748228}
     - target: {fileID: 4439491453191896005, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -101670,7 +101630,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1379961623023526999, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
   m_PrefabInstance: {fileID: 2351218235480733223}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 393858927}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1280224912be31448abea6a5576859bf, type: 3}
@@ -103179,3 +103139,6 @@ SceneRoots:
   - {fileID: 798546052}
   - {fileID: 2038325008348746597}
   - {fileID: 2145112997}
+  - {fileID: 1305189820}
+  - {fileID: 1388705085}
+  - {fileID: 1518855154}

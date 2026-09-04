@@ -60,15 +60,15 @@ public class CandyShootingInput : MonoBehaviour
     private System.Action<InputAction.CallbackContext> _onCC1, _onCC2, _onCC3, _onRotateCandy;
 
     // ── Convenience ───────────────────────────────────────────────────────────
-    private CandyType CurrentCandy => candyTypes[selectedCandyIndex];
+    private CandyType CurrentCandy => (candyTypes != null && selectedCandyIndex >= 0 && selectedCandyIndex < candyTypes.Length) ? candyTypes[selectedCandyIndex] : null;
 
     // ── Public Read-only Info ──────────────────────────────────────────────────
     public int    SelectedIndex    => selectedCandyIndex;
-    public int    CurrentAmmo      => CurrentCandy.currentAmmo;
-    public int    CurrentMaxAmmo   => CurrentCandy.maxAmmo;
-    public string CurrentCandyName => CurrentCandy.candyName;
+    public int    CurrentAmmo      => CurrentCandy != null ? CurrentCandy.currentAmmo : 0;
+    public int    CurrentMaxAmmo   => CurrentCandy != null ? CurrentCandy.maxAmmo : 0;
+    public string CurrentCandyName => CurrentCandy != null ? CurrentCandy.candyName : string.Empty;
     public float  ChargePercent    =>
-        CurrentCandy.maxLaunchForce > CurrentCandy.minLaunchForce
+        (CurrentCandy != null && CurrentCandy.maxLaunchForce > CurrentCandy.minLaunchForce)
             ? (currentLaunchForce - CurrentCandy.minLaunchForce) /
               (CurrentCandy.maxLaunchForce - CurrentCandy.minLaunchForce)
             : 0f;
@@ -84,10 +84,10 @@ public class CandyShootingInput : MonoBehaviour
         // Unbind previous callbacks if re-initializing
         UnbindInputs();
 
-        _cc1Action = playerInput.actions.FindAction("Choose Candy 1", throwIfNotFound: true);
-        _cc2Action = playerInput.actions.FindAction("Choose Candy 2", throwIfNotFound: true);
-        _cc3Action = playerInput.actions.FindAction("Choose Candy 3", throwIfNotFound: true);
-        _rotateCandyAction = playerInput.actions.FindAction("Rotate Candy", throwIfNotFound: true);
+        _cc1Action = playerInput.actions.FindAction("Choose Candy 1", throwIfNotFound: false);
+        _cc2Action = playerInput.actions.FindAction("Choose Candy 2", throwIfNotFound: false);
+        _cc3Action = playerInput.actions.FindAction("Choose Candy 3", throwIfNotFound: false);
+        _rotateCandyAction = playerInput.actions.FindAction("Rotate Candy", throwIfNotFound: false);
 
         _onCC1 = _ => SelectCandy(0);
         _onCC2 = _ => SelectCandy(1);
@@ -117,12 +117,19 @@ public class CandyShootingInput : MonoBehaviour
         UnbindInputs();
     }
 
+    private void OnDestroy()
+    {
+        UnbindInputs();
+        OnCandySelected = null;
+        OnAmmoChanged = null;
+    }
+
     private void BindInputs()
     {
-        if (_cc1Action != null && _onCC1 != null) _cc1Action.performed += _onCC1;
-        if (_cc2Action != null && _onCC2 != null) _cc2Action.performed += _onCC2;
-        if (_cc3Action != null && _onCC3 != null) _cc3Action.performed += _onCC3;
-        if (_rotateCandyAction != null && _onRotateCandy != null) _rotateCandyAction.performed += _onRotateCandy;
+        if (_cc1Action != null && _onCC1 != null) { _cc1Action.performed -= _onCC1; _cc1Action.performed += _onCC1; }
+        if (_cc2Action != null && _onCC2 != null) { _cc2Action.performed -= _onCC2; _cc2Action.performed += _onCC2; }
+        if (_cc3Action != null && _onCC3 != null) { _cc3Action.performed -= _onCC3; _cc3Action.performed += _onCC3; }
+        if (_rotateCandyAction != null && _onRotateCandy != null) { _rotateCandyAction.performed -= _onRotateCandy; _rotateCandyAction.performed += _onRotateCandy; }
     }
 
     private void UnbindInputs()
@@ -135,17 +142,21 @@ public class CandyShootingInput : MonoBehaviour
 
     private void Start()
     {
+        if (candyTypes == null || candyTypes.Length == 0) return;
+
         for (int i = 0; i < candyTypes.Length; i++)
         {
             candyTypes[i].currentAmmo = candyTypes[i].maxAmmo;
         }
 
-        currentLaunchForce = CurrentCandy.minLaunchForce;
+        if (CurrentCandy != null) currentLaunchForce = CurrentCandy.minLaunchForce;
         OnCandySelected?.Invoke(selectedCandyIndex);
     }
 
     private void Update()
     {
+        if (CurrentCandy == null) return;
+
         Vector3 startPos = firePoint != null
                                ? firePoint.position
                                : transform.position + transform.forward;
@@ -171,6 +182,8 @@ public class CandyShootingInput : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+        if (this == null || CurrentCandy == null) return;
+
         if (context.started)
         {
             if (CurrentCandy.currentAmmo <= 0)
@@ -205,6 +218,8 @@ public class CandyShootingInput : MonoBehaviour
 
     public void RestoreAmmo(int candyIndex, int amount)
     {
+        if (candyTypes == null) return;
+
         if (candyIndex == -1)
         {
             for (int i = 0; i < candyTypes.Length; i++)
@@ -228,27 +243,27 @@ public class CandyShootingInput : MonoBehaviour
 
     private void RotateCandy()
     {
-        if (candyTypes.Length == 0) return;
+        if (candyTypes == null || candyTypes.Length == 0) return;
         int nextIndex = (selectedCandyIndex + 1) % candyTypes.Length;
         SelectCandy(nextIndex);
     }
 
     private void SelectCandy(int index)
     {
-        if (index < 0 || index >= candyTypes.Length) return;
+        if (candyTypes == null || index < 0 || index >= candyTypes.Length) return;
 
         isCharging     = false;
         isHoldingShoot = false;
         if (lineRenderer != null) lineRenderer.enabled = false;
 
         selectedCandyIndex = index;
-        currentLaunchForce = CurrentCandy.minLaunchForce;
+        if (CurrentCandy != null) currentLaunchForce = CurrentCandy.minLaunchForce;
         OnCandySelected?.Invoke(selectedCandyIndex);
     }
 
     private void FireCandy(Vector3 spawnPosition, Vector3 velocity)
     {
-        if (CurrentCandy.currentAmmo <= 0) return;
+        if (CurrentCandy == null || CurrentCandy.currentAmmo <= 0) return;
 
         if (CurrentCandy.projectilePrefab == null)
         {
@@ -270,7 +285,7 @@ public class CandyShootingInput : MonoBehaviour
 
     private void DrawProjection(Vector3 startPosition, Vector3 launchDirection)
     {
-        if (lineRenderer == null) return;
+        if (lineRenderer == null || CurrentCandy == null) return;
 
         lineRenderer.enabled       = true;
         lineRenderer.useWorldSpace = true;

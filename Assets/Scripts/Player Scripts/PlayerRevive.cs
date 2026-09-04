@@ -51,6 +51,9 @@ public class PlayerRevive: MonoBehaviour
             if (reviveTimer >= reviveDuration)
             {
                 targetHealth.isBeingRevived = false;
+
+                targetHealth.transform.position += Vector3.up * 0.3f;
+
                 targetHealth.Revive();
                 hasUsedRevive = true;
                 reviveTimer = 0f;
