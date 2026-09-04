@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 57d7a06dc3572fb4e9be4c0c05141da8
   - enabled: 1
+    path: Assets/Scenes/PlayerInitialization.unity
+    guid: 78869c2c469d9a64db6931405a34c22c
+  - enabled: 1
     path: Assets/Scenes/GrayBoxed Game.unity
     guid: 1657f1914c8f68a41beada5a54504621
   - enabled: 1

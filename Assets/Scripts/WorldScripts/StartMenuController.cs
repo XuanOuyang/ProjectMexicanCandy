@@ -5,7 +5,7 @@ public class StartMenuController : MonoBehaviour
 {
     public void OnStartClick()
     {
-        SceneManager.LoadScene("GrayBoxed Game");
+        SceneManager.LoadScene("PlayerInitialization");
         //SceneManager.LoadScene("UI", LoadSceneMode.Additive);
     }
 
