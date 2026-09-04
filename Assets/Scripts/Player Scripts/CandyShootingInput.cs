@@ -56,8 +56,8 @@ public class CandyShootingInput : MonoBehaviour
     public event Action<int, int> OnAmmoChanged; // Passes: (slotIndex, newAmmoCount)
 
     // ── Direct input action references ────────────────────────────────────────
-    private InputAction _cc1Action, _cc2Action, _cc3Action;
-    private System.Action<InputAction.CallbackContext> _onCC1, _onCC2, _onCC3;
+    private InputAction _cc1Action, _cc2Action, _cc3Action, _rotateCandyAction;
+    private System.Action<InputAction.CallbackContext> _onCC1, _onCC2, _onCC3, _onRotateCandy;
 
     // ── Convenience ───────────────────────────────────────────────────────────
     private CandyType CurrentCandy => candyTypes[selectedCandyIndex];
@@ -73,6 +73,28 @@ public class CandyShootingInput : MonoBehaviour
               (CurrentCandy.maxLaunchForce - CurrentCandy.minLaunchForce)
             : 0f;
 
+    public void InitializeInput(PlayerInput playerInput)
+    {
+        if (playerInput == null)
+        {
+            Debug.LogError("[CandyShooter] InitializeInput received null PlayerInput");
+            return;
+        }
+        _cc1Action = playerInput.actions.FindAction("Choose Candy 1", throwIfNotFound: true);
+        _cc2Action = playerInput.actions.FindAction("Choose Candy 2", throwIfNotFound: true);
+        _cc3Action = playerInput.actions.FindAction("Choose Candy 3", throwIfNotFound: true);
+        _rotateCandyAction = playerInput.actions.FindAction("Rotate Candy", throwIfNotFound: true);
+
+        _onCC1 = _ => SelectCandy(0);
+        _onCC2 = _ => SelectCandy(1);
+        _onCC3 = _ => SelectCandy(2);
+        _onRotateCandy = _ => RotateCandy();
+
+        _cc1Action.performed += _onCC1;
+        _cc2Action.performed += _onCC2;
+        _cc3Action.performed += _onCC3;
+        _rotateCandyAction.performed += _onRotateCandy;
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -82,28 +104,23 @@ public class CandyShootingInput : MonoBehaviour
             Debug.LogError("[CandyShooter] No PlayerInput component found on this GameObject!");
             return;
         }
-
-        _cc1Action = pi.actions.FindAction("Choose Candy 1", throwIfNotFound: true);
-        _cc2Action = pi.actions.FindAction("Choose Candy 2", throwIfNotFound: true);
-        _cc3Action = pi.actions.FindAction("Choose Candy 3", throwIfNotFound: true);
-
-        _onCC1 = _ => SelectCandy(0);
-        _onCC2 = _ => SelectCandy(1);
-        _onCC3 = _ => SelectCandy(2);
     }
-
-    private void OnEnable()
+    
+    /*private void OnEnable()
     {
         if (_cc1Action != null) _cc1Action.performed += _onCC1;
         if (_cc2Action != null) _cc2Action.performed += _onCC2;
         if (_cc3Action != null) _cc3Action.performed += _onCC3;
+        if (_rotateCandyAction != null) _rotateCandyAction.performed += _onRotateCandy;
     }
+    */
 
     private void OnDisable()
     {
-        if (_cc1Action != null) _cc1Action.performed -= _onCC1;
-        if (_cc2Action != null) _cc2Action.performed -= _onCC2;
-        if (_cc3Action != null) _cc3Action.performed -= _onCC3;
+        if (_cc1Action != null && _onCC1 != null) _cc1Action.performed -= _onCC1;
+        if (_cc2Action != null && _onCC2 != null) _cc2Action.performed -= _onCC2;
+        if (_cc3Action != null && _onCC3 != null) _cc3Action.performed -= _onCC3;
+        if (_rotateCandyAction != null && _onRotateCandy != null) _rotateCandyAction.performed -= _onRotateCandy;
     }
 
     private void Start()
@@ -166,8 +183,8 @@ public class CandyShootingInput : MonoBehaviour
                 isCharging = false;
 
                 Vector3 startPos = firePoint != null
-                                       ? firePoint.position
-                                       : transform.position + transform.forward;
+                    ? firePoint.position
+                    : transform.position + transform.forward;
 
                 Vector3 launchDirection = (transform.forward + transform.up * CurrentCandy.arcForce).normalized;
                 if (animator != null) animator.SetTrigger("ThrowReleased");
@@ -197,6 +214,12 @@ public class CandyShootingInput : MonoBehaviour
         {
             Debug.LogWarning($"[CandyShooter] RestoreAmmo: invalid candyIndex {candyIndex}");
         }
+    }
+    private void RotateCandy()
+    {
+        if (candyTypes.Length == 0) return;
+        int nextIndex = (selectedCandyIndex + 1) % candyTypes.Length;
+        SelectCandy(nextIndex);
     }
 
     private void SelectCandy(int index)

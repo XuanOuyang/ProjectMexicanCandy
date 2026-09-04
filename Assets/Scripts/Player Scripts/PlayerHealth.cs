@@ -53,15 +53,19 @@ public AudioSource hitSound;
 public float height = 2f;
 public float backDistance = 5f;
 
-[Header("VFX")]
-public ImpactFX impact;
+    [Header("Visual Feedback")]
+    public Color flashColor = Color.red;
+    public float flashDuration = 0.15f;
 
-[Header("New Trigger Settings")]
-[Tooltip("Drag the large invisible Sphere Collider component here.")]
-public SphereCollider reviveSphereTrigger; // ADD THIS VARIABLE
+    [Header("VFX")]
+    public ImpactFX impact;
 
-[Tooltip("Set this to your Ground/Environment layer so enemies don't distort the circle.")]
-public LayerMask floorLayer;
+    [Header("New Trigger Settings")]
+    [Tooltip("Drag the large invisible Sphere Collider component here.")]
+    public SphereCollider reviveSphereTrigger; // ADD THIS VARIABLE
+
+    [Tooltip("Set this to your Ground/Environment layer so enemies don't distort the circle.")]
+    public LayerMask floorLayer;
 
     void Start()
     {
@@ -139,6 +143,7 @@ public LayerMask floorLayer;
         isInvincible = true;
         invincibilityTimer = invincibilityDuration;
     }
+    
 
     void UpdateHeartsUI()
     {
