@@ -92,8 +92,16 @@ private void TriggerCandyRupture()
     if (self != null)
         self.TakeDamage(_settings.ruptBurstDamage);
 
-    // AOE splash to all nearby enemies
-    Collider[] nearby = Physics.OverlapSphere(transform.position, _settings.ruptAoeRadius);
+
+    // Audio
+    if (_settings.ruptureSFX != null)
+    {
+        AudioSource.PlayClipAtPoint(_settings.ruptureSFX, transform.position);
+    }
+        
+
+        // AOE splash to all nearby enemies
+        Collider[] nearby = Physics.OverlapSphere(transform.position, _settings.ruptAoeRadius);
     foreach (Collider col in nearby)
     {
         if (col.gameObject == gameObject) continue;

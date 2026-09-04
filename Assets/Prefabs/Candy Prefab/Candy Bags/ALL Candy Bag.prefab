@@ -52,8 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CandyBoxPickup
   candyIndex: -1
   ammoAmount: 5
-  collectEffectPrefab: {fileID: 5622800232270703362, guid: 4d029e3aaf094c349a0b51a3447c9216, type: 3}
+  collectEffectPrefab: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065, type: 3}
   EffectlifeTime: 2
+  collectAudio: {fileID: 0}
 --- !u!135 &7622315246736317722
 SphereCollider:
   m_ObjectHideFlags: 0

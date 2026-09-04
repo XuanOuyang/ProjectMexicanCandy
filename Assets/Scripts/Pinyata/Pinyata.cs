@@ -27,7 +27,10 @@ public class Pinyata : MonoBehaviour
     public float bounceFrequency = 12f;   // Speed of the bounce
     public float bounceHeight = 0.25f;    // Peak height of the bounce
     public float tiltAngle = 15f;         // Max tilt rotation (side to side)
-    public bool animateOnlyWhenMoving = false; 
+    public bool animateOnlyWhenMoving = false;
+
+    [Header("Audio")]
+    public AudioSource hitSound;
 
     private Vector3 initialVisualLocalPos;
     private Vector3 lastPosition;
@@ -60,6 +63,13 @@ public class Pinyata : MonoBehaviour
         
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
+
+
+        GameObject audioObject = GameObject.Find("PinataHit");
+        if (audioObject != null)
+        {
+            hitSound = audioObject.GetComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -127,6 +137,7 @@ public class Pinyata : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        hitSound.Play();
         if (!isFlashing && enemyRenderer != null) StartCoroutine(FlashRedRoutine());
         if (currentHealth <= 0) Die();
     }
