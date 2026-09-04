@@ -4,12 +4,12 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    // ... Keeping all your existing variables ...
     public int maxHearts = 5;
     public int currentHearts;
-
     public bool isDowned = false;
     public bool isDead = false;
-    private bool hasBeenRevived = false; // Prevents infinite downs
+    private bool hasBeenRevived = false;
 
     public float downedTime = 10f;
     [HideInInspector] public float downedTimer;
@@ -32,29 +32,26 @@ public class PlayerHealth : MonoBehaviour
     public Rigidbody rb;
 
     [Header("Collision")]
-    public Collider playerCollider;
+    public Collider playerCollider; // This is your main Capsule Collider
 
     [Header("Combat")]
     public MonoBehaviour attackScript;
 
     [Header("New Downed UI")]
-    public TextMeshProUGUI statusText;
+    public TextMeshProUGUI statusText; 
     [HideInInspector] public bool isBeingRevived = false;
 
     [Header("In-Game Radius Visualizer")]
-    [Tooltip("Drag your Line Renderer component here.")]
     public LineRenderer circleRenderer;
-    [Tooltip("Match this to your physical invisible Sphere Collider radius!")]
     public float reviveRadius = 3f;
-    [Tooltip("How smooth the circle looks. 40 is a great balance.")]
     public int circleSegments = 40;
 
-    [Header("Audio")]
-    public AudioSource hitSound;
+[Header("Audio")]
+public AudioSource hitSound;
 
-    [Header("Backwards Hit")]
-    public float height = 2f;
-    public float backDistance = 5f;
+[Header("Backwards Hit")]
+public float height = 2f;
+public float backDistance = 5f;
 
     [Header("Visual Feedback")]
     public Color flashColor = Color.red;
@@ -63,6 +60,13 @@ public class PlayerHealth : MonoBehaviour
     [Header("VFX")]
     public ImpactFX impact;
 
+    [Header("New Trigger Settings")]
+    [Tooltip("Drag the large invisible Sphere Collider component here.")]
+    public SphereCollider reviveSphereTrigger; // ADD THIS VARIABLE
+
+    [Tooltip("Set this to your Ground/Environment layer so enemies don't distort the circle.")]
+    public LayerMask floorLayer;
+
     void Start()
     {
         currentHearts = maxHearts;
@@ -70,13 +74,16 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerRenderer != null)
             originalColor = playerRenderer.material.color;
-
+            
         if (statusText != null)
             statusText.text = "";
 
-        // Hide circle at start of game
         if (circleRenderer != null)
             circleRenderer.enabled = false;
+
+        // DISABLE the large trigger sphere when the game starts
+        if (reviveSphereTrigger != null)
+            reviveSphereTrigger.enabled = false; 
     }
 
     void Update()
@@ -84,10 +91,7 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible)
         {
             invincibilityTimer -= Time.deltaTime;
-            if (invincibilityTimer <= 0f)
-            {
-                isInvincible = false;
-            }
+            if (invincibilityTimer <= 0f) isInvincible = false;
         }
 
         if (isDowned && !isDead)
@@ -104,7 +108,6 @@ public class PlayerHealth : MonoBehaviour
                 statusText.text = "Downed: " + Mathf.CeilToInt(downedTimer) + "s";
             }
 
-            // Continuously redraw the circle in case the player gets pushed or moved
             if (circleRenderer != null && circleRenderer.enabled)
             {
                 DrawCircleInGame();
@@ -114,8 +117,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (isDead || isDowned || isInvincible)
-            return;
+        if (isDead || isDowned || isInvincible) return;
 
         currentHearts -= amount;
         if (currentHearts < 0) currentHearts = 0;
@@ -134,6 +136,7 @@ public class PlayerHealth : MonoBehaviour
             TriggerInvincibility();
         }
     }
+
     void TriggerInvincibility()
     {
         isInvincible = true;
@@ -165,10 +168,13 @@ public class PlayerHealth : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
+        // ENABLE the revive zone ONLY when player falls down
+        if (reviveSphereTrigger != null)
+            reviveSphereTrigger.enabled = true; 
+
         if (playerCollider != null) playerCollider.isTrigger = true;
         if (playerRenderer != null) playerRenderer.material.color = downedColor;
 
-        // ACTIVATES AND DRAWS THE CIRCLE
         if (circleRenderer != null)
         {
             circleRenderer.positionCount = circleSegments;
@@ -177,25 +183,49 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Mathematical formula creating a flat ring on the floor plane around the player
     void DrawCircleInGame()
     {
+        // NEW LOGIC: Automatically grab the exact radius being used by the physics trigger engine
+        float actualPhysicsRadius = reviveRadius;
+        if (reviveSphereTrigger != null)
+        {
+            // This multiplies the collider radius by the player's world scale to get the true radius size
+            actualPhysicsRadius = reviveSphereTrigger.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.z);
+        }
+
         float angleStep = 360f / circleSegments;
 
         for (int i = 0; i < circleSegments; i++)
         {
             float angleRad = Mathf.Deg2Rad * (i * angleStep);
 
-            float x = transform.position.x + Mathf.Cos(angleRad) * reviveRadius;
-            float z = transform.position.z + Mathf.Sin(angleRad) * reviveRadius;
+            // FIXED LINES: Swapped 'reviveRadius' variable for 'actualPhysicsRadius' 
+            float x = transform.position.x + Mathf.Cos(angleRad) * actualPhysicsRadius;
+            float z = transform.position.z + Mathf.Sin(angleRad) * actualPhysicsRadius;
 
-            // Placed slightly above the exact ground (0.1f) so it doesn't clip through textures
-            float y = transform.position.y + 0.1f;
+            float rayStartHeight = transform.position.y + 1f;
+            Vector3 rayOrigin = new Vector3(x, rayStartHeight, z);
+            float finalY = transform.position.y;
 
-            circleRenderer.SetPosition(i, new Vector3(x, y, z));
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 5f, floorLayer))
+            {
+                if (hit.point.y > transform.position.y + 0.5f)
+                {
+                    finalY = transform.position.y + 0.02f;
+                }
+                else
+                {
+                    finalY = hit.point.y + 0.02f;
+                }
+            }
+            else
+            {
+                finalY = transform.position.y + 0.02f;
+            }
+
+            circleRenderer.SetPosition(i, new Vector3(x, finalY, z));
         }
     }
-
     public void Revive()
     {
         if (!isDowned || isDead) return;
@@ -207,9 +237,12 @@ public class PlayerHealth : MonoBehaviour
 
         if (statusText != null) statusText.text = "";
 
-        // HIDE THE CIRCLE
         if (circleRenderer != null)
             circleRenderer.enabled = false;
+
+        // DISABLE the revive zone sphere when they stand back up
+        if (reviveSphereTrigger != null)
+            reviveSphereTrigger.enabled = false; 
 
         if (movementScript != null) movementScript.enabled = true;
         if (attackScript != null) attackScript.enabled = true;
@@ -223,11 +256,14 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         isDowned = false;
         if (statusText != null) statusText.text = "";
-
-        // HIDE THE CIRCLE
+        
         if (circleRenderer != null)
             circleRenderer.enabled = false;
 
+        // DISABLE the revive zone if they bleed out completely
+        if (reviveSphereTrigger != null)
+            reviveSphereTrigger.enabled = false; 
+            
         gameObject.SetActive(false);
     }
 

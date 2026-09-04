@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4083480066333611208}
   - component: {fileID: 2114482630724707022}
   - component: {fileID: 803646516050061255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pinyata Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: -2390639335634381110}
   - component: {fileID: 5889462034977212282}
   - component: {fileID: -3411671890762928960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pinyata
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 4560071300536562241}
   - component: {fileID: 7973921833791884847}
   - component: {fileID: 8886415168722369490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
