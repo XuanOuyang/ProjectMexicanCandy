@@ -56,8 +56,8 @@ public class CandyShootingInput : MonoBehaviour
     public event Action<int, int> OnAmmoChanged; // Passes: (slotIndex, newAmmoCount)
 
     // ── Direct input action references ────────────────────────────────────────
-    private InputAction _cc1Action, _cc2Action, _cc3Action;
-    private System.Action<InputAction.CallbackContext> _onCC1, _onCC2, _onCC3;
+    private InputAction _cc1Action, _cc2Action, _cc3Action, _rotateCandyAction;
+    private System.Action<InputAction.CallbackContext> _onCC1, _onCC2, _onCC3, _onRotateCandy;
 
     // ── Convenience ───────────────────────────────────────────────────────────
     private CandyType CurrentCandy => candyTypes[selectedCandyIndex];
@@ -86,10 +86,12 @@ public class CandyShootingInput : MonoBehaviour
         _cc1Action = pi.actions.FindAction("Choose Candy 1", throwIfNotFound: true);
         _cc2Action = pi.actions.FindAction("Choose Candy 2", throwIfNotFound: true);
         _cc3Action = pi.actions.FindAction("Choose Candy 3", throwIfNotFound: true);
+        _rotateCandyAction = pi.actions.FindAction("Rotate Candy", throwIfNotFound: true);
 
         _onCC1 = _ => SelectCandy(0);
         _onCC2 = _ => SelectCandy(1);
         _onCC3 = _ => SelectCandy(2);
+        _onRotateCandy = _ => RotateCandy();
     }
 
     private void OnEnable()
@@ -97,6 +99,7 @@ public class CandyShootingInput : MonoBehaviour
         if (_cc1Action != null) _cc1Action.performed += _onCC1;
         if (_cc2Action != null) _cc2Action.performed += _onCC2;
         if (_cc3Action != null) _cc3Action.performed += _onCC3;
+        if (_rotateCandyAction != null) _rotateCandyAction.performed += _onRotateCandy;
     }
 
     private void OnDisable()
@@ -104,6 +107,7 @@ public class CandyShootingInput : MonoBehaviour
         if (_cc1Action != null) _cc1Action.performed -= _onCC1;
         if (_cc2Action != null) _cc2Action.performed -= _onCC2;
         if (_cc3Action != null) _cc3Action.performed -= _onCC3;
+        if (_rotateCandyAction != null) _rotateCandyAction.performed -= _onRotateCandy;
     }
 
     private void Start()
@@ -197,6 +201,12 @@ public class CandyShootingInput : MonoBehaviour
         {
             Debug.LogWarning($"[CandyShooter] RestoreAmmo: invalid candyIndex {candyIndex}");
         }
+    }
+    private void RotateCandy()
+    {
+        if (candyTypes.Length == 0) return;
+        int nextIndex = (selectedCandyIndex + 1) % candyTypes.Length;
+        SelectCandy(nextIndex);
     }
 
     private void SelectCandy(int index)
