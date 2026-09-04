@@ -63301,47 +63301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7976b34add87a34ca6b60c1192a2420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-<<<<<<< HEAD
---- !u!114 &1312748222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306278743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea82b9a429a9e96428624660798c44dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerRevive
-  reviveDuration: 5
-  hasUsedRevive: 0
-  showRadiusGizmo: 1
-  visualRadius: 7
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.4}
---- !u!135 &1312748236
+--- !u!135 &1312748222 stripped
 SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+  m_PrefabInstance: {fileID: 2351218235480733223}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306278743}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 0, z: 0}
-=======
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
 --- !u!1001 &1313173419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67439,37 +67403,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9888e79505ad6d498cbc8fcae3202ac, type: 3}
   m_Name: 
-<<<<<<< HEAD
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerRevive
-  reviveDuration: 5
-  hasUsedRevive: 0
-  showRadiusGizmo: 1
-  visualRadius: 7
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.4}
---- !u!135 &1397035911
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201699711}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 0, z: 0}
-=======
   m_EditorClassIdentifier: '::'
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
+--- !u!135 &1397035912 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+  m_PrefabInstance: {fileID: 2784990939760976398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1397321648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
@@ -68655,6 +68594,7 @@ MonoBehaviour:
   ruptAoeRadius: 10
   ruptAoeDamage: 2
   ruptureVFXPrefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  ruptureSFX: {fileID: 0}
   ruptureVfxLifetime: 100
 --- !u!4 &1436950414
 Transform:
@@ -79391,17 +79331,14 @@ MonoBehaviour:
   circleRenderer: {fileID: 0}
   reviveRadius: 3
   circleSegments: 40
-<<<<<<< HEAD
-  reviveSphereTrigger: {fileID: 0}
-  floorLayer:
-    serializedVersion: 2
-    m_Bits: 0
-=======
   hitSound: {fileID: 0}
   height: 2
   backDistance: 5
   impact: {fileID: 0}
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
+  reviveSphereTrigger: {fileID: 0}
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &1709111005
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -101659,6 +101596,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.08370436
       objectReference: {fileID: 0}
+    - target: {fileID: 1095061806021584935, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: visualRadius
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1353865632666690928, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: vfx
       value: 
@@ -101772,21 +101713,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1388705086}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-<<<<<<< HEAD
       propertyPath: floorLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      propertyPath: reviveSphereTrigger
-      value: 
-      objectReference: {fileID: 1312748236}
-    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-=======
       propertyPath: hearts.Array.size
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
+      propertyPath: reviveSphereTrigger
+      value: 
+      objectReference: {fileID: 1312748222}
+    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: 'hearts.Array.data[0]'
       value: 
       objectReference: {fileID: 943414347}
@@ -101829,6 +101767,10 @@ PrefabInstance:
     - target: {fileID: 6907630539630387609, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: m_Radius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7981168555927824480, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_UseGravity
@@ -101891,15 +101833,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1305189820}
     m_AddedComponents:
-<<<<<<< HEAD
-    - targetCorrespondingSourceObject: {fileID: 144200886945120143, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1312748222}
-    - targetCorrespondingSourceObject: {fileID: 144200886945120143, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1312748236}
-=======
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
     - targetCorrespondingSourceObject: {fileID: 6907630539630387609, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1941352603}
@@ -102070,6 +102003,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1359910279223054344, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: visualRadius
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1515763893747912353, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -102121,7 +102058,7 @@ PrefabInstance:
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: reviveSphereTrigger
       value: 
-      objectReference: {fileID: 1397035911}
+      objectReference: {fileID: 1397035912}
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: 'hearts.Array.data[0]'
       value: 
@@ -102197,6 +102134,10 @@ PrefabInstance:
     - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Radius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_IsTrigger
@@ -102318,15 +102259,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 8533699082700517180, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
-      propertyPath: m_Layer
-      value: 3
-=======
     - target: {fileID: 7319163067486454865, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: moveSpeed
       value: 8
->>>>>>> 7835b050e0bffbc6fc745e41149e8f85b51bd626
       objectReference: {fileID: 0}
     - target: {fileID: 8693151705613397996, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_LocalPosition.x

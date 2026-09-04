@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2623498621525324267}
   - component: {fileID: -2390639335634381110}
   - component: {fileID: 5889462034977212282}
-- component: {fileID: -3411671890762928960}
+  - component: {fileID: -3411671890762928960}
   m_Layer: 8
   m_Name: Pinyata
   m_TagString: Enemy
