@@ -11,6 +11,8 @@ public class PiercingProjectile : Projectile
     // Track hit objects so it doesn't hit the same enemy multiple times in successive frames
     private readonly HashSet<GameObject> _hitObjects = new HashSet<GameObject>();
 
+    public string nameOfSoundFX;
+
     protected override void HandleImpact(GameObject hitObject)
     {
         // Ignore if we already hit this target during this throw
@@ -21,6 +23,13 @@ public class PiercingProjectile : Projectile
         if (pinyata != null)
         {
             _hitObjects.Add(hitObject);
+
+            //Audio
+            GameObject audioObject = GameObject.Find(nameOfSoundFX);
+
+            AudioSource collectAudio = audioObject.GetComponent<AudioSource>();
+
+            collectAudio.Play();
 
             // 1. Deal standard impact damage
             pinyata.TakeDamage(damage);

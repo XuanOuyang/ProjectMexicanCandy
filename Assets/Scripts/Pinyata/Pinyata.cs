@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class Pinyata : MonoBehaviour
 {
@@ -29,8 +30,9 @@ public class Pinyata : MonoBehaviour
     public float tiltAngle = 15f;         // Max tilt rotation (side to side)
     public bool animateOnlyWhenMoving = false;
 
-    [Header("Audio")]
-    public AudioSource hitSound;
+    [Header("VFX")]
+    public GameObject piruliVFX;
+    public GameObject damageVFX;
 
     private Vector3 initialVisualLocalPos;
     private Vector3 lastPosition;
@@ -64,12 +66,6 @@ public class Pinyata : MonoBehaviour
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
 
-
-        GameObject audioObject = GameObject.Find("PinataHit");
-        if (audioObject != null)
-        {
-            hitSound = audioObject.GetComponent<AudioSource>();
-        }
     }
 
     void Update()
@@ -128,16 +124,57 @@ public class Pinyata : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Projectile>() != null)
+        // Return early if 'other' is invalid or null
+        if (other == null) return;
+
+        // Cache component references BEFORE taking damage or destroying anything
+        Projectile baseProjectile = other.GetComponent<Projectile>();
+        PiercingProjectile piercingProjectile = other.GetComponent<PiercingProjectile>();
+
+        // If it's not a projectile at all, ignore the collision
+        if (baseProjectile == null && piercingProjectile == null) return;
+
+        // Handle projectile impact damage
+        TakeDamage(1);
+
+        // Handle Piercing Projectile Effects
+        if (piercingProjectile != null)
         {
-            TakeDamage(1);
+            if (piruliVFX != null && piruliVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
+            {
+                ParticleSystem piruliFX = Instantiate(psPrefab, transform.position, transform.rotation);
+                piruliFX.Play();
+                Debug.Log("vfx played");
+            }
+
+            // Safely play audio if object exists
+            GameObject audioObject = GameObject.Find("stab");
+            if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var collectAudio))
+            {
+                collectAudio.Play();
+            }
+        }
+        // Handle Standard Projectile Effects
+        else
+        {
+            if (damageVFX != null && damageVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
+            {
+                ParticleSystem projectileFX = Instantiate(psPrefab, transform.position, transform.rotation);
+                projectileFX.Play();
+            }
+
+            // Safely play audio if object exists
+            GameObject audioObject = GameObject.Find("PinataHit");
+            if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var hitSound))
+            {
+                hitSound.Play();
+            }
         }
     }
 
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        hitSound.Play();
         if (!isFlashing && enemyRenderer != null) StartCoroutine(FlashRedRoutine());
         if (currentHealth <= 0) Die();
     }
