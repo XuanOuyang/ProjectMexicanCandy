@@ -68574,11 +68574,7 @@ MonoBehaviour:
   ruptAoeRadius: 10
   ruptAoeDamage: 2
   ruptureVFXPrefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
-<<<<<<< HEAD
-  ruptureSFX: {fileID: 0}
-=======
   ruptureSFX: {fileID: 8300000, guid: 27a1bbe1aef577d46991ee7bfc6c913b, type: 3}
->>>>>>> Master
   ruptureVfxLifetime: 100
 --- !u!4 &1436950414
 Transform:
@@ -101789,19 +101785,9 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key0.r
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 6907630539630387609, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-      propertyPath: m_Radius
-      value: 7
-=======
     - target: {fileID: 7244985494975572371, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_Enabled
       value: 1
->>>>>>> Master
       objectReference: {fileID: 0}
     - target: {fileID: 7981168555927824480, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: m_UseGravity
@@ -102206,13 +102192,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
-<<<<<<< HEAD
-      propertyPath: m_Radius
-      value: 7
-=======
       propertyPath: m_Enabled
       value: 1
->>>>>>> Master
       objectReference: {fileID: 0}
     - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_IsTrigger
