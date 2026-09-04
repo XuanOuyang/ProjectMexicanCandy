@@ -124,33 +124,51 @@ public class Pinyata : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Projectile>() != null)
-        {
-            TakeDamage(1);
-        }
+        // Return early if 'other' is invalid or null
+        if (other == null) return;
 
-        PiercingProjectile projectile = other.GetComponent<PiercingProjectile>();
+        // Cache component references BEFORE taking damage or destroying anything
+        Projectile baseProjectile = other.GetComponent<Projectile>();
+        PiercingProjectile piercingProjectile = other.GetComponent<PiercingProjectile>();
 
-        if (projectile != null)
+        // If it's not a projectile at all, ignore the collision
+        if (baseProjectile == null && piercingProjectile == null) return;
+
+        // Handle projectile impact damage
+        TakeDamage(1);
+
+        // Handle Piercing Projectile Effects
+        if (piercingProjectile != null)
         {
-            ParticleSystem piruliFX = Instantiate(piruliVFX.GetComponent<ParticleSystem>(), transform.position, transform.rotation);
-            piruliFX.Play();
-            Debug.Log("vfx played");
-            //Audio
+            if (piruliVFX != null && piruliVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
+            {
+                ParticleSystem piruliFX = Instantiate(psPrefab, transform.position, transform.rotation);
+                piruliFX.Play();
+                Debug.Log("vfx played");
+            }
+
+            // Safely play audio if object exists
             GameObject audioObject = GameObject.Find("stab");
-            AudioSource collectAudio = audioObject.GetComponent<AudioSource>();
-
-            collectAudio.Play();
+            if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var collectAudio))
+            {
+                collectAudio.Play();
+            }
         }
+        // Handle Standard Projectile Effects
         else
         {
-            ParticleSystem projectileFX = Instantiate(damageVFX.GetComponent<ParticleSystem>(), transform.position, transform.rotation);
-            projectileFX.Play();
+            if (damageVFX != null && damageVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
+            {
+                ParticleSystem projectileFX = Instantiate(psPrefab, transform.position, transform.rotation);
+                projectileFX.Play();
+            }
 
+            // Safely play audio if object exists
             GameObject audioObject = GameObject.Find("PinataHit");
-            AudioSource hitSound = audioObject.GetComponent<AudioSource>();
-
-            hitSound.Play();
+            if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var hitSound))
+            {
+                hitSound.Play();
+            }
         }
     }
 
