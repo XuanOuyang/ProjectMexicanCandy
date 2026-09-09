@@ -16089,17 +16089,17 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 27a1bbe1aef577d46991ee7bfc6c913b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.5
+  m_Pitch: 0.5
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: 0.075
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -16133,7 +16133,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -19727,7 +19727,7 @@ Transform:
   m_GameObject: {fileID: 420019780}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: -0.48554263, y: -7.637692, z: -8.883151}
+  m_LocalPosition: {x: -0.48554263, y: -31.02, z: -8.883151}
   m_LocalScale: {x: 2.2276676, y: 2.2276676, z: 2.2276676}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51381,7 +51381,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d99026ec0340adc4c890064dcd757e08, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -62364,13 +62364,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305189819}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 10.746154, y: -2.2876923, z: 20.038462}
+  m_LocalScale: {x: 1.5384616, y: 1.5384616, z: 1.5384616}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 18226177}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1312748219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1305994214
 PrefabInstance:
@@ -66878,12 +66878,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388705084}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 8.984708, y: -3.7136922, z: 19.534216}
-  m_LocalScale: {x: 1.5384616, y: 1.5384616, z: 1.5384616}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalPosition: {x: -3.0764735, y: -8.001065, z: -10.014179}
+  m_LocalScale: {x: 2.366864, y: 2.366864, z: 2.366864}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1312748219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1388705086
 LineRenderer:
@@ -68384,7 +68384,7 @@ MonoBehaviour:
   ruptAoeRadius: 10
   ruptAoeDamage: 2
   ruptureVFXPrefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
-  ruptureSFX: {fileID: 0}
+  ruptureSFX: {fileID: 8300000, guid: 27a1bbe1aef577d46991ee7bfc6c913b, type: 3}
   ruptureVfxLifetime: 2
 --- !u!4 &1436950414
 Transform:
@@ -72058,17 +72058,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518855153}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 20.038462}
+  m_LocalScale: {x: 0.03076923, y: 0.03076923, z: 0.03076923}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 538751946}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1312748219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_AnchoredPosition: {x: 10.746154, y: 1.5584615}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1518855155
@@ -72408,7 +72408,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 68a2873f22d3705418407b3e40a24993, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -101617,6 +101617,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8900516191229359048, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1112455011}
+    - targetCorrespondingSourceObject: {fileID: 8900516191229359048, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1305189820}
+    - targetCorrespondingSourceObject: {fileID: 8900516191229359048, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1388705085}
+    - targetCorrespondingSourceObject: {fileID: 8900516191229359048, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1518855154}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 144200886945120143, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       insertIndex: 9
@@ -103139,6 +103148,3 @@ SceneRoots:
   - {fileID: 798546052}
   - {fileID: 2038325008348746597}
   - {fileID: 2145112997}
-  - {fileID: 1305189820}
-  - {fileID: 1388705085}
-  - {fileID: 1518855154}
