@@ -6,6 +6,7 @@ public class AltMenuController : MonoBehaviour
     public void OnStartClick()
     {
         SceneManager.LoadScene("TitleScreen");
+        Debug.Log("Pressed and loading");
         //SceneManager.LoadScene("UI", LoadSceneMode.Additive);
     }
 

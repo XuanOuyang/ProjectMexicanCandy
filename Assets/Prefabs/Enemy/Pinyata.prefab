@@ -224,6 +224,9 @@ MonoBehaviour:
   animateOnlyWhenMoving: 1
   piruliVFX: {fileID: 7500089526581616571}
   damageVFX: {fileID: 5417597320118187189}
+  burningVFXPrefab: {fileID: 6294508013172393196, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
+  deathVFXPrefab: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
+  deathVFXLifetime: 5
 --- !u!114 &2623498621525324267
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,12 +30,16 @@ public class Pinyata : MonoBehaviour
     public float tiltAngle = 15f;         // Max tilt rotation (side to side)
     public bool animateOnlyWhenMoving = false;
 
-    [Header("VFX")]
+    [Header("VFX Settings")]
     public GameObject piruliVFX;
     public GameObject damageVFX;
+    public GameObject burningVFXPrefab;  // Continuous effect when hit by Pica Fresa (DoT)
+    public GameObject deathVFXPrefab;    // VFX spawned when Piñata dies
+    public float deathVFXLifetime = 3f;   // Time before death VFX is destroyed
 
     private Vector3 initialVisualLocalPos;
     private Vector3 lastPosition;
+    private GameObject activeBurnEffect;
 
     void Start()
     {
@@ -65,7 +69,6 @@ public class Pinyata : MonoBehaviour
         
         animator = GetComponent<Animator>();
         lastPosition = transform.position;
-
     }
 
     void Update()
@@ -104,14 +107,12 @@ public class Pinyata : MonoBehaviour
             yield return new WaitForSeconds(gravityDelayTimer);
         }
 
-        // Disable physics dynamics so physics doesn't conflict with the agent
         if (rb != null)
         {
             rb.useGravity = false;
             rb.isKinematic = true; 
         }
 
-        // Snap down onto the NavMesh and enable the agent
         if (agent != null)
         {
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 15f, NavMesh.AllAreas))
@@ -124,37 +125,42 @@ public class Pinyata : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Return early if 'other' is invalid or null
         if (other == null) return;
 
-        // Cache component references BEFORE taking damage or destroying anything
+        // Cache component references
         Projectile baseProjectile = other.GetComponent<Projectile>();
         PiercingProjectile piercingProjectile = other.GetComponent<PiercingProjectile>();
+        DoTProjectile dotProjectile = other.GetComponent<DoTProjectile>();
 
-        // If it's not a projectile at all, ignore the collision
-        if (baseProjectile == null && piercingProjectile == null) return;
+        if (baseProjectile == null && piercingProjectile == null && dotProjectile == null) return;
 
-        // Handle projectile impact damage
         TakeDamage(1);
 
-        // Handle Piercing Projectile Effects
-        if (piercingProjectile != null)
+        // 1. Handle Pica Fresa (DoT Projectile) Burn Effect
+        if (dotProjectile != null)
+        {
+            if (burningVFXPrefab != null && activeBurnEffect == null)
+            {
+                // Instantiate attached to this transform so it stays with the enemy while moving
+                activeBurnEffect = Instantiate(burningVFXPrefab, transform.position, Quaternion.identity, transform);
+            }
+        }
+        // 2. Handle Piercing Projectile Effects
+        else if (piercingProjectile != null)
         {
             if (piruliVFX != null && piruliVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
             {
                 ParticleSystem piruliFX = Instantiate(psPrefab, transform.position, transform.rotation);
                 piruliFX.Play();
-                Debug.Log("vfx played");
             }
 
-            // Safely play audio if object exists
             GameObject audioObject = GameObject.Find("stab");
             if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var collectAudio))
             {
                 collectAudio.Play();
             }
         }
-        // Handle Standard Projectile Effects
+        // 3. Handle Standard Projectile Effects
         else
         {
             if (damageVFX != null && damageVFX.TryGetComponent<ParticleSystem>(out var psPrefab))
@@ -163,7 +169,6 @@ public class Pinyata : MonoBehaviour
                 projectileFX.Play();
             }
 
-            // Safely play audio if object exists
             GameObject audioObject = GameObject.Find("PinataHit");
             if (audioObject != null && audioObject.TryGetComponent<AudioSource>(out var hitSound))
             {
@@ -190,6 +195,13 @@ public class Pinyata : MonoBehaviour
 
     void Die()
     {
+        // Spawn Death VFX and destroy it after specified delay
+        if (deathVFXPrefab != null)
+        {
+            GameObject deathFX = Instantiate(deathVFXPrefab, transform.position, transform.rotation);
+            Destroy(deathFX, deathVFXLifetime);
+        }
+
         Destroy(gameObject);
     }
 }
