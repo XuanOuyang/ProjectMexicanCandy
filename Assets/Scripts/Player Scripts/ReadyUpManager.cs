@@ -19,6 +19,33 @@ public class ReadyUpManager : MonoBehaviour
     // Track joined PlayerInput instances to prevent duplicate processing
     private readonly HashSet<PlayerInput> joinedPlayers = new HashSet<PlayerInput>();
 
+    private void Start()
+    {
+        LocalPlayer[] existingPlayers = FindObjectsByType<LocalPlayer>();
+        foreach (LocalPlayer player in existingPlayers)
+        {
+            PlayerInput playerInput = player.GetComponent<PlayerInput>();
+            if (playerInput != null)
+            {
+                playerInput.SwitchCurrentActionMap("CharacterSelect");
+                playerInput.ActivateInput();
+            }
+
+            if (player.playerNumber == 1)
+            {
+                player.InitializePlayer(1);
+                characterSelectManager.InitializeCharacterSelection(player, 0);
+                playersReady++;
+            }
+            else if (player.playerNumber == 2)
+            {
+                player.InitializePlayer(2);
+                characterSelectManager.InitializeCharacterSelection(player, 1);
+                playersReady++;
+            }
+        }
+    }
+
     private void Awake()
     {
         if (playerInputManager != null)
@@ -38,7 +65,7 @@ public class ReadyUpManager : MonoBehaviour
         if (!wasdClaimed && Keyboard.current != null)
         {
             if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame ||
-                Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame || 
+                Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame ||
                 Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 wasdClaimed = true;
@@ -50,7 +77,8 @@ public class ReadyUpManager : MonoBehaviour
         if (!arrowsClaimed && Keyboard.current != null)
         {
             if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame ||
-                Keyboard.current.rightArrowKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame || 
+                Keyboard.current.rightArrowKey.wasPressedThisFrame ||
+                Keyboard.current.downArrowKey.wasPressedThisFrame ||
                 Keyboard.current.enterKey.wasPressedThisFrame)
             {
                 arrowsClaimed = true;
@@ -103,14 +131,15 @@ public class ReadyUpManager : MonoBehaviour
 
         if (playerInputManager.playerCount >= playerInputManager.maxPlayerCount)
         {
-            Debug.LogWarning($"ReadyUpManager: Cannot join player. Max player count ({playerInputManager.maxPlayerCount}) reached.");
+            Debug.LogWarning(
+                $"ReadyUpManager: Cannot join player. Max player count ({playerInputManager.maxPlayerCount}) reached.");
             return;
         }
 
         PlayerInput playerInput = playerInputManager.JoinPlayer(
-            playerIndex: playersReady, 
-            splitScreenIndex: -1, 
-            controlScheme: controlScheme, 
+            playerIndex: playersReady,
+            splitScreenIndex: -1,
+            controlScheme: controlScheme,
             pairWithDevice: device
         );
 
@@ -166,10 +195,8 @@ public class ReadyUpManager : MonoBehaviour
             localPlayer.InitializePlayer(2);
             if (characterSelectManager != null)
                 characterSelectManager.InitializeCharacterSelection(localPlayer, 1);
-            
-            if (pressToJoinText != null)
-                pressToJoinText.SetActive(false);
-                
+
+
             Debug.Log("Both players ready!");
         }
     }
