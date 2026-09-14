@@ -100701,10 +100701,6 @@ PrefabInstance:
       value: 28.915
       objectReference: {fileID: 0}
     - target: {fileID: 1400355161370427933, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
-      propertyPath: m_fontSize
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 1400355161370427933, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b5eb0cc2289fab14284326eeb574c079, type: 2}
@@ -100722,7 +100718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1400355161370427933, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_fontSizeBase
-      value: 150
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 1400355161370427933, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_sharedMaterial
@@ -101025,6 +101021,22 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2038325008348746599}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardImages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2038325008348746602}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardHolders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2038325008348746598}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardHolders.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2038325008348746601}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: 'cardTextArray.Array.data[0]'
       value: Pica Fresa
       objectReference: {fileID: 0}
@@ -101036,6 +101048,14 @@ PrefabInstance:
       propertyPath: 'cardTextArray.Array.data[2]'
       value: "Mazap\xE1n"
       objectReference: {fileID: 0}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardHolderImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2038325008348746600}
+    - target: {fileID: 3723018114575334031, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+      propertyPath: 'cardHolderImages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2038325008348746603}
     - target: {fileID: 3790427454163621443, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_SizeDelta.x
       value: 150
@@ -101107,10 +101127,6 @@ PrefabInstance:
     - target: {fileID: 5757114192328482707, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918324483162762468, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
-      propertyPath: m_fontSize
-      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5918324483162762468, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_fontAsset
@@ -101334,6 +101350,60 @@ PrefabInstance:
       addedObject: {fileID: 1048031417}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+--- !u!224 &2038325008348746598 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1561971813201766533, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2038325008348746599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5674922700196799333, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &2038325008348746600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5335341067745033706, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!224 &2038325008348746601 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3260507885064256503, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2038325008348746602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7831465766164525297, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &2038325008348746603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8777641379233659994, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
+  m_PrefabInstance: {fileID: 2038325008348746597}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &2351218235480733223
 PrefabInstance:
   m_ObjectHideFlags: 0
