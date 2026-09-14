@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections; // Fixed CS0246 error
 
 public class PlayerHealth : MonoBehaviour
 {
-    // ... Keeping all your existing variables ...
     public int maxHearts = 5;
     public int currentHearts;
     public bool isDowned = false;
@@ -26,13 +26,14 @@ public class PlayerHealth : MonoBehaviour
     public Renderer playerRenderer;
     public Color downedColor = Color.red;
     private Color originalColor;
+    private bool isFlashing = false;
 
     [Header("Movement")]
     public MonoBehaviour movementScript;
     public Rigidbody rb;
 
     [Header("Collision")]
-    public Collider playerCollider; // This is your main Capsule Collider
+    public Collider playerCollider; 
 
     [Header("Combat")]
     public MonoBehaviour attackScript;
@@ -46,12 +47,12 @@ public class PlayerHealth : MonoBehaviour
     public float reviveRadius = 3f;
     public int circleSegments = 40;
 
-[Header("Audio")]
-public AudioSource hitSound;
+    [Header("Audio")]
+    public AudioSource hitSound;
 
-[Header("Backwards Hit")]
-public float height = 2f;
-public float backDistance = 5f;
+    [Header("Backwards Hit")]
+    public float height = 2f;
+    public float backDistance = 5f;
 
     [Header("Visual Feedback")]
     public Color flashColor = Color.red;
@@ -62,7 +63,7 @@ public float backDistance = 5f;
 
     [Header("New Trigger Settings")]
     [Tooltip("Drag the large invisible Sphere Collider component here.")]
-    public SphereCollider reviveSphereTrigger; // ADD THIS VARIABLE
+    public SphereCollider reviveSphereTrigger;
 
     [Tooltip("Set this to your Ground/Environment layer so enemies don't distort the circle.")]
     public LayerMask floorLayer;
@@ -81,7 +82,6 @@ public float backDistance = 5f;
         if (circleRenderer != null)
             circleRenderer.enabled = false;
 
-        // DISABLE the large trigger sphere when the game starts
         if (reviveSphereTrigger != null)
             reviveSphereTrigger.enabled = false; 
     }
@@ -119,13 +119,19 @@ public float backDistance = 5f;
     {
         if (isDead || isDowned || isInvincible) return;
 
+        // Subtract damage once
         currentHearts -= amount;
         if (currentHearts < 0) currentHearts = 0;
-        hitSound.Play();
-        impact.PlayVFX();
+
+        if (hitSound != null) hitSound.Play();
+        if (impact != null) impact.PlayVFX();
+        
         UpdateHeartsUI();
         HitByPinata();
 
+        if (!isFlashing && playerRenderer != null) StartCoroutine(FlashRedRoutine());
+
+        // Handle death/downed states properly
         if (currentHearts <= 0)
         {
             if (hasBeenRevived) Die();
@@ -137,12 +143,22 @@ public float backDistance = 5f;
         }
     }
 
+    private IEnumerator FlashRedRoutine()
+    {
+        isFlashing = true;
+        if (playerRenderer != null) playerRenderer.material.color = flashColor;
+        
+        yield return new WaitForSeconds(flashDuration);
+        
+        if (playerRenderer != null) playerRenderer.material.color = originalColor;
+        isFlashing = false;
+    }
+
     void TriggerInvincibility()
     {
         isInvincible = true;
         invincibilityTimer = invincibilityDuration;
     }
-    
 
     void UpdateHeartsUI()
     {
@@ -168,7 +184,6 @@ public float backDistance = 5f;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
-        // ENABLE the revive zone ONLY when player falls down
         if (reviveSphereTrigger != null)
             reviveSphereTrigger.enabled = true; 
 
@@ -185,11 +200,9 @@ public float backDistance = 5f;
 
     void DrawCircleInGame()
     {
-        // NEW LOGIC: Automatically grab the exact radius being used by the physics trigger engine
         float actualPhysicsRadius = reviveRadius;
         if (reviveSphereTrigger != null)
         {
-            // This multiplies the collider radius by the player's world scale to get the true radius size
             actualPhysicsRadius = reviveSphereTrigger.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.z);
         }
 
@@ -199,7 +212,6 @@ public float backDistance = 5f;
         {
             float angleRad = Mathf.Deg2Rad * (i * angleStep);
 
-            // FIXED LINES: Swapped 'reviveRadius' variable for 'actualPhysicsRadius' 
             float x = transform.position.x + Mathf.Cos(angleRad) * actualPhysicsRadius;
             float z = transform.position.z + Mathf.Sin(angleRad) * actualPhysicsRadius;
 
@@ -226,12 +238,12 @@ public float backDistance = 5f;
             circleRenderer.SetPosition(i, new Vector3(x, finalY, z));
         }
     }
+
     public void Revive()
     {
         if (!isDowned || isDead) return;
 
         isDowned = false;
-
         hasBeenRevived = true;
         currentHearts = maxHearts;
         UpdateHeartsUI();
@@ -241,7 +253,6 @@ public float backDistance = 5f;
         if (circleRenderer != null)
             circleRenderer.enabled = false;
 
-        // DISABLE the revive zone sphere when they stand back up
         if (reviveSphereTrigger != null)
             reviveSphereTrigger.enabled = false; 
 
@@ -261,7 +272,6 @@ public float backDistance = 5f;
         if (circleRenderer != null)
             circleRenderer.enabled = false;
 
-        // DISABLE the revive zone if they bleed out completely
         if (reviveSphereTrigger != null)
             reviveSphereTrigger.enabled = false; 
             
@@ -270,37 +280,28 @@ public float backDistance = 5f;
 
     void HitByPinata()
     {
-            Vector2 targetPos = (Vector2)transform.position + Vector2.left * backDistance;
-            SendBackwards(targetPos, height);
+        Vector3 targetPos = transform.position - transform.forward * backDistance;
+        SendBackwards(targetPos, height);
     }
 
-    /// Launches the character toward a target position in an arc.
-
-    public void SendBackwards(Vector2 targetPos, float arcHeight)
+    public void SendBackwards(Vector3 targetPos, float arcHeight)
     {
-        // Calculate displacement
-        Vector2 displacement = targetPos - (Vector2)transform.position;
+        if (rb == null) return;
 
-        // Split into horizontal and vertical distances
+        Vector3 displacement = targetPos - transform.position;
         float displacementY = displacement.y;
-        Vector2 displacementXZ = new Vector2(displacement.x, 0);
+        Vector3 displacementXZ = new Vector3(displacement.x, 0, displacement.z);
 
-        // Calculate initial vertical velocity
-        float velocityY = Mathf.Sqrt(2 * arcHeight);
+        float gravity = Mathf.Abs(Physics.gravity.y);
+        float velocityY = Mathf.Sqrt(2 * gravity * arcHeight);
 
-        // Time to go from peak to target
-        float timeDown = Mathf.Sqrt(2 * Mathf.Max(0, arcHeight - displacementY));
+        float timeToPeak = velocityY / gravity;
+        float timeFromPeakToTarget = Mathf.Sqrt(2 * Mathf.Max(0, arcHeight - displacementY) / gravity);
+        float totalTime = timeToPeak + timeFromPeakToTarget;
 
-        float totalTime = velocityY + timeDown;
+        Vector3 velocityXZ = displacementXZ / totalTime;
+        Vector3 launchVelocity = velocityXZ + Vector3.up * velocityY;
 
-        // Calculate horizontal velocity
-        Vector2 velocityXZ = displacementXZ / totalTime;
-
-        // Combine velocities
-        Vector2 launchVelocity = velocityXZ + Vector2.up * velocityY;
-
-        // Apply velocity
         rb.linearVelocity = launchVelocity;
     }
-
 }
