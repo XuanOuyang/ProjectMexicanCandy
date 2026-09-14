@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuController : MonoBehaviour
 {
+    [SerializeField] private GameObject howToPlayPanel;
+
     public void OnStartClick()
     {
         SceneManager.LoadScene("PlayerInitialization");
@@ -11,9 +13,14 @@ public class StartMenuController : MonoBehaviour
 
     public void OnQuitClick()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-    #endif
+#endif
         Application.Quit();
+    }
+
+    public void OnHowToPlayClick()
+    {
+        howToPlayPanel.SetActive(true);
     }
 }
