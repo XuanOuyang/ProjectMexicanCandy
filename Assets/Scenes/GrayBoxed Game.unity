@@ -44762,7 +44762,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.85
   sharedProfile: {fileID: 11400000, guid: 18d3452521b661844a15c71e7e9762b9, type: 2}
 --- !u!4 &972233025
 Transform:
@@ -72059,7 +72059,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518855153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 0, y: 0, z: 20.038462}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.03076923, y: 0.03076923, z: 0.03076923}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72068,7 +72068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10.746154, y: 1.5584615}
+  m_AnchoredPosition: {x: 0, y: 2.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1518855155
@@ -96432,6 +96432,9 @@ MonoBehaviour:
   animateOnlyWhenMoving: 0
   piruliVFX: {fileID: 0}
   damageVFX: {fileID: 0}
+  burningVFXPrefab: {fileID: 0}
+  deathVFXPrefab: {fileID: 0}
+  deathVFXLifetime: 3
 --- !u!65 &2057862746
 BoxCollider:
   m_ObjectHideFlags: 0
