@@ -26,6 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4266022153310513750}
   serializedVersion: 2
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -5049,8 +5050,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.9
-      minScalar: 0.7
+      scalar: 2.5
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5513,7 +5514,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 3.5
       mode: 0
       spread: 0
       speed:
@@ -9973,8 +9974,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.9
-      minScalar: 0.7
+      scalar: 2.5
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10437,7 +10438,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 3.5
       mode: 0
       spread: 0
       speed:
@@ -14906,8 +14907,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.2
-      minScalar: 0.9
+      scalar: 1.8
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -15226,7 +15227,7 @@ ParticleSystem:
     maxNumParticles: 30
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
-    rotation3D: 0
+    rotation3D: 1
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
@@ -15370,7 +15371,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.7
+      value: 3.5
       mode: 0
       spread: 0
       speed:
@@ -24640,7 +24641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4593184485727747210}
   - component: {fileID: 4593184485727747213}
-  - component: {fileID: 6202583217566478790}
+  - component: {fileID: 1194932377424982506}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -24674,8 +24675,8 @@ Light:
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 0.559, g: 0.17468749, b: 0.05240625, a: 1}
-  m_Intensity: 0
-  m_Range: 4
+  m_Intensity: 0.102566905
+  m_Range: 4.016764
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 10, y: 10}
@@ -24728,7 +24729,7 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &6202583217566478790
+--- !u!114 &1194932377424982506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25044,8 +25045,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.9
-      minScalar: 0.7
+      scalar: 2.5
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -25508,7 +25509,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 3.5
       mode: 0
       spread: 0
       speed:
@@ -29968,8 +29969,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.9
-      minScalar: 0.7
+      scalar: 2.5
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -30432,7 +30433,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 3.5
       mode: 0
       spread: 0
       speed:
