@@ -1293,6 +1293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectManager
   characterSelectUI: {fileID: 1459296828}
+  p1SelectionOutline: {fileID: 2027905355}
+  p2SelectionOutline: {fileID: 1065256427}
   p1ReadyText: {fileID: 880831022}
   p2ReadyText: {fileID: 1238600249}
 --- !u!4 &1328211148
@@ -2144,7 +2146,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294901760
+    rgba: 4284859647
   m_fontColor: {r: 1, g: 0.7686275, b: 0.39607847, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

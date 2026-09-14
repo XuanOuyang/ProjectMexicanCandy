@@ -6,6 +6,8 @@ public class CharacterSelectManager : MonoBehaviour
     private LocalPlayer player1;
     private LocalPlayer player2;
     [SerializeField] private CharacterSelectUI characterSelectUI;
+    [SerializeField] private RectTransform p1SelectionOutline;
+    [SerializeField] private RectTransform p2SelectionOutline;
     [SerializeField] private GameObject p1ReadyText;
     [SerializeField] private GameObject p2ReadyText;
 
@@ -20,6 +22,11 @@ public class CharacterSelectManager : MonoBehaviour
             {
                 p1ReadyText.SetActive(false);
             }
+
+            if (p1SelectionOutline != null)
+            {
+                p1SelectionOutline.gameObject.SetActive(false);
+            }
         }
         else if (player.playerNumber == 2)
         {
@@ -27,6 +34,11 @@ public class CharacterSelectManager : MonoBehaviour
             if (p2ReadyText != null)
             {
                 p2ReadyText.SetActive(false);
+            }
+
+            if (p2SelectionOutline!= null)
+            {
+                p2SelectionOutline.gameObject.SetActive(false);
             }
         }
 
