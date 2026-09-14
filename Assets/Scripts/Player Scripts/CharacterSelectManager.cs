@@ -6,6 +6,8 @@ public class CharacterSelectManager : MonoBehaviour
     private LocalPlayer player1;
     private LocalPlayer player2;
     [SerializeField] private CharacterSelectUI characterSelectUI;
+    [SerializeField] private GameObject p1ReadyText;
+    [SerializeField] private GameObject p2ReadyText;
 
     public void InitializeCharacterSelection(LocalPlayer player, int startingCharacter)
     {
@@ -14,10 +16,18 @@ public class CharacterSelectManager : MonoBehaviour
         if (player.playerNumber == 1)
         {
             player1 = player;
+            if (p1ReadyText != null)
+            {
+                p1ReadyText.SetActive(false);
+            }
         }
         else if (player.playerNumber == 2)
         {
             player2 = player;
+            if (p2ReadyText != null)
+            {
+                p2ReadyText.SetActive(false);
+            }
         }
 
         Debug.Log(
@@ -76,6 +86,15 @@ public class CharacterSelectManager : MonoBehaviour
         }
 
         player.isCharacterLocked = true;
+        if (player.playerNumber == 1 && p1ReadyText != null)
+        {
+            p1ReadyText.SetActive(true);
+        }
+        else if (player.playerNumber == 2 && p2ReadyText != null)
+        {
+            p2ReadyText.SetActive(true);
+        }
+
         Debug.Log($"Player {player.playerNumber} locked in " + $"character {player.selectedCharacter}");
         CheckBothPlayersLocked();
         return true;
