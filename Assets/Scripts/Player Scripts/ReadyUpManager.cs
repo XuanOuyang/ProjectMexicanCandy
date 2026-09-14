@@ -64,9 +64,7 @@ public class ReadyUpManager : MonoBehaviour
 
         if (!wasdClaimed && Keyboard.current != null)
         {
-            if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame ||
-                Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame ||
-                Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 wasdClaimed = true;
                 JoinPlayer("WASD", Keyboard.current);
@@ -76,10 +74,7 @@ public class ReadyUpManager : MonoBehaviour
 
         if (!arrowsClaimed && Keyboard.current != null)
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame ||
-                Keyboard.current.rightArrowKey.wasPressedThisFrame ||
-                Keyboard.current.downArrowKey.wasPressedThisFrame ||
-                Keyboard.current.enterKey.wasPressedThisFrame)
+            if (Keyboard.current.enterKey.wasPressedThisFrame)
             {
                 arrowsClaimed = true;
                 JoinPlayer("Arrows", Keyboard.current);
@@ -91,27 +86,7 @@ public class ReadyUpManager : MonoBehaviour
         {
             foreach (Gamepad gamepad in Gamepad.all)
             {
-                bool anyGamepadInput =
-                    gamepad.buttonSouth.wasPressedThisFrame ||
-                    gamepad.buttonNorth.wasPressedThisFrame ||
-                    gamepad.buttonEast.wasPressedThisFrame ||
-                    gamepad.buttonWest.wasPressedThisFrame ||
-                    gamepad.startButton.wasPressedThisFrame ||
-                    gamepad.selectButton.wasPressedThisFrame ||
-                    gamepad.dpad.up.wasPressedThisFrame ||
-                    gamepad.dpad.down.wasPressedThisFrame ||
-                    gamepad.dpad.left.wasPressedThisFrame ||
-                    gamepad.dpad.right.wasPressedThisFrame ||
-                    gamepad.leftStick.up.wasPressedThisFrame ||
-                    gamepad.leftStick.down.wasPressedThisFrame ||
-                    gamepad.leftStick.left.wasPressedThisFrame ||
-                    gamepad.leftStick.right.wasPressedThisFrame ||
-                    gamepad.rightStick.up.wasPressedThisFrame ||
-                    gamepad.rightStick.down.wasPressedThisFrame ||
-                    gamepad.rightStick.left.wasPressedThisFrame ||
-                    gamepad.rightStick.right.wasPressedThisFrame;
-
-                if (anyGamepadInput)
+                if (gamepad.buttonSouth.wasPressedThisFrame)
                 {
                     gamepadClaimed = true;
                     JoinPlayer("Gamepad", gamepad);
@@ -182,22 +157,15 @@ public class ReadyUpManager : MonoBehaviour
 
         joinedPlayers.Add(playerInput);
         playersReady++;
-
-        Debug.Log($"Player {playersReady} Ready!");
-        if (playersReady == 1)
+        int playerNumber = playersReady;
+        int startingCharacter = playerNumber == 1 ? 0 : 1;
+        localPlayer.InitializePlayer(playerNumber);
+        if (characterSelectManager != null)
         {
-            localPlayer.InitializePlayer(1);
-            if (characterSelectManager != null)
-                characterSelectManager.InitializeCharacterSelection(localPlayer, 0);
+            characterSelectManager.InitializeCharacterSelection(localPlayer, startingCharacter);
+            characterSelectManager.ConfirmSelection(localPlayer);
         }
-        else if (playersReady == 2)
-        {
-            localPlayer.InitializePlayer(2);
-            if (characterSelectManager != null)
-                characterSelectManager.InitializeCharacterSelection(localPlayer, 1);
 
-
-            Debug.Log("Both players ready!");
-        }
+        Debug.Log($"Player {playerNumber} joined and is ready");
     }
 }
