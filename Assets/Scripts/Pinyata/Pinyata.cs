@@ -34,6 +34,7 @@ public class Pinyata : MonoBehaviour
     public GameObject piruliVFX;
     public GameObject damageVFX;
     public GameObject burningVFXPrefab;  // Continuous effect when hit by Pica Fresa (DoT)
+    public AudioClip burnSound;
     public GameObject deathVFXPrefab;    // VFX spawned when Piñata dies
     public float deathVFXLifetime = 3f;   // Time before death VFX is destroyed
 
@@ -143,6 +144,10 @@ public class Pinyata : MonoBehaviour
             {
                 // Instantiate attached to this transform so it stays with the enemy while moving
                 activeBurnEffect = Instantiate(burningVFXPrefab, transform.position, Quaternion.identity, transform);
+                if (burnSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(burnSound, transform.position);
+                }
             }
         }
         // 2. Handle Piercing Projectile Effects

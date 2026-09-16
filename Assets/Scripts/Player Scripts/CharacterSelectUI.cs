@@ -14,8 +14,9 @@ public class CharacterSelectUI : MonoBehaviour
         RectTransform cursor = player.playerNumber == 1 ? p1Cursor : p2Cursor;
         RectTransform outline = player.playerNumber == 1 ? p1SelectionOutline : p2SelectionOutline;
         RectTransform target = player.selectedCharacter == 0 ? character1Button : character2Button;
-        Vector3 offset = player.playerNumber == 1 ? new Vector3(0, 100f, 0) : new Vector3(0, -100f, 0);
-        cursor.position = target.position + offset;
+        Vector2 offset = player.playerNumber == 1 ? new Vector2(0, 100f) : new Vector2(0, -100f);
+        cursor.position = target.position;
+        cursor.anchoredPosition += offset;
         outline.position = target.position;
         cursor.gameObject.SetActive(true);
         outline.gameObject.SetActive(true);
