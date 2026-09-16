@@ -41,6 +41,7 @@ public class Pinyata : MonoBehaviour
     private Vector3 initialVisualLocalPos;
     private Vector3 lastPosition;
     private GameObject activeBurnEffect;
+    private AudioSource burnAudioSource; // Add this
 
     void Start()
     {
@@ -146,7 +147,11 @@ public class Pinyata : MonoBehaviour
                 activeBurnEffect = Instantiate(burningVFXPrefab, transform.position, Quaternion.identity, transform);
                 if (burnSound != null)
                 {
-                    AudioSource.PlayClipAtPoint(burnSound, transform.position);
+                    // Attach an AudioSource directly to the burn VFX object
+                    burnAudioSource = activeBurnEffect.AddComponent<AudioSource>();
+                    burnAudioSource.clip = burnSound;
+                    burnAudioSource.loop = true;          // Enable looping
+                    burnAudioSource.Play();
                 }
             }
         }
