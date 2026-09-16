@@ -227,6 +227,8 @@ MonoBehaviour:
   damageVFX: {fileID: 5417597320118187189}
   burningVFXPrefab: {fileID: 2722283810949975409, guid: 32c1be7843a8b7d48ab029af86f7193e, type: 3}
   burnSound: {fileID: 8300000, guid: 867ca7d03cc52ba48a6f5d4a5608ef66, type: 3}
+  deathSound: {fileID: 8300000, guid: 6d9a156eb7c72bb4ca291efb470bc4ef, type: 3}
+  deathSoundVolume: 0.349
   deathVFXPrefab: {fileID: 691814995702217004, guid: a98e021c6b5105c4aa0dcf0987a25ae4, type: 3}
   deathVFXLifetime: 1.5
 --- !u!114 &2623498621525324267

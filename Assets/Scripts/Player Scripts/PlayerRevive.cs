@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerRevive: MonoBehaviour
+public class PlayerRevive : MonoBehaviour
 {
     [Header("Revive Settings")]
     [Tooltip("Time in seconds required to revive a downed player.")]
@@ -8,6 +8,19 @@ public class PlayerRevive: MonoBehaviour
 
     [Header("Revive Counter")]
     public bool hasUsedRevive = false;
+
+    [Header("VFX Settings")]
+    [Tooltip("Continuous looping VFX attached to the player while actively reviving.")]
+    public GameObject reviveChannelVFXPrefab;
+    [Tooltip("Burst VFX spawned when the revive successfully completes.")]
+    public GameObject reviveCompleteVFXPrefab;
+    [Tooltip("Time in seconds before the completion VFX object is destroyed.")]
+    public float completeVFXLifetime = 3f;
+
+    [Header("Audio Settings")]
+    public AudioClip reviveSound;
+    [Range(0f, 1f)]
+    public float reviveSoundVolume = 0.5f;
 
     [Header("Editor Visualizer")]
     [SerializeField] private bool showRadiusGizmo = true;
@@ -17,6 +30,7 @@ public class PlayerRevive: MonoBehaviour
     private float reviveTimer = 0f;
     private PlayerHealth myHealth;
     private PlayerHealth currentTargetHealth;
+    private GameObject activeChannelVFX;
 
     private void Awake()
     {
@@ -36,6 +50,12 @@ public class PlayerRevive: MonoBehaviour
             currentTargetHealth = targetHealth;
             targetHealth.isBeingRevived = true;
 
+            // Spawn loop channel VFX attached to the target player while reviving
+            if (reviveChannelVFXPrefab != null && activeChannelVFX == null)
+            {
+                activeChannelVFX = Instantiate(reviveChannelVFXPrefab, targetHealth.transform.position, Quaternion.identity, targetHealth.transform);
+            }
+
             reviveTimer += Time.deltaTime;
 
             // Calculate the remaining time (e.g., 3.0 down to 0.0)
@@ -44,17 +64,32 @@ public class PlayerRevive: MonoBehaviour
 
             if (targetHealth.statusText != null)
             {
-                // MATCHES YOUR BLEEDOUT LOOK: "Reviving: 3s" using whole numbers
                 targetHealth.statusText.text = "Reviving: " + Mathf.CeilToInt(secondsRemaining) + "s";
             }
 
+            // Revive Completed
             if (reviveTimer >= reviveDuration)
             {
                 targetHealth.isBeingRevived = false;
+                targetHealth.transform.position += Vector3.up * 0.5f;
 
-                targetHealth.transform.position += Vector3.up * 0.3f;
+                // Spawn completion burst VFX
+                if (reviveCompleteVFXPrefab != null)
+                {
+                    GameObject burstFX = Instantiate(reviveCompleteVFXPrefab, targetHealth.transform.position, Quaternion.identity);
+                    Destroy(burstFX, completeVFXLifetime);
+                }
+
+                // Clean up channeling VFX
+                StopChannelVFX();
 
                 targetHealth.Revive();
+
+                if (reviveSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(reviveSound, transform.position, reviveSoundVolume);
+                }
+
                 hasUsedRevive = true;
                 reviveTimer = 0f;
                 currentTargetHealth = null;
@@ -71,7 +106,18 @@ public class PlayerRevive: MonoBehaviour
                 currentTargetHealth.isBeingRevived = false;
                 currentTargetHealth = null;
             }
+
+            StopChannelVFX();
             reviveTimer = 0f;
+        }
+    }
+
+    private void StopChannelVFX()
+    {
+        if (activeChannelVFX != null)
+        {
+            Destroy(activeChannelVFX);
+            activeChannelVFX = null;
         }
     }
 

@@ -35,6 +35,9 @@ public class Pinyata : MonoBehaviour
     public GameObject damageVFX;
     public GameObject burningVFXPrefab;  // Continuous effect when hit by Pica Fresa (DoT)
     public AudioClip burnSound;
+    public AudioClip deathSound;
+    [Range(0f, 1f)]
+    public float deathSoundVolume = 0.5f;
     public GameObject deathVFXPrefab;    // VFX spawned when Piñata dies
     public float deathVFXLifetime = 3f;   // Time before death VFX is destroyed
 
@@ -42,6 +45,7 @@ public class Pinyata : MonoBehaviour
     private Vector3 lastPosition;
     private GameObject activeBurnEffect;
     private AudioSource burnAudioSource; // Add this
+
 
     void Start()
     {
@@ -205,6 +209,10 @@ public class Pinyata : MonoBehaviour
 
     void Die()
     {
+        if (deathSound != null)
+        {
+            AudioSource.PlayClipAtPoint(deathSound, transform.position,deathSoundVolume);
+        }
         // Spawn Death VFX and destroy it after specified delay
         if (deathVFXPrefab != null)
         {
