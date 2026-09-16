@@ -7809,6 +7809,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd1a43ed141c0b40abc64b50e8f0332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
+--- !u!212 &182417758 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6651906195090482430, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+  m_PrefabInstance: {fileID: 2784990939760976398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &182864579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62365,9 +62370,9 @@ Transform:
   m_GameObject: {fileID: 1305189819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 10.746154, y: -2.2876923, z: 20.038462}
-  m_LocalScale: {x: 1.5384616, y: 1.5384616, z: 1.5384616}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 18226177}
   m_Father: {fileID: 1312748219}
@@ -70090,17 +70095,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f38531990cbb080448304a5e56b81c8d, type: 3}
---- !u!114 &1461976555 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1353865632666690928, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
-  m_PrefabInstance: {fileID: 2351218235480733223}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393858927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9888e79505ad6d498cbc8fcae3202ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImpactFX
 --- !u!1001 &1462026842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91405,6 +91399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd1a43ed141c0b40abc64b50e8f0332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
+--- !u!212 &1941352605 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8867839457282244626, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+  m_PrefabInstance: {fileID: 2351218235480733223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1942789040
 GameObject:
   m_ObjectHideFlags: 0
@@ -96433,6 +96432,7 @@ MonoBehaviour:
   piruliVFX: {fileID: 0}
   damageVFX: {fileID: 0}
   burningVFXPrefab: {fileID: 0}
+  burnSound: {fileID: 0}
   deathVFXPrefab: {fileID: 0}
   deathVFXLifetime: 3
 --- !u!65 &2057862746
@@ -100942,7 +100942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3260507885064256503, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 17.05
+      value: 17.050049
       objectReference: {fileID: 0}
     - target: {fileID: 3260507885064256503, guid: 6911fb30fd7ab7845bdcac4a73452645, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -101539,7 +101539,7 @@ PrefabInstance:
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: impact
       value: 
-      objectReference: {fileID: 1461976555}
+      objectReference: {fileID: 1312748228}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: isDead
       value: 0
@@ -101574,12 +101574,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: flashDuration
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: circleRenderer
       value: 
       objectReference: {fileID: 1388705086}
+    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: movementScript
+      value: 
+      objectReference: {fileID: 1941352603}
+    - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 1941352605}
     - target: {fileID: 5913738962721897519, guid: 526754d8a060aa04ea28ce46f3e77513, type: 3}
       propertyPath: floorLayer.m_Bits
       value: 64
@@ -101930,12 +101938,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: flashDuration
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: circleRenderer
       value: 
       objectReference: {fileID: 420019782}
+    - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 182417758}
     - target: {fileID: 1594296417231999442, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: floorLayer.m_Bits
       value: 64
@@ -102033,6 +102045,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 611d92042ca52064bb56bada89dd8861, type: 2}
     - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
       value: 0.6374134
       objectReference: {fileID: 0}
@@ -102042,6 +102062,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420094949480227335, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4775772101260722417, guid: 7825947a55eb6b24f8308c954299d64e, type: 3}
